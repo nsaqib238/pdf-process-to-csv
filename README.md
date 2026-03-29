@@ -7,9 +7,23 @@ Extract structured text, clauses, and tables from PDF documents. The local pipel
 - **PDF classification**: Scanned vs text-based heuristics
 - **Clause processing**: Hierarchy, sub-items, notes, exceptions, page ranges
 - **Table processing**: Multi-row headers, merged cells, multi-page tables, optional **Camelot/Tabula fusion**, **header reconstruction** (`final_columns` in `tables.json`)
+- **Advanced filtering**: Clause-shaped content rejection, sweep gating, 2-column prose detection (P0-P4 + Iteration 1 upgrades)
 - **Validation**: Quality checks and confidence scoring
 - **Outputs**: `normalized_document.txt`, `clauses.json`, `tables.json`
 - **Web UI**: Full pipeline or **tables-only** fast path (`POST /api/process-pdf-tables`)
+
+## Recent Upgrades (P0-P4 + Iteration 1)
+
+The pipeline now includes comprehensive quality improvements:
+- **P0**: Clause-shaped rejection (prose/normative text filtering) + sweep gating (blocks single-column prose)
+- **P1**: Enhanced table numbering with wider search windows (improved appendix table recall)
+- **P2**: Multi-engine detection improvements
+- **P4**: Enhanced diagnostics (clause_shaped_rejected, sweep_gated_rejected, schematic_rejected)
+- **Iteration 1**: 2-column prose detection (change lists, TOC entries, amendment descriptions)
+
+**Result**: ~80% reduction in false positives, 78% table number coverage (up from 20%)
+
+See `PDF_PIPELINE_UPGRADES.md`, `ITERATION_1_IMPROVEMENTS.md`, and `TABLE_COVERAGE_REPORT.md` for details.
 
 ## Tech stack
 
@@ -150,11 +164,37 @@ App: http://localhost:3000
 
 ### CLI: tables only (no browser)
 
+**Basic usage:**
 ```bash
-python backend/run_local_tables.py "input/AS3000 2018.pdf"
+cd backend
+python run_local_tables.py "../Tables AS3000 2018.pdf"
 ```
 
-See `backend/run_local_tables.py` for `--max-pages`, `--no-fusion`, `--no-header-reconstruction`.
+**With options:**
+```bash
+# Specify output directory
+python run_local_tables.py "../Tables AS3000 2018.pdf" --out-dir ..
+
+# Process only first 50 pages (for testing)
+python run_local_tables.py "../Tables AS3000 2018.pdf" --max-pages 50 --out-dir ../output/test
+
+# Disable fusion (faster, pdfplumber only)
+python run_local_tables.py "../Tables AS3000 2018.pdf" --no-fusion
+
+# Skip header reconstruction
+python run_local_tables.py "../Tables AS3000 2018.pdf" --no-header-reconstruction
+```
+
+**Available options:**
+- `--out-dir DIR` — Output directory (default: alongside PDF with `_tables_out` suffix)
+- `--max-pages N` — Process only first N pages (overrides `TABLE_PIPELINE_MAX_PAGES` env var)
+- `--no-fusion` — Disable Camelot/Tabula fusion (faster; pdfplumber only)
+- `--no-header-reconstruction` — Skip post-process header reconstruction
+
+**Output location:**
+- Default: `<pdf_directory>/<pdf_stem>_tables_out/tables.json`
+- Example: `input/AS3000 2018_tables_out/tables.json`
+- With `--out-dir ..`: writes to `../tables.json` (repository root)
 
 ---
 
@@ -179,6 +219,29 @@ Download generated files.
 - **`normalized_document.txt`** — Human-readable clauses + table summaries (full mode only).
 - **`clauses.json`** — Structured clauses (full mode only).
 - **`tables.json`** — Tables with `header_rows`, `data_rows`, and when reconstruction ran: `final_columns`, `reconstruction_confidence`, `header_model`, etc.
+
+### tables.json structure
+
+Each table includes:
+- `table_id` — Unique identifier
+- `table_number` — Caption number (e.g., "3.2", "C7", "D11") or null
+- `page_start` / `page_end` — Page range
+- `header_rows` — Extracted header rows with cells
+- `data_rows` — Extracted data rows with cells
+- `source_method` — Extraction engine (e.g., "camelot:lattice", "pdfplumber:caption_region")
+- `confidence` — Quality score (0.0-1.0)
+- `extraction_notes` — Diagnostic information
+- `quality_metrics` — Row/column counts, fill ratio, noise ratio
+- `final_columns` — Reconstructed column headers (when header reconstruction enabled)
+
+### Rejection diagnostics
+
+The pipeline logs rejection statistics:
+- `clause_shaped_rejected` — Tables rejected as prose/normative text
+- `sweep_gated_rejected` — Single-column prose blocks filtered
+- `schematic_rejected` — Image-based tables filtered
+
+These metrics help verify the pipeline is correctly filtering false positives.
 
 ---
 
@@ -212,6 +275,31 @@ Download generated files.
 ## License
 
 MIT
+
+## Documentation
+
+### Pipeline Architecture
+- **`PIPELINE_ARCHITECTURE.md`** — Complete system architecture (87 methods, 3140 lines)
+- **`PDF_PIPELINE_UPGRADES.md`** — P0-P4 upgrade details
+- **`ITERATION_1_IMPROVEMENTS.md`** — Enhanced clause rejection for 2-column prose
+- **`UPGRADE_SUMMARY.md`** — Complete summary of all improvements
+- **`TABLE_COVERAGE_REPORT.md`** — Analysis of extracted tables from AS3000 2018.pdf
+
+### Example Results
+
+**AS3000 2018.pdf (548 pages):**
+- Before upgrades: 114 tables (79% garbage, 20% with table numbers)
+- After upgrades: 23 tables (clean, 78% with table numbers)
+- Improvement: 79% reduction in false positives
+
+**Table numbers extracted:**
+- Section 3: Tables 3.2, 3.5, 3.9, 3.10
+- Section 8: Table 8.1
+- Appendix C: Tables C3, C7, C10, C11, C12
+- Appendix D: Tables D1, D2, D5, D11
+- Section 11-12: Tables 11, 12
+- Appendix K: Table K1
+- Forms: Table 104.101
 
 ## References
 
