@@ -44,18 +44,6 @@ These are **system** installs (not `pip`). Without them, fusion is skipped or de
 - [Ghostscript for Windows](https://www.ghostscript.com/download/gsdnld.html) — ensure `gswin64c.exe` is on PATH (or install via [Chocolatey](https://chocolatey.org/): `choco install openjdk ghostscript`).
 - [Tesseract installer](https://github.com/UB-Mannheim/tesseract/wiki) — add to PATH, or `choco install tesseract`.
 
-**macOS (Homebrew)**
-
-```bash
-brew install openjdk ghostscript tesseract
-```
-
-**Ubuntu / Debian**
-
-```bash
-sudo apt-get update
-sudo apt-get install -y default-jre-headless ghostscript tesseract-ocr
-```
 
 ### 4. Adobe PDF Services (optional)
 
@@ -67,6 +55,10 @@ Only if you use the Adobe SDK path. See [Adobe PDF Services](https://developer.a
 
 ### Backend (Python)
 
+Use **`python -m pip`** (not `pip` alone) so packages install into the **same** interpreter that runs `python main.py`. On Windows, global `pip` can point at a different Python than your venv.
+
+**Option A — virtualenv inside `backend/`**
+
 ```bash
 cd backend
 python -m venv .venv
@@ -75,10 +67,23 @@ python -m venv .venv
 **Windows:** `.venv\Scripts\activate`  
 **macOS/Linux:** `source .venv/bin/activate`
 
+Still in `backend/`:
+
 ```bash
-pip install --upgrade pip
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
+
+**Option B — virtualenv at repository root** (if `.venv` lives next to `backend/`)
+
+From the repo root, after activating `.venv`:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r backend/requirements.txt
+```
+
+Then start the API from `backend/`: `cd backend` and `python main.py`.
 
 If **Camelot** fails (OpenCV/NumPy), use a clean venv and ensure NumPy stays `<2` as pinned.
 
@@ -181,7 +186,8 @@ Download generated files.
 
 | Issue | What to do |
 |--------|------------|
-| `Camelot import failed` | Install Ghostscript; reinstall `pip install -r requirements.txt` in a clean venv. |
+| `No module named 'fastapi'` (or other imports) after `pip install` | You ran a different `pip` than your `python`. Use **`python -m pip install -r requirements.txt`** from the same folder/venv (in `backend/` use `requirements.txt`; from repo root use `backend/requirements.txt`). Never run `-m pip ...` alone — it must be **`python -m pip ...`**. |
+| `Camelot import failed` | Install Ghostscript; reinstall with `python -m pip install -r requirements.txt` in a clean venv. |
 | `No module named 'ghostscript'` (Camelot lattice) | Run `pip install "ghostscript>=0.7,<0.9"` (now in `requirements.txt`). You still need the **Ghostscript binary** on PATH (`gswin64c` / `gs --version`). |
 | Tabula errors / no fusion wins | Install Java; `java -version` must work. |
 | `tesseract` / image table recovery fails | Install Tesseract and ensure it is on PATH. |
