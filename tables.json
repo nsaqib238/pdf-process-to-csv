@@ -1,16 +1,18 @@
 [
   {
-    "table_id": "table_1f6ec69d",
+    "table_id": "table_93aa837b",
     "table_number": null,
     "title": null,
     "parent_clause_reference": null,
-    "page_start": 16,
-    "page_end": 16,
+    "page_start": 15,
+    "page_end": 15,
     "header_rows": [
       {
         "cells": [
-          "-'------1------:*. . . :",
-          "..."
+          "500 (50) (50)_DIMENSIO_EXAMPLE_O_ITH_CABLE",
+          "500 (50) (50)_NS_IN_MILLIME_F_A_CATEG_LOCATED_B",
+          "Bedding for unen cables ( | Column Clause 3 (50)_TRES_ORY_A_U_ELOW",
+          "required closed Table 3.5, | 8 and .11.4.2) (50)_TRES_NDERGR_NATURAL"
         ],
         "is_header": true
       }
@@ -18,218 +20,92 @@
     "data_rows": [
       {
         "cells": [
-          "~-+-",
-          ". .. .. . .. . . .• .. .. - ... .. . .."
+          "um) continuous",
+          "poured conc",
+          "rete withi",
+          "n the confi"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "ilding only abo",
+          "ve undergroun",
+          "d cable",
+          "position"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "",
+          "@t I · . . B f",
+          "Marker ta edding r or unencl",
+          "pe equired osed"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "",
+          "c C C",
+          "ables (Ta olumn 8 lause 3.1",
+          "ble 3.5, and 1.4.2)"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "MPLE OF A",
+          "CATEGORY",
+          "A UNDE",
+          "RGROU"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "E LOCATED",
+          "DIRECTLY",
+          "BELOW",
+          "POURED"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "THICKNESS",
+          "WITHIN TH",
+          "E CONF",
+          "INES OF"
         ],
         "is_header": false
       }
     ],
     "footer_notes": [],
-    "raw_csv": "-'------1------:*. . . :,...\r\n~-+-,. .. .. . .. . . .• .. .. - ... .. . ..\r\n",
-    "normalized_text_representation": "COLUMNS: -'------1------:*. . . : | ...\nROW 1: ~-+- | . .. .. . .. . . .• .. .. - ... .. . ..",
-    "confidence": "low",
-    "source_method": "camelot:sweep:lattice",
+    "raw_csv": "500 (50) (50) DIMENSIO EXAMPLE O ITH CABLE,500 (50) (50) NS IN MILLIME F A CATEG LOCATED B,Bedding for unen cables ( | Column Clause 3 (50) TRES ORY A U ELOW,\"required closed Table 3.5, | 8 and .11.4.2) (50) TRES NDERGR NATURAL\"\r\num) continuous,poured conc,rete withi,n the confi\r\nilding only abo,ve undergroun,d cable,position\r\n,@t I · . . B f,Marker ta edding r or unencl,pe equired osed\r\n,c C C,ables (Ta olumn 8 lause 3.1,\"ble 3.5, and 1.4.2)\"\r\nMPLE OF A,CATEGORY,A UNDE,RGROU\r\nE LOCATED,DIRECTLY,BELOW,POURED\r\nTHICKNESS,WITHIN TH,E CONF,INES OF\r\n",
+    "normalized_text_representation": "COLUMNS: 500 (50) (50) DIMENSIO EXAMPLE O ITH CABLE | 500 (50) (50) NS IN MILLIME F A CATEG LOCATED B | Bedding for unen cables ( | Column Clause 3 (50) TRES ORY A U ELOW | required closed Table 3.5, | 8 and .11.4.2) (50) TRES NDERGR NATURAL\nROW 1: um) continuous | poured conc | rete withi | n the confi\nROW 2: ilding only abo | ve undergroun | d cable | position\nROW 3:  | @t I · . . B f | Marker ta edding r or unencl | pe equired osed\nROW 4:  | c C C | ables (Ta olumn 8 lause 3.1 | ble 3.5, and 1.4.2)\nROW 5: MPLE OF A | CATEGORY | A UNDE | RGROU\nROW 6: E LOCATED | DIRECTLY | BELOW | POURED\nROW 7: THICKNESS | WITHIN TH | E CONF | INES OF",
+    "confidence": "medium",
+    "source_method": "pdfplumber:loose",
     "extraction_notes": [],
-    "table_key": "na:3ce9767cdb68eafe",
+    "table_key": "na:994a393667f091dd",
     "continuation_of": null,
     "quality_metrics": {
-      "fill_ratio": 1.0,
-      "col_count": 2,
-      "data_row_count": 1,
-      "noise_ratio": 0.75,
-      "multiline_ratio": 0.25,
+      "fill_ratio": 0.9375,
+      "col_count": 4,
+      "data_row_count": 7,
+      "noise_ratio": 0.1,
+      "multiline_ratio": 0.2,
       "diversity": 1.0,
-      "placeholder_ratio": 0.0,
-      "garbage_cell_ratio": 1.0,
-      "symbol_junk_ratio": 1.0,
-      "ocr_mojibake_ratio": 0.0,
-      "header_corrupt_ratio": 1.0,
-      "data_row_repeat_ratio": 0.0,
-      "semantic_hard_fail": true,
-      "unified_score": -1.0,
-      "penalty": 2.44,
-      "one_column_value_list": false,
-      "partial_fragment": false
-    },
-    "has_headers": true,
-    "is_multipage": false,
-    "has_merged_cells": true,
-    "reconstructed_header_rows": [
-      {
-        "cells": [
-          "-'------1------:*. . . :",
-          "..."
-        ],
-        "is_header": true
-      }
-    ],
-    "promoted_header_rows": [],
-    "final_columns": [
-      "-'------1------:*. . . :",
-      "..."
-    ],
-    "header_model": {
-      "table_type": "unknown",
-      "stub_column_index": 1,
-      "raw_header_row_count": 1,
-      "reconstructed_header_row_count": 1,
-      "final_column_count": 2,
-      "header_tree": [
-        {
-          "name": "-'------1------:*. . . :",
-          "children": []
-        },
-        {
-          "name": "...",
-          "children": []
-        }
-      ],
-      "row_debug": [
-        {
-          "source": "header_rows",
-          "row_index": 0,
-          "cells": [
-            "-'------1------:*. . . :",
-            "..."
-          ],
-          "analysis": {
-            "score": 0.17,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 4
-          }
-        },
-        {
-          "source": "data_rows",
-          "row_index": 0,
-          "cells": [
-            "~-+-",
-            ". .. .. . .. . . .• .. .. - ... .. . .."
-          ],
-          "analysis": {
-            "score": 0.17,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 16
-          },
-          "max_header_similarity": 0.25
-        }
-      ],
-      "clean_debug": {
-        "total_cells": 2,
-        "changed_cells": 0
-      },
-      "body_debug": {
-        "removed_header_like_body_rows": [],
-        "remaining_data_rows": 1
-      }
-    },
-    "reconstruction_confidence": "medium",
-    "reconstruction_notes": []
-  },
-  {
-    "table_id": "table_a6f1cb01",
-    "table_number": null,
-    "title": null,
-    "parent_clause_reference": null,
-    "page_start": 17,
-    "page_end": 17,
-    "header_rows": [
-      {
-        "cells": [
-          "75 mm (m i ni mum) co nti n uous pou red concre te withi n the conf ines | s 75",
-          "75 mm (m i ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion | r- ====:a- Mechani ca l",
-          "75 mm (m i ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion",
-          "75 mm (m i ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion",
-          "75 mm (m i ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion_Marke_r_t_ap_e"
-        ],
-        "is_header": true
-      }
-    ],
-    "data_rows": [
-      {
-        "cells": [
-          "",
-          "",
-          "",
-          "I ~1 ,- Bedd ing req ui red",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "",
-          "",
-          "· W J",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "",
-          "·",
-          "·",
-          "ca bl es (Tab le 3.5 ,"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "",
-          "",
-          "",
-          "Co l umn 8 and"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "",
-          "",
-          "",
-          "C lause 3.11 .4. 2)"
-        ],
-        "is_header": false
-      }
-    ],
-    "footer_notes": [],
-    "raw_csv": "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | s 75,75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion | r- ====:a- Mechani ca,75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion,75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion,75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion Marke r t ap e\r\n,,,\"I ~1 ,- Bedd ing req ui red\",\r\n,,,· W J,\r\n,,·,·,\"ca bl es (Tab le 3.5 ,\"\r\n,,,,Co l umn 8 and\r\n,,,,C lause 3.11 .4. 2)\r\n",
-    "normalized_text_representation": "COLUMNS: 75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | s 75 | 75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion | r- ====:a- Mechani ca | 75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion | 75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion | 75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion Marke r t ap e\nROW 1:  |  |  | I ~1 ,- Bedd ing req ui red | \nROW 2:  |  |  | · W J | \nROW 3:  |  | · | · | ca bl es (Tab le 3.5 ,\nROW 4:  |  |  |  | Co l umn 8 and\nROW 5:  |  |  |  | C lause 3.11 .4. 2)",
-    "confidence": "low",
-    "source_method": "camelot:sweep:stream",
-    "extraction_notes": [],
-    "table_key": "na:8a06f00a4eb1592b",
-    "continuation_of": null,
-    "quality_metrics": {
-      "fill_ratio": 0.4,
-      "col_count": 5,
-      "data_row_count": 5,
-      "noise_ratio": 0.75,
-      "multiline_ratio": 0.0,
-      "diversity": 0.8333,
-      "placeholder_ratio": 0.6,
+      "placeholder_ratio": 0.0625,
       "garbage_cell_ratio": 0.0,
       "symbol_junk_ratio": 0.0,
       "ocr_mojibake_ratio": 0.0,
       "header_corrupt_ratio": 0.0,
-      "data_row_repeat_ratio": 0.2,
-      "semantic_hard_fail": true,
-      "unified_score": -0.89,
-      "penalty": 1.29,
+      "data_row_repeat_ratio": 0.1429,
+      "semantic_hard_fail": false,
+      "unified_score": 0.6025,
+      "penalty": 0.335,
       "one_column_value_list": false,
       "partial_fragment": false
     },
@@ -239,775 +115,42 @@
     "reconstructed_header_rows": [
       {
         "cells": [
-          "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | s 75",
-          "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion | r- ====:a- Mechani ca",
-          "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion",
-          "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion",
-          "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion Marke r t ap e"
+          "500 (50) (50) DIMENSIO EXAMPLE O ITH CABLE",
+          "500 (50) (50) NS IN MILLIME F A CATEG LOCATED B",
+          "Bedding for unen cables ( | Column Clause 3 (50) TRES ORY A U ELOW",
+          "required closed Table 3.5, | 8 and .11.4.2) (50) TRES NDERGR NATURAL"
         ],
         "is_header": true
       }
     ],
     "promoted_header_rows": [],
     "final_columns": [
-      "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | s 75",
-      "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion | r- ====:a- Mechani ca",
-      "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion",
-      "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion",
-      "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion Marke r t ap e"
+      "500 (50) (50) DIMENSIO EXAMPLE O ITH CABLE",
+      "500 (50) (50) NS IN MILLIME F A CATEG LOCATED B",
+      "Bedding for unen cables ( | Column Clause 3 (50) TRES ORY A U ELOW",
+      "required closed Table 3.5, | 8 and .11.4.2) (50) TRES NDERGR NATURAL"
     ],
     "header_model": {
       "table_type": "unknown",
-      "stub_column_index": 3,
-      "raw_header_row_count": 1,
-      "reconstructed_header_row_count": 1,
-      "final_column_count": 5,
-      "header_tree": [
-        {
-          "name": "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | s 75",
-          "children": []
-        },
-        {
-          "name": "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion | r- ====:a- Mechani ca",
-          "children": []
-        },
-        {
-          "name": "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion",
-          "children": []
-        },
-        {
-          "name": "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion",
-          "children": []
-        },
-        {
-          "name": "75 mm (m ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion Marke r t ap e",
-          "children": []
-        }
-      ],
-      "row_debug": [
-        {
-          "source": "header_rows",
-          "row_index": 0,
-          "cells": [
-            "75 mm (m i ni mum) co nti n uous pou red concre te withi n the conf ines | s 75",
-            "75 mm (m i ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion | r- ====:a- Mechani ca l",
-            "75 mm (m i ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion",
-            "75 mm (m i ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion",
-            "75 mm (m i ni mum) co nti n uous pou red concre te withi n the conf ines | o f a b uildin g on ly a bove und erg rou nd ca bl e posi tion Marke r t ap e"
-          ],
-          "analysis": {
-            "score": 0.3237,
-            "text_ratio": 0.9674,
-            "numeric_ratio": 0.0326,
-            "header_hint_hits": 0,
-            "unit_hits": 19,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 2
-          }
-        },
-        {
-          "source": "data_rows",
-          "row_index": 0,
-          "cells": [
-            "",
-            "",
-            "",
-            "I ~1 ,- Bedd ing req ui red",
-            ""
-          ],
-          "analysis": {
-            "score": 0.27,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 1
-          },
-          "max_header_similarity": 0.0385
-        },
-        {
-          "source": "data_rows",
-          "row_index": 1,
-          "cells": [
-            "",
-            "",
-            "",
-            "· W J",
-            ""
-          ],
-          "analysis": {
-            "score": 0.31,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 1,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 1
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 2,
-          "cells": [
-            "",
-            "",
-            "·",
-            "·",
-            "ca bl es (Tab le 3.5 ,"
-          ],
-          "analysis": {
-            "score": 0.1575,
-            "text_ratio": 0.875,
-            "numeric_ratio": 0.125,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 2
-          },
-          "max_header_similarity": 0.0392
-        },
-        {
-          "source": "data_rows",
-          "row_index": 3,
-          "cells": [
-            "",
-            "",
-            "",
-            "",
-            "Co l umn 8 and"
-          ],
-          "analysis": {
-            "score": 0.17,
-            "text_ratio": 0.8,
-            "numeric_ratio": 0.2,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 1
-          },
-          "max_header_similarity": 0.0408
-        },
-        {
-          "source": "data_rows",
-          "row_index": 4,
-          "cells": [
-            "",
-            "",
-            "",
-            "",
-            "C lause 3.11 .4. 2)"
-          ],
-          "analysis": {
-            "score": 0.16,
-            "text_ratio": 0.6,
-            "numeric_ratio": 0.4,
-            "header_hint_hits": 0,
-            "unit_hits": 1,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        }
-      ],
-      "clean_debug": {
-        "total_cells": 5,
-        "changed_cells": 5
-      },
-      "body_debug": {
-        "removed_header_like_body_rows": [],
-        "remaining_data_rows": 5
-      }
-    },
-    "reconstruction_confidence": "high",
-    "reconstruction_notes": [
-      "Cleaned 5 header cells."
-    ]
-  },
-  {
-    "table_id": "table_7d632d2f",
-    "table_number": null,
-    "title": null,
-    "parent_clause_reference": null,
-    "page_start": 31,
-    "page_end": 31,
-    "header_rows": [
-      {
-        "cells": [
-          "C ·g (C) | <I> (C) | \"'",
-          "C ·g (C) | U npro te cted area | un de r the ove rhang to_th_e_o_ute_r_edge"
-        ],
-        "is_header": true
-      }
-    ],
-    "data_rows": [
-      {
-        "cells": [
-          "a,",
-          "Sha ded area s re qu ire"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "0",
-          "el ectri cal equipmen t to be"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "a mi nimum of IP33"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "i';'",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "E",
-          "FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES"
-        ],
-        "is_header": false
-      }
-    ],
-    "footer_notes": [],
-    "raw_csv": "\"C ·g (C) | < > (C) | \"\"'\",C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge\r\n\"a,\",Sha ded area s re qu ire\r\n0,el ectri cal equipmen t to be\r\n,a mi nimum of IP33\r\ni';',\r\nE,FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES\r\n",
-    "normalized_text_representation": "COLUMNS: C ·g (C) | < > (C) | \"' | C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge\nROW 1: a, | Sha ded area s re qu ire\nROW 2: 0 | el ectri cal equipmen t to be\nROW 3:  | a mi nimum of IP33\nROW 4: i';' | \nROW 5: E | FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES",
-    "confidence": "low",
-    "source_method": "camelot:sweep:stream",
-    "extraction_notes": [],
-    "table_key": "na:73bf81b93c409257",
-    "continuation_of": null,
-    "quality_metrics": {
-      "fill_ratio": 0.8333,
-      "col_count": 2,
-      "data_row_count": 5,
-      "noise_ratio": 0.3,
-      "multiline_ratio": 0.0,
-      "diversity": 1.0,
-      "placeholder_ratio": 0.1667,
-      "garbage_cell_ratio": 0.0,
-      "symbol_junk_ratio": 0.2,
-      "ocr_mojibake_ratio": 0.0,
-      "header_corrupt_ratio": 0.5,
-      "data_row_repeat_ratio": 0.2,
-      "semantic_hard_fail": true,
-      "unified_score": -1.0,
-      "penalty": 1.84,
-      "one_column_value_list": false,
-      "partial_fragment": false
-    },
-    "has_headers": true,
-    "is_multipage": false,
-    "has_merged_cells": true,
-    "reconstructed_header_rows": [
-      {
-        "cells": [
-          "C ·g (C) | < > (C) | \"'",
-          "C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge"
-        ],
-        "is_header": true
-      }
-    ],
-    "promoted_header_rows": [],
-    "final_columns": [
-      "C ·g (C) | < > (C) | \"'",
-      "C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge"
-    ],
-    "header_model": {
-      "table_type": "unknown",
-      "stub_column_index": 1,
-      "raw_header_row_count": 1,
-      "reconstructed_header_row_count": 1,
-      "final_column_count": 2,
-      "header_tree": [
-        {
-          "name": "C ·g (C) | < > (C) | \"'",
-          "children": []
-        },
-        {
-          "name": "C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge",
-          "children": []
-        }
-      ],
-      "row_debug": [
-        {
-          "source": "header_rows",
-          "row_index": 0,
-          "cells": [
-            "C ·g (C) | <I> (C) | \"'",
-            "C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge"
-          ],
-          "analysis": {
-            "score": 0.39,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 5,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 1
-          }
-        },
-        {
-          "source": "data_rows",
-          "row_index": 0,
-          "cells": [
-            "a,",
-            "Sha ded area s re qu ire"
-          ],
-          "analysis": {
-            "score": 0.4,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 2,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0357
-        },
-        {
-          "source": "data_rows",
-          "row_index": 1,
-          "cells": [
-            "0",
-            "el ectri cal equipmen t to be"
-          ],
-          "analysis": {
-            "score": 0.2575,
-            "text_ratio": 0.875,
-            "numeric_ratio": 0.125,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0357
-        },
-        {
-          "source": "data_rows",
-          "row_index": 2,
-          "cells": [
-            "",
-            "a mi nimum of IP33"
-          ],
-          "analysis": {
-            "score": 0.36,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 1,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 3,
-          "cells": [
-            "i';'",
-            ""
-          ],
-          "analysis": {
-            "score": 0.27,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 1
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 4,
-          "cells": [
-            "E",
-            "FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES"
-          ],
-          "analysis": {
-            "score": 0.2644,
-            "text_ratio": 0.8889,
-            "numeric_ratio": 0.1111,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0714
-        }
-      ],
-      "clean_debug": {
-        "total_cells": 2,
-        "changed_cells": 1
-      },
-      "body_debug": {
-        "removed_header_like_body_rows": [],
-        "remaining_data_rows": 5
-      }
-    },
-    "reconstruction_confidence": "high",
-    "reconstruction_notes": [
-      "Cleaned 1 header cells."
-    ]
-  },
-  {
-    "table_id": "table_f4485321",
-    "table_number": null,
-    "title": null,
-    "parent_clause_reference": null,
-    "page_start": 53,
-    "page_end": 53,
-    "header_rows": [
-      {
-        "cells": [
-          "*",
-          "(b) | (c)",
-          "operating the switch has a clear view of any person working on the | converter; | be provided with a means of securing the device in the isolated | position that requires a deliberate action to engage or disengage it; | comply with Clause 4.13 when the electricity converter incorporates an | electric motor;"
-        ],
-        "is_header": true
-      }
-    ],
-    "data_rows": [
-      {
-        "cells": [
-          "",
-          "(d)",
-          "be under manual control only; and"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "(e)",
-          "not be capable of being overridden or bypassed by programmable"
-        ],
-        "is_header": false
-      }
-    ],
-    "footer_notes": [],
-    "raw_csv": "*,(b) | (c),operating the switch has a clear view of any person working on the | converter; | be provided with a means of securing the device in the isolated | position that requires a deliberate action to engage or disengage it; | comply with Clause 4.13 when the electricity converter incorporates an | electric motor;\r\n,(d),be under manual control only; and\r\n,(e),not be capable of being overridden or bypassed by programmable\r\n",
-    "normalized_text_representation": "COLUMNS: * | (b) | (c) | operating the switch has a clear view of any person working on the | converter; | be provided with a means of securing the device in the isolated | position that requires a deliberate action to engage or disengage it; | comply with Clause 4.13 when the electricity converter incorporates an | electric motor;\nROW 1:  | (d) | be under manual control only; and\nROW 2:  | (e) | not be capable of being overridden or bypassed by programmable",
-    "confidence": "low",
-    "source_method": "tabula:sweep",
-    "extraction_notes": [],
-    "table_key": "na:e45c219187bd875a",
-    "continuation_of": null,
-    "quality_metrics": {
-      "fill_ratio": 0.7778,
-      "col_count": 3,
-      "data_row_count": 2,
-      "noise_ratio": 0.5714,
-      "multiline_ratio": 0.0,
-      "diversity": 1.0,
-      "placeholder_ratio": 0.2222,
-      "garbage_cell_ratio": 0.0,
-      "symbol_junk_ratio": 0.1429,
-      "ocr_mojibake_ratio": 0.0,
-      "header_corrupt_ratio": 0.6667,
-      "data_row_repeat_ratio": 0.0,
-      "semantic_hard_fail": true,
-      "unified_score": -1.0,
-      "penalty": 2.0638,
-      "one_column_value_list": false,
-      "partial_fragment": true
-    },
-    "has_headers": true,
-    "is_multipage": false,
-    "has_merged_cells": true,
-    "reconstructed_header_rows": [
-      {
-        "cells": [
-          "*",
-          "(b) | (c)",
-          "operating the switch has a clear view of any person working on the | converter; | be provided with a means of securing the device in the isolated | position that requires a deliberate action to engage or disengage it; | comply with Clause 4.13 when the electricity converter incorporates an | electric motor;"
-        ],
-        "is_header": true
-      }
-    ],
-    "promoted_header_rows": [],
-    "final_columns": [
-      "*",
-      "(b) | (c)",
-      "operating the switch has a clear view of any person working on the | converter; | be provided with a means of securing the device in the isolated | position that requires a deliberate action to engage or disengage it; | comply with Clause 4.13 when the electricity converter incorporates an | electric motor;"
-    ],
-    "header_model": {
-      "table_type": "unknown",
-      "stub_column_index": 2,
-      "raw_header_row_count": 1,
-      "reconstructed_header_row_count": 1,
-      "final_column_count": 3,
-      "header_tree": [
-        {
-          "name": "*",
-          "children": []
-        },
-        {
-          "name": "(b) | (c)",
-          "children": []
-        },
-        {
-          "name": "operating the switch has a clear view of any person working on the | converter; | be provided with a means of securing the device in the isolated | position that requires a deliberate action to engage or disengage it; | comply with Clause 4.13 when the electricity converter incorporates an | electric motor;",
-          "children": []
-        }
-      ],
-      "row_debug": [
-        {
-          "source": "header_rows",
-          "row_index": 0,
-          "cells": [
-            "*",
-            "(b) | (c)",
-            "operating the switch has a clear view of any person working on the | converter; | be provided with a means of securing the device in the isolated | position that requires a deliberate action to engage or disengage it; | comply with Clause 4.13 when the electricity converter incorporates an | electric motor;"
-          ],
-          "analysis": {
-            "score": 0.4304,
-            "text_ratio": 0.9808,
-            "numeric_ratio": 0.0192,
-            "header_hint_hits": 1,
-            "unit_hits": 4,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 1
-          }
-        },
-        {
-          "source": "data_rows",
-          "row_index": 0,
-          "cells": [
-            "",
-            "(d)",
-            "be under manual control only; and"
-          ],
-          "analysis": {
-            "score": 0.32,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0204
-        },
-        {
-          "source": "data_rows",
-          "row_index": 1,
-          "cells": [
-            "",
-            "(e)",
-            "not be capable of being overridden or bypassed by programmable"
-          ],
-          "analysis": {
-            "score": 0.36,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 1,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0588
-        }
-      ],
-      "clean_debug": {
-        "total_cells": 3,
-        "changed_cells": 0
-      },
-      "body_debug": {
-        "removed_header_like_body_rows": [],
-        "remaining_data_rows": 2
-      }
-    },
-    "reconstruction_confidence": "high",
-    "reconstruction_notes": []
-  },
-  {
-    "table_id": "table_7acefc35",
-    "table_number": null,
-    "title": null,
-    "parent_clause_reference": null,
-    "page_start": 78,
-    "page_end": 78,
-    "header_rows": [
-      {
-        "cells": [
-          "AS/NZS 3000:2018 | LEGEND:",
-          "AS/NZS 3000:2018 (0.6)",
-          "324 | Zone 3 2.25 (2.4)",
-          "324 (2.5) | Zone 3 2.25 | 2.25 !NZ!"
-        ],
-        "is_header": true
-      }
-    ],
-    "data_rows": [
-      {
-        "cells": [
-          "",
-          "E2ZJ = Zo ne o",
-          "",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "= Zone 1",
-          "",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "Im != Zone 2",
-          "",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "=Zone3",
-          "",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "",
-          "DIMENSIONS IN MET RES",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "FIGURE 6.2",
-          "ZONE DIMENSIONS (ELEVATION)",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "",
-          "BATH WITHOUT SHOWER OR FIXED BARRIER",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "",
-          "",
-          "COPYRIGHT",
-          ""
-        ],
-        "is_header": false
-      }
-    ],
-    "footer_notes": [],
-    "raw_csv": "AS/NZS 3000:2018 | LEGEND:,AS/NZS 3000:2018 (0.6),324 | Zone 3 2.25 (2.4),324 (2.5) | Zone 3 2.25 | 2.25 !NZ!\r\n,E2ZJ = Zo ne o,,\r\n,= Zone 1,,\r\n,Im != Zone 2,,\r\n,=Zone3,,\r\n,,DIMENSIONS IN MET RES,\r\n,FIGURE 6.2,ZONE DIMENSIONS (ELEVATION),\r\n,,BATH WITHOUT SHOWER OR FIXED BARRIER,\r\n,,COPYRIGHT,\r\n",
-    "normalized_text_representation": "COLUMNS: AS/NZS 3000:2018 | LEGEND: | AS/NZS 3000:2018 (0.6) | 324 | Zone 3 2.25 (2.4) | 324 (2.5) | Zone 3 2.25 | 2.25 !NZ!\nROW 1:  | E2ZJ = Zo ne o |  | \nROW 2:  | = Zone 1 |  | \nROW 3:  | Im != Zone 2 |  | \nROW 4:  | =Zone3 |  | \nROW 5:  |  | DIMENSIONS IN MET RES | \nROW 6:  | FIGURE 6.2 | ZONE DIMENSIONS (ELEVATION) | \nROW 7:  |  | BATH WITHOUT SHOWER OR FIXED BARRIER | \nROW 8:  |  | COPYRIGHT |",
-    "confidence": "low",
-    "source_method": "camelot:sweep:stream",
-    "extraction_notes": [],
-    "table_key": "na:b38007dd151a22d3",
-    "continuation_of": null,
-    "quality_metrics": {
-      "fill_ratio": 0.3611,
-      "col_count": 4,
-      "data_row_count": 8,
-      "noise_ratio": 0.5385,
-      "multiline_ratio": 0.0,
-      "diversity": 1.0,
-      "placeholder_ratio": 0.6389,
-      "garbage_cell_ratio": 0.0,
-      "symbol_junk_ratio": 0.0,
-      "ocr_mojibake_ratio": 0.0,
-      "header_corrupt_ratio": 0.5,
-      "data_row_repeat_ratio": 0.125,
-      "semantic_hard_fail": true,
-      "unified_score": -1.0,
-      "penalty": 1.67,
-      "one_column_value_list": false,
-      "partial_fragment": false
-    },
-    "has_headers": true,
-    "is_multipage": false,
-    "has_merged_cells": true,
-    "reconstructed_header_rows": [
-      {
-        "cells": [
-          "AS/NZS 3000:2018 | LEGEND:",
-          "AS/NZS 3000:2018 (0.6)",
-          "324 | Zone 3 2.25 (2.4)",
-          "324 (2.5) | Zone 3 2.25 | 2.25 !NZ!"
-        ],
-        "is_header": true
-      }
-    ],
-    "promoted_header_rows": [],
-    "final_columns": [
-      "AS/NZS 3000:2018 | LEGEND:",
-      "AS/NZS 3000:2018 (0.6)",
-      "324 | Zone 3 2.25 (2.4)",
-      "324 (2.5) | Zone 3 2.25 | 2.25 !NZ!"
-    ],
-    "header_model": {
-      "table_type": "unknown",
-      "stub_column_index": 2,
+      "stub_column_index": 0,
       "raw_header_row_count": 1,
       "reconstructed_header_row_count": 1,
       "final_column_count": 4,
       "header_tree": [
         {
-          "name": "AS/NZS 3000:2018 | LEGEND:",
+          "name": "500 (50) (50) DIMENSIO EXAMPLE O ITH CABLE",
           "children": []
         },
         {
-          "name": "AS/NZS 3000:2018 (0.6)",
+          "name": "500 (50) (50) NS IN MILLIME F A CATEG LOCATED B",
           "children": []
         },
         {
-          "name": "324 | Zone 3 2.25 (2.4)",
+          "name": "Bedding for unen cables ( | Column Clause 3 (50) TRES ORY A U ELOW",
           "children": []
         },
         {
-          "name": "324 (2.5) | Zone 3 2.25 | 2.25 !NZ!",
+          "name": "required closed Table 3.5, | 8 and .11.4.2) (50) TRES NDERGR NATURAL",
           "children": []
         }
       ],
@@ -1016,18 +159,18 @@
           "source": "header_rows",
           "row_index": 0,
           "cells": [
-            "AS/NZS 3000:2018 | LEGEND:",
-            "AS/NZS 3000:2018 (0.6)",
-            "324 | Zone 3 2.25 (2.4)",
-            "324 (2.5) | Zone 3 2.25 | 2.25 !NZ!"
+            "500 (50) (50) DIMENSIO EXAMPLE O ITH CABLE",
+            "500 (50) (50) NS IN MILLIME F A CATEG LOCATED B",
+            "Bedding for unen cables ( | Column Clause 3 (50) TRES ORY A U ELOW",
+            "required closed Table 3.5, | 8 and .11.4.2) (50) TRES NDERGR NATURAL"
           ],
           "analysis": {
-            "score": 0.1818,
-            "text_ratio": 0.3636,
-            "numeric_ratio": 0.6364,
-            "header_hint_hits": 2,
-            "unit_hits": 0,
-            "category_hits": 2,
+            "score": 0.2721,
+            "text_ratio": 0.7442,
+            "numeric_ratio": 0.2558,
+            "header_hint_hits": 0,
+            "unit_hits": 2,
+            "category_hits": 0,
             "multiline_ratio": 0.0,
             "junk_hits": 0
           }
@@ -1036,20 +179,20 @@
           "source": "data_rows",
           "row_index": 0,
           "cells": [
-            "",
-            "E2ZJ = Zo ne o",
-            "",
-            ""
+            "um) continuous",
+            "poured conc",
+            "rete withi",
+            "n the confi"
           ],
           "analysis": {
-            "score": 0.27,
+            "score": 0.32,
             "text_ratio": 1.0,
             "numeric_ratio": 0.0,
             "header_hint_hits": 0,
             "unit_hits": 0,
             "category_hits": 0,
             "multiline_ratio": 0.0,
-            "junk_hits": 1
+            "junk_hits": 0
           },
           "max_header_similarity": 0.0
         },
@@ -1057,115 +200,94 @@
           "source": "data_rows",
           "row_index": 1,
           "cells": [
-            "",
-            "= Zone 1",
-            "",
-            ""
+            "ilding only abo",
+            "ve undergroun",
+            "d cable",
+            "position"
           ],
           "analysis": {
-            "score": 0.1433,
-            "text_ratio": 0.6667,
-            "numeric_ratio": 0.3333,
-            "header_hint_hits": 1,
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
             "unit_hits": 0,
-            "category_hits": 1,
+            "category_hits": 0,
             "multiline_ratio": 0.0,
-            "junk_hits": 2
+            "junk_hits": 0
           },
-          "max_header_similarity": 0.0667
+          "max_header_similarity": 0.0238
         },
         {
           "source": "data_rows",
           "row_index": 2,
           "cells": [
             "",
-            "Im != Zone 2",
-            "",
-            ""
+            "@t I · . . B f",
+            "Marker ta edding r or unencl",
+            "pe equired osed"
           ],
           "analysis": {
-            "score": 0.235,
-            "text_ratio": 0.75,
-            "numeric_ratio": 0.25,
-            "header_hint_hits": 1,
+            "score": 0.17,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
             "unit_hits": 0,
-            "category_hits": 1,
+            "category_hits": 0,
             "multiline_ratio": 0.0,
-            "junk_hits": 1
+            "junk_hits": 3
           },
-          "max_header_similarity": 0.0625
+          "max_header_similarity": 0.0417
         },
         {
           "source": "data_rows",
           "row_index": 3,
           "cells": [
             "",
-            "=Zone3",
-            "",
-            ""
+            "c C C",
+            "ables (Ta olumn 8 lause 3.1",
+            "ble 3.5, and 1.4.2)"
           ],
           "analysis": {
-            "score": 0.32,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
+            "score": 0.3246,
+            "text_ratio": 0.7692,
+            "numeric_ratio": 0.2308,
             "header_hint_hits": 0,
-            "unit_hits": 0,
+            "unit_hits": 3,
             "category_hits": 0,
             "multiline_ratio": 0.0,
             "junk_hits": 0
           },
-          "max_header_similarity": 0.0
+          "max_header_similarity": 0.0698
         },
         {
           "source": "data_rows",
           "row_index": 4,
           "cells": [
-            "",
-            "",
-            "DIMENSIONS IN MET RES",
-            ""
+            "MPLE OF A",
+            "CATEGORY",
+            "A UNDE",
+            "RGROU"
           ],
           "analysis": {
-            "score": 0.37,
+            "score": 0.45,
             "text_ratio": 1.0,
             "numeric_ratio": 0.0,
             "header_hint_hits": 1,
-            "unit_hits": 0,
+            "unit_hits": 2,
             "category_hits": 0,
             "multiline_ratio": 0.0,
             "junk_hits": 0
           },
-          "max_header_similarity": 0.0
+          "max_header_similarity": 0.025
         },
         {
           "source": "data_rows",
           "row_index": 5,
           "cells": [
-            "",
-            "FIGURE 6.2",
-            "ZONE DIMENSIONS (ELEVATION)",
-            ""
-          ],
-          "analysis": {
-            "score": 0.36,
-            "text_ratio": 0.8,
-            "numeric_ratio": 0.2,
-            "header_hint_hits": 2,
-            "unit_hits": 0,
-            "category_hits": 1,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0588
-        },
-        {
-          "source": "data_rows",
-          "row_index": 6,
-          "cells": [
-            "",
-            "",
-            "BATH WITHOUT SHOWER OR FIXED BARRIER",
-            ""
+            "E LOCATED",
+            "DIRECTLY",
+            "BELOW",
+            "POURED"
           ],
           "analysis": {
             "score": 0.32,
@@ -1177,16 +299,16 @@
             "multiline_ratio": 0.0,
             "junk_hits": 0
           },
-          "max_header_similarity": 0.0
+          "max_header_similarity": 0.0256
         },
         {
           "source": "data_rows",
-          "row_index": 7,
+          "row_index": 6,
           "cells": [
-            "",
-            "",
-            "COPYRIGHT",
-            ""
+            "THICKNESS",
+            "WITHIN TH",
+            "E CONF",
+            "INES OF"
           ],
           "analysis": {
             "score": 0.32,
@@ -1207,16 +329,532 @@
       },
       "body_debug": {
         "removed_header_like_body_rows": [],
-        "remaining_data_rows": 8
+        "remaining_data_rows": 7
       }
     },
     "reconstruction_confidence": "high",
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_a043fa1f",
-    "table_number": "E8",
-    "title": ".1",
+    "table_id": "table_6d691ec0",
+    "table_number": "3.9",
+    "title": "Aerial conductor maximum spans table",
+    "parent_clause_reference": null,
+    "page_start": 23,
+    "page_end": 23,
+    "header_rows": [
+      {
+        "cells": [
+          "Type of conductor",
+          "Size mm 2",
+          "Maximum span m"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "Insulated annealed copper including neutral-screened",
+          "?!6",
+          "20"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Bare hard-drawn copper",
+          "?!6",
+          "60"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Insulated hard-drawn copper including two-, three- and four-core twisted but excluding neutral-screened",
+          "6 10 ?!16",
+          "40 50 60"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Neutral-screened cables with hard-drawn copper conductors- two conductors three conductors four conductors two, three, or fou r conductors",
+          "6 or 10 6 or 10 6 or 10 16",
+          "40 60 50 60"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Insulated or bare aluminium excluding neutral- screened",
+          "16 ?!25",
+          "50 60"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Aerial bundled cables (aluminium conductor)",
+          "?!25",
+          "60"
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "Type of conductor,Size mm 2,Maximum span m\r\nInsulated annealed copper including neutral-screened,?!6,20\r\nBare hard-drawn copper,?!6,60\r\n\"Insulated hard-drawn copper including two-, three- and four-core twisted but excluding neutral-screened\",6 10 ?!16,40 50 60\r\n\"Neutral-screened cables with hard-drawn copper conductors- two conductors three conductors four conductors two, three, or fou r conductors\",6 or 10 6 or 10 6 or 10 16,40 60 50 60\r\nInsulated or bare aluminium excluding neutral- screened,16 ?!25,50 60\r\nAerial bundled cables (aluminium conductor),?!25,60\r\n",
+    "normalized_text_representation": "TABLE 3.9\nTITLE: Aerial conductor maximum spans table\nCOLUMNS: Type of conductor | Size mm 2 | Maximum span m\nROW 1: Insulated annealed copper including neutral-screened | ?!6 | 20\nROW 2: Bare hard-drawn copper | ?!6 | 60\nROW 3: Insulated hard-drawn copper including two-, three- and four-core twisted but excluding neutral-screened | 6 10 ?!16 | 40 50 60\nROW 4: Neutral-screened cables with hard-drawn copper conductors- two conductors three conductors four conductors two, three, or fou r conductors | 6 or 10 6 or 10 6 or 10 16 | 40 60 50 60\nROW 5: Insulated or bare aluminium excluding neutral- screened | 16 ?!25 | 50 60\nROW 6: Aerial bundled cables (aluminium conductor) | ?!25 | 60",
+    "confidence": "medium",
+    "source_method": "camelot:lattice",
+    "extraction_notes": [
+      "fusion_win:camelot:lattice"
+    ],
+    "table_key": "3.9:2238e3e1fe622ac1",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 1.0,
+      "col_count": 3,
+      "data_row_count": 6,
+      "noise_ratio": 0.2381,
+      "multiline_ratio": 0.4286,
+      "diversity": 0.9048,
+      "placeholder_ratio": 0.0,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.0476,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.0,
+      "data_row_repeat_ratio": 0.1667,
+      "semantic_hard_fail": false,
+      "unified_score": 0.65,
+      "penalty": 0.35,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "Type of conductor",
+          "Size mm 2",
+          "Maximum span m"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "Type of conductor",
+      "Size mm 2",
+      "Maximum span m"
+    ],
+    "header_model": {
+      "table_type": "unknown",
+      "stub_column_index": 0,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 3,
+      "header_tree": [
+        {
+          "name": "Type of conductor",
+          "children": []
+        },
+        {
+          "name": "Size mm 2",
+          "children": []
+        },
+        {
+          "name": "Maximum span m",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "Type of conductor",
+            "Size mm 2",
+            "Maximum span m"
+          ],
+          "analysis": {
+            "score": 0.5344,
+            "text_ratio": 0.8889,
+            "numeric_ratio": 0.1111,
+            "header_hint_hits": 3,
+            "unit_hits": 2,
+            "category_hits": 1,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "Insulated annealed copper including neutral-screened",
+            "?!6",
+            "20"
+          ],
+          "analysis": {
+            "score": 0.2486,
+            "text_ratio": 0.8571,
+            "numeric_ratio": 0.1429,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "Bare hard-drawn copper",
+            "?!6",
+            "60"
+          ],
+          "analysis": {
+            "score": 0.22,
+            "text_ratio": 0.8,
+            "numeric_ratio": 0.2,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "Insulated hard-drawn copper including two-, three- and four-core twisted but excluding neutral-screened",
+            "6 10 ?!16",
+            "40 50 60"
+          ],
+          "analysis": {
+            "score": 0.1811,
+            "text_ratio": 0.7222,
+            "numeric_ratio": 0.2778,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 3,
+          "cells": [
+            "Neutral-screened cables with hard-drawn copper conductors- two conductors three conductors four conductors two, three, or fou r conductors",
+            "6 or 10 6 or 10 6 or 10 16",
+            "40 60 50 60"
+          ],
+          "analysis": {
+            "score": 0.2281,
+            "text_ratio": 0.6562,
+            "numeric_ratio": 0.3438,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 2,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 4,
+          "cells": [
+            "Insulated or bare aluminium excluding neutral- screened",
+            "16 ?!25",
+            "50 60"
+          ],
+          "analysis": {
+            "score": 0.1836,
+            "text_ratio": 0.7273,
+            "numeric_ratio": 0.2727,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 5,
+          "cells": [
+            "Aerial bundled cables (aluminium conductor)",
+            "?!25",
+            "60"
+          ],
+          "analysis": {
+            "score": 0.2486,
+            "text_ratio": 0.8571,
+            "numeric_ratio": 0.1429,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0667
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 3,
+        "changed_cells": 0
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 6
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": []
+  },
+  {
+    "table_id": "table_f933ef4c",
+    "table_number": "TABLE 4.3",
+    "title": "Guide to recessed luminaire classification, application and general restrictions on use",
+    "parent_clause_reference": null,
+    "page_start": 41,
+    "page_end": 44,
+    "header_rows": [
+      {
+        "cells": [
+          "Abuttedt 1>_No_No | Abutted!''_Yes",
+          "Normal uset 2>- covered_No_No | Normal use<2>- covered_No",
+          "Use with insulationt 3l_No_Yes | Use with insulation!3l_Yes",
+          "Accessibility to high temperature partsl•l_Fully_accessible_Fully_accessible | Accessibility to high temperature parts<•> | Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to side and top of luminaire",
+          "Surface of luminaire normal operating temperature limit | No limit on side or top surface of luminaire Mounting surface of luminaire limited to 90°C | No limit on side or top surface of luminaire Mounting surface of luminaire limited lo 90°C | 90°C limit on side or top or mounting surface of luminaire"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [],
+    "footer_notes": [],
+    "raw_csv": "Abuttedt 1> No No | Abutted!'' Yes - Yes,Categories - Yes,Categories - No,Categories - Yes,Categories - No\r\n",
+    "normalized_text_representation": "TABLE TABLE 4.3\nTITLE: Guide to recessed luminaire classification, application and general restrictions on use\nCOLUMNS: Abuttedt 1> No No | Abutted!'' Yes - Yes | Categories - Yes | Categories - No | Categories - Yes | Categories - No",
+    "confidence": "medium",
+    "source_method": "ai_discovery+pdfplumber",
+    "extraction_notes": [],
+    "table_key": "TABLE 4.3:fed87141ea8af2ca",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 1.0,
+      "col_count": 5,
+      "data_row_count": 2,
+      "noise_ratio": 0.4667,
+      "multiline_ratio": 0.2667,
+      "diversity": 0.6667,
+      "placeholder_ratio": 0.0,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.0,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.0,
+      "data_row_repeat_ratio": 0.0,
+      "semantic_hard_fail": false,
+      "unified_score": 0.43,
+      "penalty": 0.57,
+      "one_column_value_list": false,
+      "partial_fragment": true
+    },
+    "has_headers": true,
+    "is_multipage": true,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "Abuttedt 1> No No | Abutted!'' Yes",
+          "Normal uset 2>- covered No No | Normal use<2>- covered No",
+          "Use with insulationt 3l No Yes | Use with insulation!3l Yes",
+          "Accessibility to high temperature partsl• Fully accessible Fully accessible | Accessibility to high temperature parts<•> | Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to side and top of luminaire",
+          "Surface of luminaire normal operating temperature limit | No limit on side or top surface of luminaire Mounting surface of luminaire limited to 90°C | No limit on side or top surface of luminaire Mounting surface of luminaire limited lo 90°C | 90°C limit on side or top or mounting surface of luminaire"
+        ],
+        "is_header": true
+      },
+      {
+        "cells": [
+          "Yes",
+          "Yes",
+          "Yes",
+          "Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to sides and top of luminaire",
+          "limit on side or top or mounting surface of luminaire"
+        ],
+        "is_header": true
+      },
+      {
+        "cells": [
+          "Yes",
+          "Yes",
+          "Yes",
+          "Restricted access In this Standard, this is assessed for access to high temperature parts by use of a IP4X- 1 mm probe to sides and top and front face of luminaire",
+          "90°C limit on side or top or mounting surface of luminaire"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [
+      {
+        "cells": [
+          "Yes",
+          "Yes",
+          "Yes",
+          "Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to sides and top of luminaire",
+          "go•c limit on side or top or mounting surface of luminaire"
+        ],
+        "is_header": true
+      },
+      {
+        "cells": [
+          "Yes",
+          "Yes",
+          "Yes",
+          "Restricted access In this Standard, this is assessed for access to high temperature parts by use of a IP4X- 1 mm probe to sides and top and front face of luminaire",
+          "90°C limit on side or top or mounting surface of luminaire"
+        ],
+        "is_header": true
+      }
+    ],
+    "final_columns": [
+      "Abuttedt 1> No No | Abutted!'' Yes - Yes",
+      "Categories - Yes",
+      "Categories - No",
+      "Categories - Yes",
+      "Categories - No"
+    ],
+    "header_model": {
+      "table_type": "matrix",
+      "stub_column_index": 0,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 3,
+      "final_column_count": 5,
+      "header_tree": [
+        {
+          "name": "Abuttedt 1> No No | Abutted!'' Yes - Yes",
+          "children": []
+        },
+        {
+          "name": "Categories",
+          "children": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "name": "Categories",
+          "children": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "name": "Accessibility to high temperature partsl• Fully accessible Fully accessible | Accessibility to high temperature parts<•> | Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to side and top of luminaire - Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to sides and top of luminaire - Restricted access In this Standard, this is assessed for access to high temperature parts by use of a IP4X- 1 mm probe to sides and top and front face of luminaire",
+          "children": []
+        },
+        {
+          "name": "Surface of luminaire normal operating temperature limit | No limit on side or top surface of luminaire Mounting surface of luminaire limited to 90°C | No limit on side or top surface of luminaire Mounting surface of luminaire limited lo 90°C | 90°C limit on side or top or mounting surface of luminaire - limit on side or top or mounting surface of luminaire - 90°C limit on side or top or mounting surface of luminaire",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "Abuttedt 1> No No | Abutted!'' Yes",
+            "Normal uset 2>- covered No No | Normal use<2>- covered No",
+            "Use with insulationt 3l No Yes | Use with insulation!3l Yes",
+            "Accessibility to high temperature partsl•l Fully accessible Fully accessible | Accessibility to high temperature parts<•> | Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to side and top of luminaire",
+            "Surface of luminaire normal operating temperature limit | No limit on side or top surface of luminaire Mounting surface of luminaire limited to 90°C | No limit on side or top surface of luminaire Mounting surface of luminaire limited lo 90°C | 90°C limit on side or top or mounting surface of luminaire"
+          ],
+          "analysis": {
+            "score": 0.5411,
+            "text_ratio": 0.9421,
+            "numeric_ratio": 0.0579,
+            "header_hint_hits": 18,
+            "unit_hits": 2,
+            "category_hits": 11,
+            "multiline_ratio": 0.0,
+            "junk_hits": 4
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "Yes",
+            "Yes",
+            "Yes",
+            "Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to sides and top of luminaire",
+            "go•c limit on side or top or mounting surface of luminaire"
+          ],
+          "analysis": {
+            "score": 0.6578,
+            "text_ratio": 0.9756,
+            "numeric_ratio": 0.0244,
+            "header_hint_hits": 4,
+            "unit_hits": 2,
+            "category_hits": 3,
+            "multiline_ratio": 0.0,
+            "junk_hits": 1
+          },
+          "max_header_similarity": 0.5577
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "Yes",
+            "Yes",
+            "Yes",
+            "Restricted access In this Standard, this is assessed for access to high temperature parts by use of a IP4X- 1 mm probe to sides and top and front face of luminaire",
+            "90°C limit on side or top or mounting surface of luminaire"
+          ],
+          "analysis": {
+            "score": 0.6478,
+            "text_ratio": 0.9556,
+            "numeric_ratio": 0.0444,
+            "header_hint_hits": 4,
+            "unit_hits": 2,
+            "category_hits": 3,
+            "multiline_ratio": 0.0,
+            "junk_hits": 1
+          },
+          "max_header_similarity": 0.7568
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 15,
+        "changed_cells": 2
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 0
+      }
+    },
+    "reconstruction_confidence": "medium",
+    "reconstruction_notes": [
+      "Detected 2 possible repeated header-like body rows (see promoted_header_rows).",
+      "Cleaned 2 header cells.",
+      "Flattened header names truncated to match table column width."
+    ]
+  },
+  {
+    "table_id": "table_eaff0611",
+    "table_number": "TABLE 8.1",
+    "title": "Maximum values of earth fault-loop impedance for the total circuit including the supply transformer.",
     "parent_clause_reference": null,
     "page_start": 86,
     "page_end": 86,
@@ -1369,13 +1007,13 @@
     ],
     "footer_notes": [],
     "raw_csv": "device rating Amps Amps Amps (6) (10),device rating Amps Amps Amps (9.6) (5.8),device rating Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (5.1) (3.1),Disconnecti on times Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (3.1) (1.8),Disconnecti on times Amps | 0. 4 s | Maximum earth fault-loop impedance Zs n (11.5) (6.4),Disconnecti on times Amps Ss | Maximum earth fault-loop impedance Zs n (15.3) (9.2)\r\n16,3.6,1.9,1.2,3. 1,5.0\r\n20,2.9,1.5,0.9,2. 1,3.6\r\n25,2.3,1.2,0.7,1.6,2.7\r\n32,1.8,1.0,0.6,1.3,2.2\r\n40,1.4,0.8,0.5,1.0,1.6\r\n50,1.2,0.6,0.4,0.7,1.3\r\n63,0.9,0.5,0.3,0.6,0.9\r\n80,0.7,0.4,0.2,0.4,0.7\r\n100,0.6,0.3,0.2,0.3,0.5\r\n125,0.5,0.2,0.1,0.2,0.4\r\n160,0.4,0.2,0.1,0.2,0.3\r\n200,0.3,0.2,0.1,0. 1,0.2\r\n",
-    "normalized_text_representation": "TABLE E8\nTITLE: .1\nCOLUMNS: device rating Amps Amps Amps (6) (10) | device rating Amps Amps Amps (9.6) (5.8) | device rating Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (5.1) (3.1) | Disconnecti on times Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (3.1) (1.8) | Disconnecti on times Amps | 0. 4 s | Maximum earth fault-loop impedance Zs n (11.5) (6.4) | Disconnecti on times Amps Ss | Maximum earth fault-loop impedance Zs n (15.3) (9.2)\nROW 1: 16 | 3.6 | 1.9 | 1.2 | 3. 1 | 5.0\nROW 2: 20 | 2.9 | 1.5 | 0.9 | 2. 1 | 3.6\nROW 3: 25 | 2.3 | 1.2 | 0.7 | 1.6 | 2.7\nROW 4: 32 | 1.8 | 1.0 | 0.6 | 1.3 | 2.2\nROW 5: 40 | 1.4 | 0.8 | 0.5 | 1.0 | 1.6\nROW 6: 50 | 1.2 | 0.6 | 0.4 | 0.7 | 1.3\nROW 7: 63 | 0.9 | 0.5 | 0.3 | 0.6 | 0.9\nROW 8: 80 | 0.7 | 0.4 | 0.2 | 0.4 | 0.7\nROW 9: 100 | 0.6 | 0.3 | 0.2 | 0.3 | 0.5\nROW 10: 125 | 0.5 | 0.2 | 0.1 | 0.2 | 0.4\nROW 11: 160 | 0.4 | 0.2 | 0.1 | 0.2 | 0.3\nROW 12: 200 | 0.3 | 0.2 | 0.1 | 0. 1 | 0.2",
+    "normalized_text_representation": "TABLE TABLE 8.1\nTITLE: Maximum values of earth fault-loop impedance for the total circuit including the supply transformer.\nCOLUMNS: device rating Amps Amps Amps (6) (10) | device rating Amps Amps Amps (9.6) (5.8) | device rating Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (5.1) (3.1) | Disconnecti on times Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (3.1) (1.8) | Disconnecti on times Amps | 0. 4 s | Maximum earth fault-loop impedance Zs n (11.5) (6.4) | Disconnecti on times Amps Ss | Maximum earth fault-loop impedance Zs n (15.3) (9.2)\nROW 1: 16 | 3.6 | 1.9 | 1.2 | 3. 1 | 5.0\nROW 2: 20 | 2.9 | 1.5 | 0.9 | 2. 1 | 3.6\nROW 3: 25 | 2.3 | 1.2 | 0.7 | 1.6 | 2.7\nROW 4: 32 | 1.8 | 1.0 | 0.6 | 1.3 | 2.2\nROW 5: 40 | 1.4 | 0.8 | 0.5 | 1.0 | 1.6\nROW 6: 50 | 1.2 | 0.6 | 0.4 | 0.7 | 1.3\nROW 7: 63 | 0.9 | 0.5 | 0.3 | 0.6 | 0.9\nROW 8: 80 | 0.7 | 0.4 | 0.2 | 0.4 | 0.7\nROW 9: 100 | 0.6 | 0.3 | 0.2 | 0.3 | 0.5\nROW 10: 125 | 0.5 | 0.2 | 0.1 | 0.2 | 0.4\nROW 11: 160 | 0.4 | 0.2 | 0.1 | 0.2 | 0.3\nROW 12: 200 | 0.3 | 0.2 | 0.1 | 0. 1 | 0.2",
     "confidence": "high",
     "source_method": "camelot:stream",
     "extraction_notes": [
       "fusion_win:camelot:stream"
     ],
-    "table_key": "E8:04f89ff301f2d9fa",
+    "table_key": "TABLE 8.1:abf7b550b9792ed9",
     "continuation_of": null,
     "quality_metrics": {
       "fill_ratio": 1.0,
@@ -1766,9 +1404,483 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_e6d5a5d9",
-    "table_number": null,
+    "table_id": "table_52f1b646",
+    "table_number": "C1",
+    "title": "provides an allocation of load for different types of equipment",
+    "parent_clause_reference": null,
+    "page_start": 88,
+    "page_end": 89,
+    "header_rows": [
+      {
+        "cells": [
+          "connected to consumer mains or submains in a single or mu | installation. The load current is calculated for each equipmen | the installation or affected part thereof, and these contributi | together to achieve the maximum demand current. The | notes provide clarification of certain provisions and the ens | demonstrate how the calculation is made.",
+          "ltiple domestic_t_load_group_in_ons_are_added_accompanying_uing_examples",
+          "Column 3"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "2",
+          "3",
+          "4"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Single domestic electrical installation or individual living unit per phasel1>",
+          "Single domestic electrical installation or individual living unit per phasel1>",
+          "Single domestic electrical installation or individual living unit per phasel1>"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "3 A for 1 to 20 points + 2 A for each additional 20 points or part thereof",
+          "6A",
+          "5 A + 0.25 A per living unit"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "75% connected load",
+          "75% connected load",
+          "75% connected load"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "10 A for 1 to 20 points + 5 A for each additional 20 points or part thereof",
+          "10 A+ 5 A per living unit",
+          "15A + 3.75A per living unit"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "2 to 5 living units per phase",
+          "6 to 20 living units per phase",
+          ""
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "\"connected to consumer mains or submains in a single or mu | installation. The load current is calculated for each equipmen | the installation or affected part thereof, and these contributi | together to achieve the maximum demand current. The | notes provide clarification of certain provisions and the ens | demonstrate how the calculation is made.\",ltiple domestic t load group in ons are added accompanying uing examples,Column 3\r\n2,3,4\r\nSingle domestic electrical installation or individual living unit per phasel1>,Single domestic electrical installation or individual living unit per phasel1>,Single domestic electrical installation or individual living unit per phasel1>\r\n3 A for 1 to 20 points + 2 A for each additional 20 points or part thereof,6A,5 A + 0.25 A per living unit\r\n75% connected load,75% connected load,75% connected load\r\n10 A for 1 to 20 points + 5 A for each additional 20 points or part thereof,10 A+ 5 A per living unit,15A + 3.75A per living unit\r\n2 to 5 living units per phase,6 to 20 living units per phase,\r\n",
+    "normalized_text_representation": "TABLE C1\nTITLE: provides an allocation of load for different types of equipment\nCOLUMNS: connected to consumer mains or submains in a single or mu | installation. The load current is calculated for each equipmen | the installation or affected part thereof, and these contributi | together to achieve the maximum demand current. The | notes provide clarification of certain provisions and the ens | demonstrate how the calculation is made. | ltiple domestic t load group in ons are added accompanying uing examples | Column 3\nROW 1: 2 | 3 | 4\nROW 2: Single domestic electrical installation or individual living unit per phasel1> | Single domestic electrical installation or individual living unit per phasel1> | Single domestic electrical installation or individual living unit per phasel1>\nROW 3: 3 A for 1 to 20 points + 2 A for each additional 20 points or part thereof | 6A | 5 A + 0.25 A per living unit\nROW 4: 75% connected load | 75% connected load | 75% connected load\nROW 5: 10 A for 1 to 20 points + 5 A for each additional 20 points or part thereof | 10 A+ 5 A per living unit | 15A + 3.75A per living unit\nROW 6: 2 to 5 living units per phase | 6 to 20 living units per phase |",
+    "confidence": "medium",
+    "source_method": "pdfplumber:caption_region",
+    "extraction_notes": [],
+    "table_key": "C1:b4c30db048025800",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 0.9524,
+      "col_count": 3,
+      "data_row_count": 6,
+      "noise_ratio": 0.45,
+      "multiline_ratio": 0.5,
+      "diversity": 0.8,
+      "placeholder_ratio": 0.0476,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.0,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.0,
+      "data_row_repeat_ratio": 0.1667,
+      "semantic_hard_fail": false,
+      "unified_score": 0.6024,
+      "penalty": 0.35,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": true,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "connected to consumer mains or submains in a single or mu | installation. The load current is calculated for each equipmen | the installation or affected part thereof, and these contributi | together to achieve the maximum demand current. The | notes provide clarification of certain provisions and the ens | demonstrate how the calculation is made.",
+          "ltiple domestic t load group in ons are added accompanying uing examples",
+          "Column 3"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "connected to consumer mains or submains in a single or mu | installation. The load current is calculated for each equipmen | the installation or affected part thereof, and these contributi | together to achieve the maximum demand current. The | notes provide clarification of certain provisions and the ens | demonstrate how the calculation is made.",
+      "ltiple domestic t load group in ons are added accompanying uing examples",
+      "Column 3"
+    ],
+    "header_model": {
+      "table_type": "matrix",
+      "stub_column_index": 0,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 3,
+      "header_tree": [
+        {
+          "name": "connected to consumer mains or submains in a single or mu | installation. The load current is calculated for each equipmen | the installation or affected part thereof, and these contributi | together to achieve the maximum demand current. The | notes provide clarification of certain provisions and the ens | demonstrate how the calculation is made.",
+          "children": []
+        },
+        {
+          "name": "ltiple domestic t load group in ons are added accompanying uing examples",
+          "children": []
+        },
+        {
+          "name": "Column 3",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "connected to consumer mains or submains in a single or mu | installation. The load current is calculated for each equipmen | the installation or affected part thereof, and these contributi | together to achieve the maximum demand current. The | notes provide clarification of certain provisions and the ens | demonstrate how the calculation is made.",
+            "ltiple domestic t load group in ons are added accompanying uing examples",
+            "Column 3"
+          ],
+          "analysis": {
+            "score": 0.6324,
+            "text_ratio": 0.9848,
+            "numeric_ratio": 0.0152,
+            "header_hint_hits": 5,
+            "unit_hits": 1,
+            "category_hits": 2,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "2",
+            "3",
+            "4"
+          ],
+          "analysis": {
+            "score": -0.18,
+            "text_ratio": 0.0,
+            "numeric_ratio": 1.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0179
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "Single domestic electrical installation or individual living unit per phasel1>",
+            "Single domestic electrical installation or individual living unit per phasel1>",
+            "Single domestic electrical installation or individual living unit per phasel1>"
+          ],
+          "analysis": {
+            "score": 0.44,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 3,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0667
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "3 A for 1 to 20 points + 2 A for each additional 20 points or part thereof",
+            "6A",
+            "5 A + 0.25 A per living unit"
+          ],
+          "analysis": {
+            "score": 0.1419,
+            "text_ratio": 0.7037,
+            "numeric_ratio": 0.2963,
+            "header_hint_hits": 0,
+            "unit_hits": 4,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 3
+          },
+          "max_header_similarity": 0.1212
+        },
+        {
+          "source": "data_rows",
+          "row_index": 3,
+          "cells": [
+            "75% connected load",
+            "75% connected load",
+            "75% connected load"
+          ],
+          "analysis": {
+            "score": 0.3033,
+            "text_ratio": 0.6667,
+            "numeric_ratio": 0.3333,
+            "header_hint_hits": 3,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0364
+        },
+        {
+          "source": "data_rows",
+          "row_index": 4,
+          "cells": [
+            "10 A for 1 to 20 points + 5 A for each additional 20 points or part thereof",
+            "10 A+ 5 A per living unit",
+            "15A + 3.75A per living unit"
+          ],
+          "analysis": {
+            "score": 0.1448,
+            "text_ratio": 0.7097,
+            "numeric_ratio": 0.2903,
+            "header_hint_hits": 0,
+            "unit_hits": 3,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 3
+          },
+          "max_header_similarity": 0.1045
+        },
+        {
+          "source": "data_rows",
+          "row_index": 5,
+          "cells": [
+            "2 to 5 living units per phase",
+            "6 to 20 living units per phase",
+            ""
+          ],
+          "analysis": {
+            "score": 0.2571,
+            "text_ratio": 0.7143,
+            "numeric_ratio": 0.2857,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 2,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0161
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 3,
+        "changed_cells": 0
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 6
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": []
+  },
+  {
+    "table_id": "table_2ca87642",
+    "table_number": "C3",
     "title": null,
+    "parent_clause_reference": null,
+    "page_start": 100,
+    "page_end": 100,
+    "header_rows": [
+      {
+        "cells": [
+          "Light and power | Airconditioning: - Cooling - Reverse cycle - Zonal reheat - Variable volume | Open air EV charging Basement EV charging | Light and power Airconditioning | Light and power Ventilation Special equipment",
+          "Range, VA/m 2 (40-60) (30-40 20-30 40-60 20) (0-10 5-15 10-20 10-30) (40- 100 20-40) | 5- 15 5 (use load details)"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "Light and power Ventilation Airconditioning Special equipment",
+          "10-20 10-20 30-50 (use load details)"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Total",
+          "60- 100"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Total",
+          "80- 120"
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "Light and power | Airconditioning: - Cooling - Reverse cycle - Zonal reheat - Variable volume | Open air EV charging Basement EV charging | Light and power Airconditioning | Light and power Ventilation Special equipment,\"Range, VA/m 2 (40-60) (30-40 20-30 40-60 20) (0-10 5-15 10-20 10-30) (40- 100 20-40) | 5- 15 5 (use load details)\"\r\nLight and power Ventilation Airconditioning Special equipment,10-20 10-20 30-50 (use load details)\r\nTotal,60- 100\r\nTotal,80- 120\r\n",
+    "normalized_text_representation": "TABLE C3\nCOLUMNS: Light and power | Airconditioning: - Cooling - Reverse cycle - Zonal reheat - Variable volume | Open air EV charging Basement EV charging | Light and power Airconditioning | Light and power Ventilation Special equipment | Range, VA/m 2 (40-60) (30-40 20-30 40-60 20) (0-10 5-15 10-20 10-30) (40- 100 20-40) | 5- 15 5 (use load details)\nROW 1: Light and power Ventilation Airconditioning Special equipment | 10-20 10-20 30-50 (use load details)\nROW 2: Total | 60- 100\nROW 3: Total | 80- 120",
+    "confidence": "medium",
+    "source_method": "pdfplumber:caption_region",
+    "extraction_notes": [],
+    "table_key": "C3:c388a95de83f6c05",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 1.0,
+      "col_count": 2,
+      "data_row_count": 3,
+      "noise_ratio": 0.25,
+      "multiline_ratio": 0.25,
+      "diversity": 0.875,
+      "placeholder_ratio": 0.0,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.0,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.0,
+      "data_row_repeat_ratio": 0.0,
+      "semantic_hard_fail": false,
+      "unified_score": 0.65,
+      "penalty": 0.35,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "Light and power | Airconditioning: - Cooling - Reverse cycle - Zonal reheat - Variable volume | Open air EV charging Basement EV charging | Light and power Airconditioning | Light and power Ventilation Special equipment",
+          "Range, VA/m 2 (40-60) (30-40 20-30 40-60 20) (0-10 5-15 10-20 10-30) (40- 100 20-40) | 5- 15 5 (use load details)"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "Light and power | Airconditioning: - Cooling - Reverse cycle - Zonal reheat - Variable volume | Open air EV charging Basement EV charging | Light and power Airconditioning | Light and power Ventilation Special equipment",
+      "Range, VA/m 2 (40-60) (30-40 20-30 40-60 20) (0-10 5-15 10-20 10-30) (40- 100 20-40) | 5- 15 5 (use load details)"
+    ],
+    "header_model": {
+      "table_type": "unknown",
+      "stub_column_index": 0,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 2,
+      "header_tree": [
+        {
+          "name": "Light and power | Airconditioning: - Cooling - Reverse cycle - Zonal reheat - Variable volume | Open air EV charging Basement EV charging | Light and power Airconditioning | Light and power Ventilation Special equipment",
+          "children": []
+        },
+        {
+          "name": "Range, VA/m 2 (40-60) (30-40 20-30 40-60 20) (0-10 5-15 10-20 10-30) (40- 100 20-40) | 5- 15 5 (use load details)",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "Light and power | Airconditioning: - Cooling - Reverse cycle - Zonal reheat - Variable volume | Open air EV charging Basement EV charging | Light and power Airconditioning | Light and power Ventilation Special equipment",
+            "Range, VA/m 2 (40-60) (30-40 20-30 40-60 20) (0-10 5-15 10-20 10-30) (40- 100 20-40) | 5- 15 5 (use load details)"
+          ],
+          "analysis": {
+            "score": 0.3537,
+            "text_ratio": 0.9074,
+            "numeric_ratio": 0.0926,
+            "header_hint_hits": 3,
+            "unit_hits": 2,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 4
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "Light and power Ventilation Airconditioning Special equipment",
+            "10-20 10-20 30-50 (use load details)"
+          ],
+          "analysis": {
+            "score": 0.42,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 2,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.2619
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "Total",
+            "60- 100"
+          ],
+          "analysis": {
+            "score": 0.1533,
+            "text_ratio": 0.6667,
+            "numeric_ratio": 0.3333,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0233
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "Total",
+            "80- 120"
+          ],
+          "analysis": {
+            "score": 0.1533,
+            "text_ratio": 0.6667,
+            "numeric_ratio": 0.3333,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 2,
+        "changed_cells": 0
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 3
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": []
+  },
+  {
+    "table_id": "table_7165109d",
+    "table_number": "TABLE C8",
+    "title": "Voltage drop simplified method table showing cable conductor sizes and corresponding amperage for single-phase and three-phase circuits.",
     "parent_clause_reference": null,
     "page_start": 107,
     "page_end": 107,
@@ -1818,13 +1930,13 @@
     ],
     "footer_notes": [],
     "raw_csv": "2.5 mm 2 | 4 mm 2 | 6 mm 2 | 10 mm 2 | 16 mm 2 | 25 mm 2,128 (205) (306) (515) (818) (1289),256 (412) (615) (1034) (1643) (2588)\r\n35 mm2,1773,3560\r\n50 mm2,2377,4772\r\n70 mm2,3342,6712\r\n95 mm2,4445,8927\r\n",
-    "normalized_text_representation": "COLUMNS: 2.5 mm 2 | 4 mm 2 | 6 mm 2 | 10 mm 2 | 16 mm 2 | 25 mm 2 | 128 (205) (306) (515) (818) (1289) | 256 (412) (615) (1034) (1643) (2588)\nROW 1: 35 mm2 | 1773 | 3560\nROW 2: 50 mm2 | 2377 | 4772\nROW 3: 70 mm2 | 3342 | 6712\nROW 4: 95 mm2 | 4445 | 8927",
-    "confidence": "medium",
+    "normalized_text_representation": "TABLE TABLE C8\nTITLE: Voltage drop simplified method table showing cable conductor sizes and corresponding amperage for single-phase and three-phase circuits.\nCOLUMNS: 2.5 mm 2 | 4 mm 2 | 6 mm 2 | 10 mm 2 | 16 mm 2 | 25 mm 2 | 128 (205) (306) (515) (818) (1289) | 256 (412) (615) (1034) (1643) (2588)\nROW 1: 35 mm2 | 1773 | 3560\nROW 2: 50 mm2 | 2377 | 4772\nROW 3: 70 mm2 | 3342 | 6712\nROW 4: 95 mm2 | 4445 | 8927",
+    "confidence": "high",
     "source_method": "camelot:stream",
     "extraction_notes": [
       "fusion_win:camelot:stream"
     ],
-    "table_key": "na:4b778597a0ee137b",
+    "table_key": "TABLE C8:2360acb56af82ba9",
     "continuation_of": null,
     "quality_metrics": {
       "fill_ratio": 1.0,
@@ -1840,8 +1952,8 @@
       "header_corrupt_ratio": 0.0,
       "data_row_repeat_ratio": 0.25,
       "semantic_hard_fail": false,
-      "unified_score": 0.78,
-      "penalty": 0.22,
+      "unified_score": 1.0,
+      "penalty": 0.0,
       "one_column_value_list": false,
       "partial_fragment": false
     },
@@ -1998,7 +2110,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_3308f523",
+    "table_id": "table_52d6c202",
     "table_number": "C10",
     "title": "CJ)",
     "parent_clause_reference": null,
@@ -2210,7 +2322,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_3a6d7d38",
+    "table_id": "table_54a7f26a",
     "table_number": "C11",
     "title": null,
     "parent_clause_reference": null,
@@ -3296,7 +3408,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_0d3259fc",
+    "table_id": "table_c47676df",
     "table_number": "C12",
     "title": "CJ)",
     "parent_clause_reference": null,
@@ -3496,7 +3608,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_93f81613",
+    "table_id": "table_371ea2fc",
     "table_number": "D1",
     "title": null,
     "parent_clause_reference": null,
@@ -3984,7 +4096,319 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_ee987c34",
+    "table_id": "table_915ed6ea",
+    "table_number": "TABLE D2",
+    "title": "Force exerted by aerial line conductors, detailing various sizes and their corresponding weights, sag, tension, and strength ratings.",
+    "parent_clause_reference": null,
+    "page_start": 119,
+    "page_end": 119,
+    "header_rows": [
+      {
+        "cells": [
+          "0.35 max",
+          "10 15 20 30 40 50",
+          "0.09 0.17 0.26 0.43 0.57 0.73",
+          "0.2 0.4 0.6 1.0 1.3 2.0",
+          "0.49 0.58 0.67 0.92 1.23 1.50",
+          "12.4"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "0.2 max",
+          "10 15 20 30 40 50",
+          "0.09 0.17 0.26 0.43 0.57 0.73",
+          "0.2 04 0.6 1.0 1.3 2.0",
+          "0.28 0.33 0.38 0.52 0.70 0.86",
+          "7"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "0.4 max",
+          "10 15 20 30 40 50",
+          "0.09 0.17 0.26 0.43 0.57 0.73",
+          "0.2 04 0.6 1.0 1.3 2.0",
+          "0.56 0.66 0.77 1.05 1.40 1.71",
+          "14"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "0.7 max",
+          "10 15 20 30 40 50",
+          "0.09 0.17 0.26 0.43 0.57 0.73",
+          "0.2 0.4 0.6 1.0 1.3 2.0",
+          "0.97 1.16 1.35 1.83 2.46 3.00",
+          "24.8"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "1.35 max",
+          "10 15 20 30 40 50",
+          "0.09 0.17 0.26 0.59 1.05 1.64",
+          "0.2 0.4 0.6 1.0 1.3 2.0",
+          "1.88 2.23 2.57 2.57 2.57 2.57",
+          "53.2"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "2.7 max",
+          "10 15 20 30 40 50",
+          "0.09 0.17 0.26 0.59 1.05 1.64",
+          "0.2 0.4 0.6 1.0 1.3 2.0",
+          "3.75 4.47 5.14 5.14 5.14 5.14",
+          "106.4"
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "0.35 max,10 15 20 30 40 50,0.09 0.17 0.26 0.43 0.57 0.73,0.2 0.4 0.6 1.0 1.3 2.0,0.49 0.58 0.67 0.92 1.23 1.50,12.4\r\n0.2 max,10 15 20 30 40 50,0.09 0.17 0.26 0.43 0.57 0.73,0.2 04 0.6 1.0 1.3 2.0,0.28 0.33 0.38 0.52 0.70 0.86,7\r\n0.4 max,10 15 20 30 40 50,0.09 0.17 0.26 0.43 0.57 0.73,0.2 04 0.6 1.0 1.3 2.0,0.56 0.66 0.77 1.05 1.40 1.71,14\r\n0.7 max,10 15 20 30 40 50,0.09 0.17 0.26 0.43 0.57 0.73,0.2 0.4 0.6 1.0 1.3 2.0,0.97 1.16 1.35 1.83 2.46 3.00,24.8\r\n1.35 max,10 15 20 30 40 50,0.09 0.17 0.26 0.59 1.05 1.64,0.2 0.4 0.6 1.0 1.3 2.0,1.88 2.23 2.57 2.57 2.57 2.57,53.2\r\n2.7 max,10 15 20 30 40 50,0.09 0.17 0.26 0.59 1.05 1.64,0.2 0.4 0.6 1.0 1.3 2.0,3.75 4.47 5.14 5.14 5.14 5.14,106.4\r\n",
+    "normalized_text_representation": "TABLE TABLE D2\nTITLE: Force exerted by aerial line conductors, detailing various sizes and their corresponding weights, sag, tension, and strength ratings.\nCOLUMNS: 0.35 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 0.4 0.6 1.0 1.3 2.0 | 0.49 0.58 0.67 0.92 1.23 1.50 | 12.4\nROW 1: 0.2 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 04 0.6 1.0 1.3 2.0 | 0.28 0.33 0.38 0.52 0.70 0.86 | 7\nROW 2: 0.4 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 04 0.6 1.0 1.3 2.0 | 0.56 0.66 0.77 1.05 1.40 1.71 | 14\nROW 3: 0.7 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 0.4 0.6 1.0 1.3 2.0 | 0.97 1.16 1.35 1.83 2.46 3.00 | 24.8\nROW 4: 1.35 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.59 1.05 1.64 | 0.2 0.4 0.6 1.0 1.3 2.0 | 1.88 2.23 2.57 2.57 2.57 2.57 | 53.2\nROW 5: 2.7 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.59 1.05 1.64 | 0.2 0.4 0.6 1.0 1.3 2.0 | 3.75 4.47 5.14 5.14 5.14 5.14 | 106.4",
+    "confidence": "medium",
+    "source_method": "ai_discovery+pdfplumber",
+    "extraction_notes": [],
+    "table_key": "TABLE D2:06d59709266a8452",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 1.0,
+      "col_count": 6,
+      "data_row_count": 5,
+      "noise_ratio": 0.0,
+      "multiline_ratio": 0.5556,
+      "diversity": 0.7222,
+      "placeholder_ratio": 0.0,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.0,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.0,
+      "data_row_repeat_ratio": 0.2,
+      "semantic_hard_fail": false,
+      "unified_score": 1.0,
+      "penalty": 0.0,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "0.35 max",
+          "10 15 20 30 40 50",
+          "0.09 0.17 0.26 0.43 0.57 0.73",
+          "0.2 0.4 0.6 1.0 1.3 2.0",
+          "0.49 0.58 0.67 0.92 1.23 1.50",
+          "12.4"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "0.35 max",
+      "10 15 20 30 40 50",
+      "0.09 0.17 0.26 0.43 0.57 0.73",
+      "0.2 0.4 0.6 1.0 1.3 2.0",
+      "0.49 0.58 0.67 0.92 1.23 1.50",
+      "12.4"
+    ],
+    "header_model": {
+      "table_type": "numeric_lookup",
+      "stub_column_index": 0,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 6,
+      "header_tree": [
+        {
+          "name": "0.35 max",
+          "children": []
+        },
+        {
+          "name": "10 15 20 30 40 50",
+          "children": []
+        },
+        {
+          "name": "0.09 0.17 0.26 0.43 0.57 0.73",
+          "children": []
+        },
+        {
+          "name": "0.2 0.4 0.6 1.0 1.3 2.0",
+          "children": []
+        },
+        {
+          "name": "0.49 0.58 0.67 0.92 1.23 1.50",
+          "children": []
+        },
+        {
+          "name": "12.4",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "0.35 max",
+            "10 15 20 30 40 50",
+            "0.09 0.17 0.26 0.43 0.57 0.73",
+            "0.2 0.4 0.6 1.0 1.3 2.0",
+            "0.49 0.58 0.67 0.92 1.23 1.50",
+            "12.4"
+          ],
+          "analysis": {
+            "score": -0.1615,
+            "text_ratio": 0.037,
+            "numeric_ratio": 0.963,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "0.2 max",
+            "10 15 20 30 40 50",
+            "0.09 0.17 0.26 0.43 0.57 0.73",
+            "0.2 04 0.6 1.0 1.3 2.0",
+            "0.28 0.33 0.38 0.52 0.70 0.86",
+            "7"
+          ],
+          "analysis": {
+            "score": -0.1615,
+            "text_ratio": 0.037,
+            "numeric_ratio": 0.963,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.5143
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "0.4 max",
+            "10 15 20 30 40 50",
+            "0.09 0.17 0.26 0.43 0.57 0.73",
+            "0.2 04 0.6 1.0 1.3 2.0",
+            "0.56 0.66 0.77 1.05 1.40 1.71",
+            "14"
+          ],
+          "analysis": {
+            "score": -0.1615,
+            "text_ratio": 0.037,
+            "numeric_ratio": 0.963,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.5429
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "0.7 max",
+            "10 15 20 30 40 50",
+            "0.09 0.17 0.26 0.43 0.57 0.73",
+            "0.2 0.4 0.6 1.0 1.3 2.0",
+            "0.97 1.16 1.35 1.83 2.46 3.00",
+            "24.8"
+          ],
+          "analysis": {
+            "score": -0.1615,
+            "text_ratio": 0.037,
+            "numeric_ratio": 0.963,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.5429
+        },
+        {
+          "source": "data_rows",
+          "row_index": 3,
+          "cells": [
+            "1.35 max",
+            "10 15 20 30 40 50",
+            "0.09 0.17 0.26 0.59 1.05 1.64",
+            "0.2 0.4 0.6 1.0 1.3 2.0",
+            "1.88 2.23 2.57 2.57 2.57 2.57",
+            "53.2"
+          ],
+          "analysis": {
+            "score": -0.1615,
+            "text_ratio": 0.037,
+            "numeric_ratio": 0.963,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.4571
+        },
+        {
+          "source": "data_rows",
+          "row_index": 4,
+          "cells": [
+            "2.7 max",
+            "10 15 20 30 40 50",
+            "0.09 0.17 0.26 0.59 1.05 1.64",
+            "0.2 0.4 0.6 1.0 1.3 2.0",
+            "3.75 4.47 5.14 5.14 5.14 5.14",
+            "106.4"
+          ],
+          "analysis": {
+            "score": -0.1615,
+            "text_ratio": 0.037,
+            "numeric_ratio": 0.963,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.4571
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 6,
+        "changed_cells": 0
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 5
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": []
+  },
+  {
+    "table_id": "table_28277dfe",
     "table_number": "D2",
     "title": null,
     "parent_clause_reference": null,
@@ -4332,7 +4756,7 @@
     ]
   },
   {
-    "table_id": "table_435dc6cf",
+    "table_id": "table_363abe2a",
     "table_number": "D3",
     "title": null,
     "parent_clause_reference": null,
@@ -5454,771 +5878,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_79f9c515",
-    "table_number": "D4",
-    "title": null,
-    "parent_clause_reference": null,
-    "page_start": 121,
-    "page_end": 121,
-    "header_rows": [
-      {
-        "cells": [
-          "Free length to lowest_conductor_support",
-          "ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-          "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-          "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-          "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9 .5 ml",
-          "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml",
-          "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml"
-        ],
-        "is_header": true
-      }
-    ],
-    "data_rows": [
-      {
-        "cells": [
-          "",
-          "2 kN",
-          "4 kN",
-          "6 kN",
-          "2 kN",
-          "4 kN",
-          "6 kN"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "m",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "3.0",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "3.3",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "3.6",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "3.9",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "4.2",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "4.5",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "4.8",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "5.1",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "5.4",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "5.7",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "6.0",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "6.3",
-          "S23",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "6.6",
-          "",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "6.9",
-          "",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      },
-      {
-        "cells": [
-          "7.2",
-          "",
-          "S29",
-          "S32",
-          "S23",
-          "S29",
-          "S32"
-        ],
-        "is_header": false
-      }
-    ],
-    "footer_notes": [],
-    "raw_csv": "Free length to lowest conductor support,ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml,TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml,TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml,TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9 .5 ml,TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml,TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml\r\n,2 kN,4 kN,6 kN,2 kN,4 kN,6 kN\r\nm,,,,,,\r\n3.0,S23,S29,S32,S23,S29,S32\r\n3.3,S23,S29,S32,S23,S29,S32\r\n3.6,S23,S29,S32,S23,S29,S32\r\n3.9,S23,S29,S32,S23,S29,S32\r\n4.2,S23,S29,S32,S23,S29,S32\r\n4.5,S23,S29,S32,S23,S29,S32\r\n4.8,S23,S29,S32,S23,S29,S32\r\n5.1,S23,S29,S32,S23,S29,S32\r\n5.4,S23,S29,S32,S23,S29,S32\r\n5.7,S23,S29,S32,S23,S29,S32\r\n6.0,S23,S29,S32,S23,S29,S32\r\n6.3,S23,S29,S32,S23,S29,S32\r\n6.6,,S29,S32,S23,S29,S32\r\n6.9,,S29,S32,S23,S29,S32\r\n7.2,,S29,S32,S23,S29,S32\r\n",
-    "normalized_text_representation": "TABLE D4\nCOLUMNS: Free length to lowest conductor support | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml | TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml | TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml | TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9 .5 ml | TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml | TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml\nROW 1:  | 2 kN | 4 kN | 6 kN | 2 kN | 4 kN | 6 kN\nROW 2: m |  |  |  |  |  | \nROW 3: 3.0 | S23 | S29 | S32 | S23 | S29 | S32\nROW 4: 3.3 | S23 | S29 | S32 | S23 | S29 | S32\nROW 5: 3.6 | S23 | S29 | S32 | S23 | S29 | S32\nROW 6: 3.9 | S23 | S29 | S32 | S23 | S29 | S32\nROW 7: 4.2 | S23 | S29 | S32 | S23 | S29 | S32\nROW 8: 4.5 | S23 | S29 | S32 | S23 | S29 | S32\nROW 9: 4.8 | S23 | S29 | S32 | S23 | S29 | S32\nROW 10: 5.1 | S23 | S29 | S32 | S23 | S29 | S32\nROW 11: 5.4 | S23 | S29 | S32 | S23 | S29 | S32\nROW 12: 5.7 | S23 | S29 | S32 | S23 | S29 | S32\nROW 13: 6.0 | S23 | S29 | S32 | S23 | S29 | S32\nROW 14: 6.3 | S23 | S29 | S32 | S23 | S29 | S32\nROW 15: 6.6 |  | S29 | S32 | S23 | S29 | S32\nROW 16: 6.9 |  | S29 | S32 | S23 | S29 | S32\nROW 17: 7.2 |  | S29 | S32 | S23 | S29 | S32",
-    "confidence": "medium",
-    "source_method": "camelot:stream",
-    "extraction_notes": [
-      "fusion_win:camelot:stream"
-    ],
-    "table_key": "D4:5ba6b39fb8f935c1",
-    "continuation_of": null,
-    "quality_metrics": {
-      "fill_ratio": 0.9206,
-      "col_count": 7,
-      "data_row_count": 17,
-      "noise_ratio": 0.0517,
-      "multiline_ratio": 0.0,
-      "diversity": 0.25,
-      "placeholder_ratio": 0.0794,
-      "garbage_cell_ratio": 0.0,
-      "symbol_junk_ratio": 0.0,
-      "ocr_mojibake_ratio": 0.0,
-      "header_corrupt_ratio": 0.0,
-      "data_row_repeat_ratio": 0.0588,
-      "semantic_hard_fail": false,
-      "unified_score": 0.5254,
-      "penalty": 0.3952,
-      "one_column_value_list": false,
-      "partial_fragment": false
-    },
-    "has_headers": true,
-    "is_multipage": false,
-    "has_merged_cells": true,
-    "reconstructed_header_rows": [
-      {
-        "cells": [
-          "Free length to lowest conductor support",
-          "ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-          "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-          "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-          "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9 .5 ml",
-          "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml",
-          "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml"
-        ],
-        "is_header": true
-      }
-    ],
-    "promoted_header_rows": [],
-    "final_columns": [
-      "Free length to lowest conductor support",
-      "ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-      "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-      "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-      "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9 .5 ml",
-      "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml",
-      "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml"
-    ],
-    "header_model": {
-      "table_type": "unknown",
-      "stub_column_index": 1,
-      "raw_header_row_count": 1,
-      "reconstructed_header_row_count": 1,
-      "final_column_count": 7,
-      "header_tree": [
-        {
-          "name": "Free length to lowest conductor support",
-          "children": []
-        },
-        {
-          "name": "ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-          "children": []
-        },
-        {
-          "name": "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-          "children": []
-        },
-        {
-          "name": "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-          "children": []
-        },
-        {
-          "name": "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9 .5 ml",
-          "children": []
-        },
-        {
-          "name": "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml",
-          "children": []
-        },
-        {
-          "name": "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml",
-          "children": []
-        }
-      ],
-      "row_debug": [
-        {
-          "source": "header_rows",
-          "row_index": 0,
-          "cells": [
-            "Free length to lowest conductor support",
-            "ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-            "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-            "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 8 ml",
-            "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9 .5 ml",
-            "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml",
-            "TABLE D 5 | ROUND HARDWOOD POLE (100 MPa TIMBER TO AS 2209) | STRENGTH RATINGS-HEIGHT REDUCED FROM BASE | Free length to lowest | 9.5 ml"
-          ],
-          "analysis": {
-            "score": 0.439,
-            "text_ratio": 0.838,
-            "numeric_ratio": 0.162,
-            "header_hint_hits": 7,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          }
-        },
-        {
-          "source": "data_rows",
-          "row_index": 0,
-          "cells": [
-            "",
-            "2 kN",
-            "4 kN",
-            "6 kN",
-            "2 kN",
-            "4 kN",
-            "6 kN"
-          ],
-          "analysis": {
-            "score": 0.07,
-            "text_ratio": 0.5,
-            "numeric_ratio": 0.5,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 1,
-          "cells": [
-            "m",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-          ],
-          "analysis": {
-            "score": 0.36,
-            "text_ratio": 1.0,
-            "numeric_ratio": 0.0,
-            "header_hint_hits": 0,
-            "unit_hits": 1,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 2,
-          "cells": [
-            "3.0",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 3,
-          "cells": [
-            "3.3",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 4,
-          "cells": [
-            "3.6",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 5,
-          "cells": [
-            "3.9",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 6,
-          "cells": [
-            "4.2",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 7,
-          "cells": [
-            "4.5",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 8,
-          "cells": [
-            "4.8",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 9,
-          "cells": [
-            "5.1",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 10,
-          "cells": [
-            "5.4",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 11,
-          "cells": [
-            "5.7",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 12,
-          "cells": [
-            "6.0",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 13,
-          "cells": [
-            "6.3",
-            "S23",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2486,
-            "text_ratio": 0.8571,
-            "numeric_ratio": 0.1429,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 14,
-          "cells": [
-            "6.6",
-            "",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2367,
-            "text_ratio": 0.8333,
-            "numeric_ratio": 0.1667,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 15,
-          "cells": [
-            "6.9",
-            "",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2367,
-            "text_ratio": 0.8333,
-            "numeric_ratio": 0.1667,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        },
-        {
-          "source": "data_rows",
-          "row_index": 16,
-          "cells": [
-            "7.2",
-            "",
-            "S29",
-            "S32",
-            "S23",
-            "S29",
-            "S32"
-          ],
-          "analysis": {
-            "score": 0.2367,
-            "text_ratio": 0.8333,
-            "numeric_ratio": 0.1667,
-            "header_hint_hits": 0,
-            "unit_hits": 0,
-            "category_hits": 0,
-            "multiline_ratio": 0.0,
-            "junk_hits": 0
-          },
-          "max_header_similarity": 0.0
-        }
-      ],
-      "clean_debug": {
-        "total_cells": 7,
-        "changed_cells": 0
-      },
-      "body_debug": {
-        "removed_header_like_body_rows": [],
-        "remaining_data_rows": 17
-      }
-    },
-    "reconstruction_confidence": "high",
-    "reconstruction_notes": []
-  },
-  {
-    "table_id": "table_050940ec",
+    "table_id": "table_2d2859f2",
     "table_number": "D11",
     "title": "CJ)",
     "parent_clause_reference": null,
@@ -8798,7 +8458,797 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_00665dc9",
+    "table_id": "table_876ebd15",
+    "table_number": null,
+    "title": null,
+    "parent_clause_reference": null,
+    "page_start": 133,
+    "page_end": 133,
+    "header_rows": [
+      {
+        "cells": [
+          "The degree of ingres | expressed as an IP | AS 60529. | The 'IP' rating is usu | sometimes, an additio | The first number, from",
+          "s protectio | (Ingress | AS 60529._ally_written | nal letter. | 1 to 6, de",
+          "n of an item | Protection) ra | AS 60529. | as 'IP' follow_signates_a_de",
+          "of enclos | ting, in | AS 60529._ed_by_t_ed_by_t | gree of '",
+          "ed eq_accord | AS 60529._wo_num_wo_num_protecti",
+          "uipment is_ance_with | AS 60529. | bers and,_on_against"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "solid objects', and 'p",
+          "rotection of",
+          "persons aga",
+          "inst acce",
+          "ss to",
+          "hazardous"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "parts'.",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "The second number, fr",
+          "om 1 to 8, d",
+          "esignates a de",
+          "gree of '",
+          "protecti",
+          "on against"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "entry of water with har",
+          "mful effects'",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "If a specific degree of",
+          "protection is",
+          "not designate",
+          "d, an 'X'",
+          "is used",
+          "instead of"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "either one or both num",
+          "bers.",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "The additional letter,",
+          "from A to",
+          "D, when used",
+          ", design",
+          "ates a",
+          "degree of"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "'protection of persons",
+          "against acc",
+          "ess to hazardo",
+          "us parts'.",
+          "",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "AS/NZS 60947.3:2015",
+          ", Annex D,",
+          "refers to an",
+          "IP56NW",
+          "rating",
+          "for switch"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "disconnectors within",
+          "enclosures;",
+          "this is requi",
+          "red in",
+          "AS/NZS",
+          "5033 PV"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Installations. 'NW' is i",
+          "n reference",
+          "to no water en",
+          "try into th",
+          "e encl",
+          "osure. The"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "test procedure is ident",
+          "ical to that u",
+          "ndertaken to v",
+          "erify the",
+          "1Px6 ra",
+          "ting but no"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "water is to enter the en",
+          "closure dur",
+          "ing the test.",
+          "",
+          "",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "On infrequent occasio",
+          "ns, a suppl",
+          "ementary letter",
+          ", H, M, S",
+          "or W,",
+          "is used to"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "designate special clas",
+          "ses of electr",
+          "ical equipment",
+          "",
+          "",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "NOTES:",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "1 Figure G1 gives f",
+          "urther inform",
+          "ation and Figu",
+          "re G2 giv",
+          "es an",
+          "example to"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "facilitate the under",
+          "standing of th",
+          "e IP code cover",
+          "ed by AS",
+          "60529.",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "2 Refer to AS 60529",
+          "for test resul",
+          "ts.",
+          "",
+          "",
+          ""
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "\"The degree of ingres | expressed as an IP | AS 60529. | The 'IP' rating is usu | sometimes, an additio | The first number, from\",\"s protectio | (Ingress | AS 60529. ally written | na etter. | 1 to 6, de\",n of an item | Protection) ra | AS 60529. | as 'IP' follow signates a de,\"of enclos | ting, in | AS 60529. ed by t ed by t | gree of '\",ed eq accord | AS 60529. wo num wo num protecti,\"uipment is ance with | AS 60529. | bers and, on against\"\r\n\"solid objects', and 'p\",rotection of,persons aga,inst acce,ss to,hazardous\r\nparts'.,,,,,\r\n\"The second number, fr\",\"om 1 to 8, d\",esignates a de,gree of ',protecti,on against\r\nentry of water with har,mful effects',,,,\r\nIf a specific degree of,protection is,not designate,\"d, an 'X'\",is used,instead of\r\neither one or both num,bers.,,,,\r\n\"The additional letter,\",from A to,\"D, when used\",\", design\",ates a,degree of\r\n'protection of persons,against acc,ess to hazardo,us parts'.,,\r\nAS/NZS 60947.3:2015,\", Annex D,\",refers to an,IP56NW,rating,for switch\r\ndisconnectors within,enclosures;,this is requi,red in,AS/NZS,5033 PV\r\nInstallations. 'NW' is i,n reference,to no water en,try into th,e encl,osure. The\r\ntest procedure is ident,ical to that u,ndertaken to v,erify the,1Px6 ra,ting but no\r\nwater is to enter the en,closure dur,ing the test.,,,\r\nOn infrequent occasio,\"ns, a suppl\",ementary letter,\", H, M, S\",\"or W,\",is used to\r\ndesignate special clas,ses of electr,ical equipment,,,\r\nNOTES:,,,,,\r\n1 Figure G1 gives f,urther inform,ation and Figu,re G2 giv,es an,example to\r\nfacilitate the under,standing of th,e IP code cover,ed by AS,60529.,\r\n2 Refer to AS 60529,for test resul,ts.,,,\r\n",
+    "normalized_text_representation": "COLUMNS: The degree of ingres | expressed as an IP | AS 60529. | The 'IP' rating is usu | sometimes, an additio | The first number, from | s protectio | (Ingress | AS 60529. ally written | na etter. | 1 to 6, de | n of an item | Protection) ra | AS 60529. | as 'IP' follow signates a de | of enclos | ting, in | AS 60529. ed by t ed by t | gree of ' | ed eq accord | AS 60529. wo num wo num protecti | uipment is ance with | AS 60529. | bers and, on against\nROW 1: solid objects', and 'p | rotection of | persons aga | inst acce | ss to | hazardous\nROW 2: parts'. |  |  |  |  | \nROW 3: The second number, fr | om 1 to 8, d | esignates a de | gree of ' | protecti | on against\nROW 4: entry of water with har | mful effects' |  |  |  | \nROW 5: If a specific degree of | protection is | not designate | d, an 'X' | is used | instead of\nROW 6: either one or both num | bers. |  |  |  | \nROW 7: The additional letter, | from A to | D, when used | , design | ates a | degree of\nROW 8: 'protection of persons | against acc | ess to hazardo | us parts'. |  | \nROW 9: AS/NZS 60947.3:2015 | , Annex D, | refers to an | IP56NW | rating | for switch\nROW 10: disconnectors within | enclosures; | this is requi | red in | AS/NZS | 5033 PV\nROW 11: Installations. 'NW' is i | n reference | to no water en | try into th | e encl | osure. The\nROW 12: test procedure is ident | ical to that u | ndertaken to v | erify the | 1Px6 ra | ting but no\nROW 13: water is to enter the en | closure dur | ing the test. |  |  | \nROW 14: On infrequent occasio | ns, a suppl | ementary letter | , H, M, S | or W, | is used to\nROW 15: designate special clas | ses of electr | ical equipment |  |  | \nROW 16: NOTES: |  |  |  |  | \nROW 17: 1 Figure G1 gives f | urther inform | ation and Figu | re G2 giv | es an | example to\nROW 18: facilitate the under | standing of th | e IP code cover | ed by AS | 60529. | \nROW 19: 2 Refer to AS 60529 | for test resul | ts. |  |  |",
+    "confidence": "low",
+    "source_method": "pdfplumber:loose",
+    "extraction_notes": [],
+    "table_key": "na:8c0711e9751d90f1",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 0.75,
+      "col_count": 6,
+      "data_row_count": 19,
+      "noise_ratio": 0.1667,
+      "multiline_ratio": 0.0,
+      "diversity": 1.0,
+      "placeholder_ratio": 0.25,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.0,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.0,
+      "data_row_repeat_ratio": 0.0526,
+      "semantic_hard_fail": true,
+      "unified_score": -0.3767,
+      "penalty": 1.1267,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "The degree of ingres | expressed as an IP | AS 60529. | The 'IP' rating is usu | sometimes, an additio | The first number, from",
+          "s protectio | (Ingress | AS 60529. ally written | na etter. | 1 to 6, de",
+          "n of an item | Protection) ra | AS 60529. | as 'IP' follow signates a de",
+          "of enclos | ting, in | AS 60529. ed by t ed by t | gree of '",
+          "ed eq accord | AS 60529. wo num wo num protecti",
+          "uipment is ance with | AS 60529. | bers and, on against"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "The degree of ingres | expressed as an IP | AS 60529. | The 'IP' rating is usu | sometimes, an additio | The first number, from",
+      "s protectio | (Ingress | AS 60529. ally written | na etter. | 1 to 6, de",
+      "n of an item | Protection) ra | AS 60529. | as 'IP' follow signates a de",
+      "of enclos | ting, in | AS 60529. ed by t ed by t | gree of '",
+      "ed eq accord | AS 60529. wo num wo num protecti",
+      "uipment is ance with | AS 60529. | bers and, on against"
+    ],
+    "header_model": {
+      "table_type": "unknown",
+      "stub_column_index": 0,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 6,
+      "header_tree": [
+        {
+          "name": "The degree of ingres | expressed as an IP | AS 60529. | The 'IP' rating is usu | sometimes, an additio | The first number, from",
+          "children": []
+        },
+        {
+          "name": "s protectio | (Ingress | AS 60529. ally written | na etter. | 1 to 6, de",
+          "children": []
+        },
+        {
+          "name": "n of an item | Protection) ra | AS 60529. | as 'IP' follow signates a de",
+          "children": []
+        },
+        {
+          "name": "of enclos | ting, in | AS 60529. ed by t ed by t | gree of '",
+          "children": []
+        },
+        {
+          "name": "ed eq accord | AS 60529. wo num wo num protecti",
+          "children": []
+        },
+        {
+          "name": "uipment is ance with | AS 60529. | bers and, on against",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "The degree of ingres | expressed as an IP | AS 60529. | The 'IP' rating is usu | sometimes, an additio | The first number, from",
+            "s protectio | (Ingress | AS 60529. ally written | nal letter. | 1 to 6, de",
+            "n of an item | Protection) ra | AS 60529. | as 'IP' follow signates a de",
+            "of enclos | ting, in | AS 60529. ed by t ed by t | gree of '",
+            "ed eq accord | AS 60529. wo num wo num protecti",
+            "uipment is ance with | AS 60529. | bers and, on against"
+          ],
+          "analysis": {
+            "score": 0.3381,
+            "text_ratio": 0.9762,
+            "numeric_ratio": 0.0238,
+            "header_hint_hits": 1,
+            "unit_hits": 2,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 2
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "solid objects', and 'p",
+            "rotection of",
+            "persons aga",
+            "inst acce",
+            "ss to",
+            "hazardous"
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0455
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "parts'.",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "The second number, fr",
+            "om 1 to 8, d",
+            "esignates a de",
+            "gree of '",
+            "protecti",
+            "on against"
+          ],
+          "analysis": {
+            "score": 0.2044,
+            "text_ratio": 0.8889,
+            "numeric_ratio": 0.1111,
+            "header_hint_hits": 0,
+            "unit_hits": 1,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 2
+          },
+          "max_header_similarity": 0.1935
+        },
+        {
+          "source": "data_rows",
+          "row_index": 3,
+          "cells": [
+            "entry of water with har",
+            "mful effects'",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0328
+        },
+        {
+          "source": "data_rows",
+          "row_index": 4,
+          "cells": [
+            "If a specific degree of",
+            "protection is",
+            "not designate",
+            "d, an 'X'",
+            "is used",
+            "instead of"
+          ],
+          "analysis": {
+            "score": 0.4,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 1,
+            "category_hits": 1,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0938
+        },
+        {
+          "source": "data_rows",
+          "row_index": 5,
+          "cells": [
+            "either one or both num",
+            "bers.",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0164
+        },
+        {
+          "source": "data_rows",
+          "row_index": 6,
+          "cells": [
+            "The additional letter,",
+            "from A to",
+            "D, when used",
+            ", design",
+            "ates a",
+            "degree of"
+          ],
+          "analysis": {
+            "score": 0.4,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 2,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0952
+        },
+        {
+          "source": "data_rows",
+          "row_index": 7,
+          "cells": [
+            "'protection of persons",
+            "against acc",
+            "ess to hazardo",
+            "us parts'.",
+            "",
+            ""
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0476
+        },
+        {
+          "source": "data_rows",
+          "row_index": 8,
+          "cells": [
+            "AS/NZS 60947.3:2015",
+            ", Annex D,",
+            "refers to an",
+            "IP56NW",
+            "rating",
+            "for switch"
+          ],
+          "analysis": {
+            "score": 0.2931,
+            "text_ratio": 0.8462,
+            "numeric_ratio": 0.1538,
+            "header_hint_hits": 1,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0615
+        },
+        {
+          "source": "data_rows",
+          "row_index": 9,
+          "cells": [
+            "disconnectors within",
+            "enclosures;",
+            "this is requi",
+            "red in",
+            "AS/NZS",
+            "5033 PV"
+          ],
+          "analysis": {
+            "score": 0.2783,
+            "text_ratio": 0.9167,
+            "numeric_ratio": 0.0833,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0462
+        },
+        {
+          "source": "data_rows",
+          "row_index": 10,
+          "cells": [
+            "Installations. 'NW' is i",
+            "n reference",
+            "to no water en",
+            "try into th",
+            "e encl",
+            "osure. The"
+          ],
+          "analysis": {
+            "score": 0.36,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 1,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.058
+        },
+        {
+          "source": "data_rows",
+          "row_index": 11,
+          "cells": [
+            "test procedure is ident",
+            "ical to that u",
+            "ndertaken to v",
+            "erify the",
+            "1Px6 ra",
+            "ting but no"
+          ],
+          "analysis": {
+            "score": 0.4,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 1,
+            "category_hits": 1,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0735
+        },
+        {
+          "source": "data_rows",
+          "row_index": 12,
+          "cells": [
+            "water is to enter the en",
+            "closure dur",
+            "ing the test.",
+            "",
+            "",
+            ""
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0476
+        },
+        {
+          "source": "data_rows",
+          "row_index": 13,
+          "cells": [
+            "On infrequent occasio",
+            "ns, a suppl",
+            "ementary letter",
+            ", H, M, S",
+            "or W,",
+            "is used to"
+          ],
+          "analysis": {
+            "score": 0.44,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 4,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0746
+        },
+        {
+          "source": "data_rows",
+          "row_index": 14,
+          "cells": [
+            "designate special clas",
+            "ses of electr",
+            "ical equipment",
+            "",
+            "",
+            ""
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0159
+        },
+        {
+          "source": "data_rows",
+          "row_index": 15,
+          "cells": [
+            "NOTES:",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 16,
+          "cells": [
+            "1 Figure G1 gives f",
+            "urther inform",
+            "ation and Figu",
+            "re G2 giv",
+            "es an",
+            "example to"
+          ],
+          "analysis": {
+            "score": 0.2406,
+            "text_ratio": 0.9412,
+            "numeric_ratio": 0.0588,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 1
+          },
+          "max_header_similarity": 0.058
+        },
+        {
+          "source": "data_rows",
+          "row_index": 17,
+          "cells": [
+            "facilitate the under",
+            "standing of th",
+            "e IP code cover",
+            "ed by AS",
+            "60529.",
+            ""
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.1111
+        },
+        {
+          "source": "data_rows",
+          "row_index": 18,
+          "cells": [
+            "2 Refer to AS 60529",
+            "for test resul",
+            "ts.",
+            "",
+            "",
+            ""
+          ],
+          "analysis": {
+            "score": 0.2089,
+            "text_ratio": 0.7778,
+            "numeric_ratio": 0.2222,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0317
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 6,
+        "changed_cells": 1
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 19
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": [
+      "Cleaned 1 header cells."
+    ]
+  },
+  {
+    "table_id": "table_e33f39b2",
     "table_number": "E11",
     "title": null,
     "parent_clause_reference": null,
@@ -9224,7 +9674,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_c1a3bdb0",
+    "table_id": "table_a217ce34",
     "table_number": "K1",
     "title": null,
     "parent_clause_reference": null,
@@ -9531,7 +9981,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_b824c878",
+    "table_id": "table_380d9619",
     "table_number": "E104",
     "title": ".101 of AS/NZS 61439.2:2016)",
     "parent_clause_reference": null,
