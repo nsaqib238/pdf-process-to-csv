@@ -1,0 +1,29 @@
+fastapi==0.109.0
+uvicorn[standard]>=0.27.0,<0.32
+python-multipart==0.0.6
+pydantic==2.5.3
+pydantic-settings==2.1.0
+# PyPDF2 is deprecated; pypdf is the maintained package (PdfReader / PdfWriter API)
+pypdf>=4.0,<6
+aiofiles==23.2.1
+
+# Adobe PDF Services SDK (optional — install separately if needed)
+# See: https://github.com/adobe/pdfservices-python-sdk
+# pip install pdfservices-sdk
+pdfplumber>=0.11
+
+# Table pipeline: pdfplumber + Camelot + Tabula
+# Install Java + Ghostscript on the OS first (see README). NumPy 2.x breaks many camelot wheels.
+numpy>=1.26,<2
+pandas>=2.0
+# OpenCV for Camelot lattice (camelot-py 1.x dropped the [cv] extra; install headless explicitly)
+opencv-python-headless>=4.8,<5
+camelot-py>=0.11.0,<1.0
+# Camelot lattice imports this module; without it you get: No module named 'ghostscript'
+# You still need the Ghostscript *binary* on PATH (Windows: gswin64c.exe — see README).
+ghostscript>=0.7,<0.9
+tabula-py>=2.9.0
+
+# Optional: cropped table image OCR (install Tesseract on PATH)
+pytesseract>=0.3.10
+Pillow>=10.0

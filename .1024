@@ -1,0 +1,6 @@
+# Commands to run when "Run" button clicked
+run_command:
+  - python backend/main.py
+  - npm run dev
+# Command to install or update dependencies
+dependency_command: pip install -r backend/requirements.txt && npm install
