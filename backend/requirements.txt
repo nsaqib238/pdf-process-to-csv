@@ -27,3 +27,7 @@ tabula-py>=2.9.0
 # Optional: cropped table image OCR (install Tesseract on PATH)
 pytesseract>=0.3.10
 Pillow>=10.0
+
+# Optional: AI-powered table enhancement (OpenAI GPT-4 Vision)
+# Requires OPENAI_API_KEY in .env and enable_ai_table_discovery=true in config
+openai>=1.12.0

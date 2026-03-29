@@ -8,6 +8,7 @@ Extract structured text, clauses, and tables from PDF documents. The local pipel
 - **Clause processing**: Hierarchy, sub-items, notes, exceptions, page ranges
 - **Table processing**: Multi-row headers, merged cells, multi-page tables, optional **Camelot/Tabula fusion**, **header reconstruction** (`final_columns` in `tables.json`)
 - **Advanced filtering**: Clause-shaped content rejection, sweep gating, 2-column prose detection (P0-P4 + Iteration 1 upgrades)
+- **🆕 AI Enhancement (Optional)**: Vision-based table discovery, caption detection, and structure validation using OpenAI GPT-4o
 - **Validation**: Quality checks and confidence scoring
 - **Outputs**: `normalized_document.txt`, `clauses.json`, `tables.json`
 - **Web UI**: Full pipeline or **tables-only** fast path (`POST /api/process-pdf-tables`)
@@ -127,6 +128,14 @@ TABLE_PIPELINE_FUSION_TRIGGER_SCORE=0.82
 
 # Header reconstruction post-pass
 ENABLE_HEADER_RECONSTRUCTION=true
+
+# 🆕 AI Enhancement (Optional - requires OpenAI API key)
+# Improves table detection coverage and quality using GPT-4o Vision
+# Cost: ~$0.70 per 100-page PDF. See AI_ENHANCEMENT_PLAN.md for details.
+# OPENAI_API_KEY=sk-proj-...
+# ENABLE_AI_TABLE_DISCOVERY=false
+# ENABLE_AI_CAPTION_DETECTION=false
+# ENABLE_AI_STRUCTURE_VALIDATION=false
 ```
 
 ### Frontend

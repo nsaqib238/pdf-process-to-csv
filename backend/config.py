@@ -73,6 +73,24 @@ class Settings(BaseSettings):
     # If no grid in the default band, expand once to the bottom of the page and retry extractors.
     table_pipeline_caption_region_expand_when_empty: bool = True
 
+    # AI Enhancement (optional, default disabled)
+    enable_ai_table_discovery: bool = False
+    enable_ai_caption_detection: bool = False
+    enable_ai_structure_validation: bool = False
+    
+    openai_api_key: Optional[str] = None
+    openai_model: str = "gpt-4o"
+    openai_max_retries: int = 3
+    openai_timeout_seconds: int = 60
+    
+    ai_max_calls_per_job: int = 100
+    ai_discovery_confidence_threshold: float = 0.7
+    ai_validation_quality_threshold: float = 0.6
+    
+    # Cost tracking
+    ai_log_token_usage: bool = True
+    ai_alert_cost_threshold: float = 5.0  # USD per job
+
     # API settings
     api_host: str = "0.0.0.0"
     api_port: int = 8000
