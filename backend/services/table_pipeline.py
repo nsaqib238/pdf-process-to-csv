@@ -1945,12 +1945,35 @@ class TablePipeline:
     
     @staticmethod
     def _percent_bbox_to_absolute(
-        bbox_percent: Tuple[float, float, float, float],
+        bbox_percent,  # Can be Tuple or Dict from AI service
         page_width: float,
         page_height: float
     ) -> Tuple[float, float, float, float]:
-        """Convert percentage-based bbox (0-100) to absolute pixel coordinates."""
-        x0_pct, y0_pct, x1_pct, y1_pct = bbox_percent
+        """
+        Convert percentage-based bbox (0-100) to absolute pixel coordinates.
+        
+        Args:
+            bbox_percent: Either a tuple (x0, y0, x1, y1) or dict {"top", "left", "bottom", "right"}
+            page_width: Page width in points
+            page_height: Page height in points
+        
+        Returns:
+            Tuple of (x0, y0, x1, y1) in absolute coordinates
+        """
+        # Handle dict format from AI service
+        if isinstance(bbox_percent, dict):
+            x0_pct = float(bbox_percent.get("left", 0))
+            y0_pct = float(bbox_percent.get("top", 0))
+            x1_pct = float(bbox_percent.get("right", 100))
+            y1_pct = float(bbox_percent.get("bottom", 100))
+        else:
+            # Handle tuple format
+            x0_pct, y0_pct, x1_pct, y1_pct = bbox_percent
+            x0_pct = float(x0_pct)
+            y0_pct = float(y0_pct)
+            x1_pct = float(x1_pct)
+            y1_pct = float(y1_pct)
+        
         return (
             (x0_pct / 100.0) * page_width,
             (y0_pct / 100.0) * page_height,
