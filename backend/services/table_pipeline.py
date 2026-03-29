@@ -66,6 +66,11 @@ def _pdfplumber_table_settings() -> Optional[Dict[str, Any]]:
                 getattr(settings, "table_intersection_tolerance", 5)
             ),
             "join_x_tolerance": int(getattr(settings, "table_join_x_tolerance", 5)),
+            # Text-based detection for borderless tables (Table 3.x series)
+            "vertical_strategy": "lines_strict",  # Start with lines
+            "horizontal_strategy": "lines_strict",
+            "text_x_tolerance": 3,  # Tolerance for text column alignment
+            "text_y_tolerance": 3,  # Tolerance for text row alignment
         }
     except Exception:
         return None
@@ -86,6 +91,13 @@ def _pdfplumber_loose_table_settings() -> Optional[Dict[str, Any]]:
             "snap_y_tolerance": int(base["snap_y_tolerance"]) + 4,
             "intersection_tolerance": int(base["intersection_tolerance"]) + 4,
             "join_x_tolerance": int(base["join_x_tolerance"]) + 5,
+            # More aggressive text-based detection in loose pass
+            "vertical_strategy": "text",  # Use text edges for columns
+            "horizontal_strategy": "text",  # Use text edges for rows
+            "text_x_tolerance": 5,
+            "text_y_tolerance": 5,
+            "min_words_vertical": 3,  # Minimum words to infer a vertical line
+            "min_words_horizontal": 1,  # Minimum words to infer a horizontal line
         }
     except Exception:
         return None
