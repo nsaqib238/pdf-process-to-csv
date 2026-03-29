@@ -113,6 +113,7 @@ python -m pip install -r requirements.txt
 ```bash
 python -m pip install --upgrade pip
 python -m pip install -r backend/requirements.txt
+python -m pip install requirements.txt
 ```
 
 **Installed packages include:**
@@ -475,7 +476,7 @@ python -c "import pdfplumber, camelot, tabula, openai; print('✅ All installed'
 
 # Check system dependencies
 java -version          # Should show Java 8+
-gs --version           # Should show Ghostscript
+gswin64c -version           # Should show Ghostscript
 tesseract --version    # Should show Tesseract (optional)
 
 # Check AI service (if API key configured)
