@@ -10,7 +10,7 @@ import uuid
 from dataclasses import dataclass
 from io import StringIO
 from collections import Counter
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 from models.table import ConfidenceLevel, Table, TableRow
 
@@ -1772,11 +1772,23 @@ class TablePipeline:
 
         # AI-powered table discovery (if enabled)
         if self._ai_service and self._ai_service.discovery_enabled:
-            logger.info("Running AI table discovery...")
+            logger.info("Running AI table discovery with weak table detection...")
             ai_discovered_count = 0
             
+            # Detect pages with weak table signals that need AI analysis
+            pages_needing_ai = self._detect_weak_table_pages(out, source_pdf_path, last_page)
+            
+            if pages_needing_ai:
+                logger.info(
+                    "Weak table detection identified %d pages needing AI analysis: %s",
+                    len(pages_needing_ai),
+                    sorted(pages_needing_ai)
+                )
+            else:
+                logger.info("No weak table signals detected - skipping AI discovery")
+            
             with pdfplumber.open(source_pdf_path) as pdf:
-                for page_num in range(1, last_page + 1):
+                for page_num in pages_needing_ai:
                     page = pdf.pages[page_num - 1]
                     
                     # Get existing table bboxes on this page to avoid duplicates
@@ -1836,12 +1848,138 @@ class TablePipeline:
                         except Exception as e:
                             logger.debug("AI region extraction failed page %s: %s", page_num, e)
             
-            logger.info("AI discovery found %d additional tables", ai_discovered_count)
+            logger.info("AI discovery found %d additional tables from %d pages", ai_discovered_count, len(pages_needing_ai))
 
         if not out:
             logger.warning("No tables extracted by pdfplumber (incl. loose pass / page sweep)")
         return out
 
+    def _detect_weak_table_pages(
+        self,
+        extracted_tables: List[_RawTable],
+        source_pdf_path: str,
+        last_page: int
+    ) -> Set[int]:
+        """
+        Detect pages with weak table signals that need AI analysis.
+        
+        Weak signals include:
+        1. Caption detected but no matching table extracted
+        2. Low-quality extractions (few rows, low quality score)
+        3. Pages where all engines failed (pdfplumber, camelot, tabula all returned nothing)
+        4. Tables marked with semantic_hard_fail that need validation
+        
+        Returns:
+            Set of page numbers (1-indexed) that need AI analysis
+        """
+        pages_needing_ai: Set[int] = set()
+        weak_signal_reasons: Dict[int, List[str]] = {}
+        
+        # Build index of extracted tables by page
+        tables_by_page: Dict[int, List[_RawTable]] = {}
+        for rt in extracted_tables:
+            if rt.page_start not in tables_by_page:
+                tables_by_page[rt.page_start] = []
+            tables_by_page[rt.page_start].append(rt)
+        
+        # Collect caption anchors to detect orphaned captions
+        caption_pages: Dict[int, List[str]] = {}
+        try:
+            import pdfplumber
+            with pdfplumber.open(source_pdf_path) as pdf:
+                for page_num in range(1, min(last_page + 1, len(pdf.pages) + 1)):
+                    page = pdf.pages[page_num - 1]
+                    page_words = page.extract_words() or []
+                    if page_words:
+                        anchors = self._discover_caption_anchors_from_page_words(
+                            page_words,
+                            float(page.width),
+                            float(page.height)
+                        )
+                        if anchors:
+                            caption_pages[page_num] = [a.table_number for a in anchors]
+        except Exception as e:
+            logger.debug("Failed to extract caption anchors for weak detection: %s", e)
+        
+        # Signal 1: Caption detected but no matching table extracted
+        for page_num, caption_numbers in caption_pages.items():
+            page_tables = tables_by_page.get(page_num, [])
+            extracted_numbers = {rt.table_number for rt in page_tables if rt.table_number}
+            
+            for caption_num in caption_numbers:
+                if caption_num not in extracted_numbers:
+                    pages_needing_ai.add(page_num)
+                    if page_num not in weak_signal_reasons:
+                        weak_signal_reasons[page_num] = []
+                    weak_signal_reasons[page_num].append(f"orphaned_caption:{caption_num}")
+                    self._diag["ai_trigger_orphaned_caption"] = self._diag.get("ai_trigger_orphaned_caption", 0) + 1
+        
+        # Signal 2: Low-quality extractions (weak tables)
+        for page_num, page_tables in tables_by_page.items():
+            for rt in page_tables:
+                # Check for weak signals
+                is_weak = False
+                reason = None
+                
+                # Very few rows
+                if len(rt.rows) < 3:
+                    is_weak = True
+                    reason = f"few_rows:{len(rt.rows)}"
+                    self._diag["ai_trigger_few_rows"] = self._diag.get("ai_trigger_few_rows", 0) + 1
+                
+                # Very few columns (likely a list, not a table)
+                elif rt.rows and max(len(row) for row in rt.rows) < 2:
+                    is_weak = True
+                    reason = "single_column"
+                    self._diag["ai_trigger_single_column"] = self._diag.get("ai_trigger_single_column", 0) + 1
+                
+                # Mostly empty cells (sparse data)
+                elif rt.rows:
+                    total_cells = sum(len(row) for row in rt.rows)
+                    empty_cells = sum(1 for row in rt.rows for cell in row if not cell.strip())
+                    if total_cells > 0 and (empty_cells / total_cells) > 0.7:
+                        is_weak = True
+                        reason = f"sparse_data:{empty_cells}/{total_cells}"
+                        self._diag["ai_trigger_sparse_data"] = self._diag.get("ai_trigger_sparse_data", 0) + 1
+                
+                if is_weak:
+                    pages_needing_ai.add(page_num)
+                    if page_num not in weak_signal_reasons:
+                        weak_signal_reasons[page_num] = []
+                    weak_signal_reasons[page_num].append(reason)
+        
+        # Signal 3: Pages with no extractions (all engines failed)
+        pages_with_tables = set(tables_by_page.keys())
+        for page_num in range(1, last_page + 1):
+            if page_num not in pages_with_tables:
+                # Check if page has text (not just blank page)
+                try:
+                    import pdfplumber
+                    with pdfplumber.open(source_pdf_path) as pdf:
+                        if page_num <= len(pdf.pages):
+                            page = pdf.pages[page_num - 1]
+                            page_text = page.extract_text() or ""
+                            # Only flag pages with substantial text content
+                            if len(page_text.strip()) > 200:
+                                pages_needing_ai.add(page_num)
+                                if page_num not in weak_signal_reasons:
+                                    weak_signal_reasons[page_num] = []
+                                weak_signal_reasons[page_num].append("no_extraction")
+                                self._diag["ai_trigger_no_extraction"] = self._diag.get("ai_trigger_no_extraction", 0) + 1
+                except Exception:
+                    pass
+        
+        # Log weak signals detected
+        if weak_signal_reasons:
+            for page_num in sorted(weak_signal_reasons.keys())[:10]:  # Log first 10
+                logger.debug(
+                    "Weak table signals on page %s: %s",
+                    page_num,
+                    ", ".join(weak_signal_reasons[page_num])
+                )
+        
+        return pages_needing_ai
+    
     @staticmethod
     def _percent_bbox_to_absolute(
         bbox_percent: Tuple[float, float, float, float],
