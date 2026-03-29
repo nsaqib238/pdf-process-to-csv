@@ -1059,18 +1059,21 @@ class TablePipeline:
         # AI metrics reporting (if AI service is available)
         if self._ai_service:
             ai_metrics = self._ai_service.get_metrics()
+            total_calls = (
+                ai_metrics.get("ai_discovery_calls", 0) +
+                ai_metrics.get("ai_caption_calls", 0) +
+                ai_metrics.get("ai_validation_calls", 0)
+            )
             logger.info(
                 "AI Enhancement metrics: discovery_tables=%s total_calls=%s (discovery=%s, caption=%s, validation=%s) "
-                "total_tokens=%s (prompt=%s, completion=%s) estimated_cost=$%.4f",
+                "total_tokens=%s estimated_cost=$%.4f",
                 self._diag.get("ai_discovery_tables", 0),
-                ai_metrics["total_calls"],
-                ai_metrics["discovery_calls"],
-                ai_metrics["caption_calls"],
-                ai_metrics["validation_calls"],
-                ai_metrics["total_tokens"],
-                ai_metrics["prompt_tokens"],
-                ai_metrics["completion_tokens"],
-                ai_metrics["estimated_cost"]
+                total_calls,
+                ai_metrics.get("ai_discovery_calls", 0),
+                ai_metrics.get("ai_caption_calls", 0),
+                ai_metrics.get("ai_validation_calls", 0),
+                ai_metrics.get("ai_total_tokens", 0),
+                ai_metrics.get("ai_total_cost_usd", 0.0)
             )
         
         return tables
