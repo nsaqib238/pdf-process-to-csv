@@ -1267,62 +1267,10 @@ class TablePipeline:
             )
         out.sort(key=lambda a: a.line_bbox[1])
         
-        # AI-powered caption detection (if enabled)
-        if self._ai_service and self._ai_service.caption_enabled:
-            try:
-                # Extract full text from page words
-                page_text = " ".join(w.get("text", "") for w in page_words if w.get("text"))
-                page_num = page_words[0].get("page_number", 0) if page_words else 0
-                
-                # Call AI caption detection
-                ai_captions = self._ai_service.detect_captions(
-                    page_text=page_text,
-                    page_num=page_num
-                )
-                
-                # Convert AI captions to _CaptionAnchor objects
-                for ai_cap in ai_captions:
-                    # Try to find matching line bbox for this caption
-                    matching_line = None
-                    search_text = ai_cap.table_number.lower()
-                    for ln in lines:
-                        line_text = " ".join(
-                            (w.get("text") or "").strip().lower()
-                            for w in sorted(ln, key=lambda w: float(w.get("x0", 0.0)))
-                        )
-                        if search_text in line_text:
-                            matching_line = ln
-                            break
-                    
-                    if matching_line:
-                        x0 = min(float(w.get("x0", 0.0)) for w in matching_line)
-                        x1 = max(float(w.get("x1", 0.0)) for w in matching_line)
-                        top = min(float(w.get("top", 0.0)) for w in matching_line)
-                        bottom = max(float(w.get("bottom", 0.0)) for w in matching_line)
-                        line_bbox = (x0, top, x1, bottom)
-                    else:
-                        # Fallback: use approximate bbox
-                        if page_words:
-                            first_word = page_words[0]
-                            x0 = float(first_word.get("x0", 0.0))
-                            top = float(first_word.get("top", 0.0))
-                            line_bbox = (x0, top, x0 + 200, top + 15)
-                        else:
-                            line_bbox = (0.0, 0.0, 200.0, 15.0)
-                    
-                    # Check if this caption already exists (avoid duplicates)
-                    if not any(a.table_number == ai_cap.table_number for a in out):
-                        out.append(
-                            _CaptionAnchor(
-                                table_number=ai_cap.table_number,
-                                title=ai_cap.description or "",
-                                continuation=False,
-                                line_bbox=line_bbox,
-                            )
-                        )
-                        logger.debug("AI caption detection found: %s", ai_cap.table_number)
-            except Exception as e:
-                logger.warning("AI caption detection failed: %s", e)
+        # AI-powered caption detection (DISABLED - calls every page, not cost-effective)
+        # Only AI Discovery is enabled which uses weak table detection to filter pages
+        # if self._ai_service and self._ai_service.caption_enabled:
+        #     ... (code removed to prevent calling AI on every page)
         
         out.sort(key=lambda a: a.line_bbox[1])
         return out
