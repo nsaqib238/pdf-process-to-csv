@@ -1,0 +1,1826 @@
+[
+  {
+    "table_id": "table_9fb5df14",
+    "table_number": "3.2",
+    "title": null,
+    "parent_clause_reference": null,
+    "page_start": 6,
+    "page_end": 6,
+    "header_rows": [
+      {
+        "cells": [
+          "> Type of cable insulation<1",
+          "Operating temperature of conductor, •c | Normal use<2>",
+          "Operating temperature of conductor, •c | Maximum permissiblel 7>",
+          "Operating temperature of conductor, •c | Minimum ambient 13>"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "Thermoplastic'4J V-75 HFl-75-TP, TPE-75 V-90 HFl-90-TP, TP-90 V-90HT",
+          "75 75 75 75 75",
+          "75 75 90 90 105",
+          "0 - 20 0 - 20 0"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Elastomeric R-EP-90 R-CPE-90, R-HF-90, R-CSP-90 R-HF- 110, R-E-110 R-S-150",
+          "90 90 110 150",
+          "90 90 110 150",
+          "- 40 - 20 • - 50"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Cross-linked polyethylene X-90, X-90UV, X-HF-90 X-HF-110",
+          "90 110",
+          "90 110",
+          "• •"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "MIMS<5>",
+          "100",
+          "250",
+          "(6)"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Other types PE, LLDPE",
+          "70",
+          "70",
+          "•"
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "> Type of cable insulation<1,\"Operating temperature of conductor, •c | Normal use<2>\",\"Operating temperature of conductor, •c | Maximum permissiblel 7>\",\"Operating temperature of conductor, •c | Minimum ambient 13>\"\r\n\"Thermoplastic'4J V-75 HFl-75-TP, TPE-75 V-90 HFl-90-TP, TP-90 V-90HT\",75 75 75 75 75,75 75 90 90 105,0 - 20 0 - 20 0\r\n\"Elastomeric R-EP-90 R-CPE-90, R-HF-90, R-CSP-90 R-HF- 110, R-E-110 R-S-150\",90 90 110 150,90 90 110 150,- 40 - 20 • - 50\r\n\"Cross-linked polyethylene X-90, X-90UV, X-HF-90 X-HF-110\",90 110,90 110,• •\r\nMIMS<5>,100,250,(6)\r\n\"Other types PE, LLDPE\",70,70,•\r\n",
+    "normalized_text_representation": "TABLE 3.2\nCOLUMNS: > Type of cable insulation<1 | Operating temperature of conductor, •c | Normal use<2> | Operating temperature of conductor, •c | Maximum permissiblel 7> | Operating temperature of conductor, •c | Minimum ambient 13>\nROW 1: Thermoplastic'4J V-75 HFl-75-TP, TPE-75 V-90 HFl-90-TP, TP-90 V-90HT | 75 75 75 75 75 | 75 75 90 90 105 | 0 - 20 0 - 20 0\nROW 2: Elastomeric R-EP-90 R-CPE-90, R-HF-90, R-CSP-90 R-HF- 110, R-E-110 R-S-150 | 90 90 110 150 | 90 90 110 150 | - 40 - 20 • - 50\nROW 3: Cross-linked polyethylene X-90, X-90UV, X-HF-90 X-HF-110 | 90 110 | 90 110 | • •\nROW 4: MIMS<5> | 100 | 250 | (6)\nROW 5: Other types PE, LLDPE | 70 | 70 | •",
+    "confidence": "medium",
+    "source_method": "camelot:lattice",
+    "extraction_notes": [
+      "fusion_win:camelot:lattice"
+    ],
+    "table_key": "3.2:c7b751666a38753c",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 1.0,
+      "col_count": 4,
+      "data_row_count": 5,
+      "noise_ratio": 0.375,
+      "multiline_ratio": 0.5417,
+      "diversity": 0.875,
+      "placeholder_ratio": 0.0,
+      "garbage_cell_ratio": 0.0417,
+      "symbol_junk_ratio": 0.0417,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.25,
+      "data_row_repeat_ratio": 0.2,
+      "semantic_hard_fail": false,
+      "unified_score": 0.345,
+      "penalty": 0.655,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "> Type of cable insulation<1",
+          "Operating temperature of conductor, •c | Normal use<2>",
+          "Operating temperature of conductor, •c | Maximum permissiblel 7>",
+          "Operating temperature of conductor, •c | Minimum ambient 13>"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "> Type of cable insulation<1",
+      "Operating temperature of conductor, •c | Normal use<2>",
+      "Operating temperature of conductor, •c | Maximum permissiblel 7>",
+      "Operating temperature of conductor, •c | Minimum ambient 13>"
+    ],
+    "header_model": {
+      "table_type": "matrix",
+      "stub_column_index": 0,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 4,
+      "header_tree": [
+        {
+          "name": "> Type of cable insulation<1",
+          "children": []
+        },
+        {
+          "name": "Operating temperature of conductor, •c | Normal use<2>",
+          "children": []
+        },
+        {
+          "name": "Operating temperature of conductor, •c | Maximum permissiblel 7>",
+          "children": []
+        },
+        {
+          "name": "Operating temperature of conductor, •c | Minimum ambient 13>",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "> Type of cable insulation<1",
+            "Operating temperature of conductor, •c | Normal use<2>",
+            "Operating temperature of conductor, •c | Maximum permissiblel 7>",
+            "Operating temperature of conductor, •c | Minimum ambient 13>"
+          ],
+          "analysis": {
+            "score": 0.441,
+            "text_ratio": 0.8621,
+            "numeric_ratio": 0.1379,
+            "header_hint_hits": 7,
+            "unit_hits": 0,
+            "category_hits": 1,
+            "multiline_ratio": 0.0,
+            "junk_hits": 1
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "Thermoplastic'4J V-75 HFl-75-TP, TPE-75 V-90 HFl-90-TP, TP-90 V-90HT",
+            "75 75 75 75 75",
+            "75 75 90 90 105",
+            "0 - 20 0 - 20 0"
+          ],
+          "analysis": {
+            "score": -0.08,
+            "text_ratio": 0.4,
+            "numeric_ratio": 0.6,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 2
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "Elastomeric R-EP-90 R-CPE-90, R-HF-90, R-CSP-90 R-HF- 110, R-E-110 R-S-150",
+            "90 90 110 150",
+            "90 90 110 150",
+            "- 40 - 20 • - 50"
+          ],
+          "analysis": {
+            "score": -0.08,
+            "text_ratio": 0.5,
+            "numeric_ratio": 0.5,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 4
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "Cross-linked polyethylene X-90, X-90UV, X-HF-90 X-HF-110",
+            "90 110",
+            "90 110",
+            "• •"
+          ],
+          "analysis": {
+            "score": 0.0533,
+            "text_ratio": 0.6667,
+            "numeric_ratio": 0.3333,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 2
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 3,
+          "cells": [
+            "MIMS<5>",
+            "100",
+            "250",
+            "(6)"
+          ],
+          "analysis": {
+            "score": -0.08,
+            "text_ratio": 0.2,
+            "numeric_ratio": 0.8,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 4,
+          "cells": [
+            "Other types PE, LLDPE",
+            "70",
+            "70",
+            "•"
+          ],
+          "analysis": {
+            "score": 0.1271,
+            "text_ratio": 0.7143,
+            "numeric_ratio": 0.2857,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 1
+          },
+          "max_header_similarity": 0.0
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 4,
+        "changed_cells": 0
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 5
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": []
+  },
+  {
+    "table_id": "table_a683753b",
+    "table_number": "3.5",
+    "title": null,
+    "parent_clause_reference": null,
+    "page_start": 11,
+    "page_end": 11,
+    "header_rows": [
+      {
+        "cells": [
+          "2 | Heavy- duty conduit* (A) (A) (A) (A)",
+          "3 | Medium-duty conduit* encased in concrete (A) (A) (A) (A)",
+          "4 | Heavy- duty fibre cement conduit_NP (A) (A) (A)",
+          "5 | Fibre cement conduit encased in concrete_NP (A) (A) (A)",
+          "6 | Medium- or heavy-duty galvanized pipe_NP (A) (A) (A)",
+          "7 | Medium-duty, corrugated or flexible conduit* (A) (A)",
+          "8 | Buried direct in the ground with no enclosure_NP (A) (A)"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "B",
+          "B"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "B",
+          "B"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "A",
+          "A",
+          "A",
+          "A",
+          "A",
+          "B",
+          "B"
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "2 | Heavy- duty conduit* (A) (A) (A) (A),3 | Medium-duty conduit* encased in concrete (A) (A) (A) (A),4 | Heavy- duty fibre cement conduit NP (A) (A) (A),5 | Fibre cement conduit encased in concrete NP (A) (A) (A),6 | Medium- or heavy-duty galvanized pipe NP (A) (A) (A),\"7 | Medium-duty, corrugated or flexible conduit* (A) (A)\",8 | Buried direct in the ground with no enclosure NP (A) (A)\r\nA,A,A,A,A,B,B\r\nA,A,A,A,A,B,B\r\nA,A,A,A,A,B,B\r\n",
+    "normalized_text_representation": "TABLE 3.5\nCOLUMNS: 2 | Heavy- duty conduit* (A) (A) (A) (A) | 3 | Medium-duty conduit* encased in concrete (A) (A) (A) (A) | 4 | Heavy- duty fibre cement conduit NP (A) (A) (A) | 5 | Fibre cement conduit encased in concrete NP (A) (A) (A) | 6 | Medium- or heavy-duty galvanized pipe NP (A) (A) (A) | 7 | Medium-duty, corrugated or flexible conduit* (A) (A) | 8 | Buried direct in the ground with no enclosure NP (A) (A)\nROW 1: A | A | A | A | A | B | B\nROW 2: A | A | A | A | A | B | B\nROW 3: A | A | A | A | A | B | B",
+    "confidence": "medium",
+    "source_method": "pdfplumber:caption_region",
+    "extraction_notes": [],
+    "table_key": "3.5:ccbf95b8ae9e1b57",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 1.0,
+      "col_count": 7,
+      "data_row_count": 3,
+      "noise_ratio": 0.25,
+      "multiline_ratio": 0.0,
+      "diversity": 0.3214,
+      "placeholder_ratio": 0.0,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.0,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.0,
+      "data_row_repeat_ratio": 0.0,
+      "semantic_hard_fail": false,
+      "unified_score": 0.65,
+      "penalty": 0.35,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "2 | Heavy- duty conduit* (A) (A) (A) (A)",
+          "3 | Medium-duty conduit* encased in concrete (A) (A) (A) (A)",
+          "4 | Heavy- duty fibre cement conduit NP (A) (A) (A)",
+          "5 | Fibre cement conduit encased in concrete NP (A) (A) (A)",
+          "6 | Medium- or heavy-duty galvanized pipe NP (A) (A) (A)",
+          "7 | Medium-duty, corrugated or flexible conduit* (A) (A)",
+          "8 | Buried direct in the ground with no enclosure NP (A) (A)"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "2 | Heavy- duty conduit* (A) (A) (A) (A)",
+      "3 | Medium-duty conduit* encased in concrete (A) (A) (A) (A)",
+      "4 | Heavy- duty fibre cement conduit NP (A) (A) (A)",
+      "5 | Fibre cement conduit encased in concrete NP (A) (A) (A)",
+      "6 | Medium- or heavy-duty galvanized pipe NP (A) (A) (A)",
+      "7 | Medium-duty, corrugated or flexible conduit* (A) (A)",
+      "8 | Buried direct in the ground with no enclosure NP (A) (A)"
+    ],
+    "header_model": {
+      "table_type": "unknown",
+      "stub_column_index": 0,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 7,
+      "header_tree": [
+        {
+          "name": "2 | Heavy- duty conduit* (A) (A) (A) (A)",
+          "children": []
+        },
+        {
+          "name": "3 | Medium-duty conduit* encased in concrete (A) (A) (A) (A)",
+          "children": []
+        },
+        {
+          "name": "4 | Heavy- duty fibre cement conduit NP (A) (A) (A)",
+          "children": []
+        },
+        {
+          "name": "5 | Fibre cement conduit encased in concrete NP (A) (A) (A)",
+          "children": []
+        },
+        {
+          "name": "6 | Medium- or heavy-duty galvanized pipe NP (A) (A) (A)",
+          "children": []
+        },
+        {
+          "name": "7 | Medium-duty, corrugated or flexible conduit* (A) (A)",
+          "children": []
+        },
+        {
+          "name": "8 | Buried direct in the ground with no enclosure NP (A) (A)",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "2 | Heavy- duty conduit* (A) (A) (A) (A)",
+            "3 | Medium-duty conduit* encased in concrete (A) (A) (A) (A)",
+            "4 | Heavy- duty fibre cement conduit NP (A) (A) (A)",
+            "5 | Fibre cement conduit encased in concrete NP (A) (A) (A)",
+            "6 | Medium- or heavy-duty galvanized pipe NP (A) (A) (A)",
+            "7 | Medium-duty, corrugated or flexible conduit* (A) (A)",
+            "8 | Buried direct in the ground with no enclosure NP (A) (A)"
+          ],
+          "analysis": {
+            "score": 0.4293,
+            "text_ratio": 0.8986,
+            "numeric_ratio": 0.1014,
+            "header_hint_hits": 0,
+            "unit_hits": 21,
+            "category_hits": 1,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "B",
+            "B"
+          ],
+          "analysis": {
+            "score": 0.44,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 5,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0294
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "B",
+            "B"
+          ],
+          "analysis": {
+            "score": 0.44,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 5,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0294
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "A",
+            "A",
+            "A",
+            "A",
+            "A",
+            "B",
+            "B"
+          ],
+          "analysis": {
+            "score": 0.44,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 5,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0294
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 7,
+        "changed_cells": 0
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 3
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": []
+  },
+  {
+    "table_id": "table_47a2b733",
+    "table_number": "3.9",
+    "title": null,
+    "parent_clause_reference": null,
+    "page_start": 23,
+    "page_end": 23,
+    "header_rows": [
+      {
+        "cells": [
+          "Type of conductor",
+          "Size mm 2",
+          "Maximum span m"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "Insulated annealed copper including neutral-screened",
+          "?!6",
+          "20"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Bare hard-drawn copper",
+          "?!6",
+          "60"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Insulated hard-drawn copper including two-, three- and four-core twisted but excluding neutral-screened",
+          "6 10 ?!16",
+          "40 50 60"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Neutral-screened cables with hard-drawn copper conductors- two conductors three conductors four conductors two, three, or fou r conductors",
+          "6 or 10 6 or 10 6 or 10 16",
+          "40 60 50 60"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Insulated or bare aluminium excluding neutral- screened",
+          "16 ?!25",
+          "50 60"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "Aerial bundled cables (aluminium conductor)",
+          "?!25",
+          "60"
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "Type of conductor,Size mm 2,Maximum span m\r\nInsulated annealed copper including neutral-screened,?!6,20\r\nBare hard-drawn copper,?!6,60\r\n\"Insulated hard-drawn copper including two-, three- and four-core twisted but excluding neutral-screened\",6 10 ?!16,40 50 60\r\n\"Neutral-screened cables with hard-drawn copper conductors- two conductors three conductors four conductors two, three, or fou r conductors\",6 or 10 6 or 10 6 or 10 16,40 60 50 60\r\nInsulated or bare aluminium excluding neutral- screened,16 ?!25,50 60\r\nAerial bundled cables (aluminium conductor),?!25,60\r\n",
+    "normalized_text_representation": "TABLE 3.9\nCOLUMNS: Type of conductor | Size mm 2 | Maximum span m\nROW 1: Insulated annealed copper including neutral-screened | ?!6 | 20\nROW 2: Bare hard-drawn copper | ?!6 | 60\nROW 3: Insulated hard-drawn copper including two-, three- and four-core twisted but excluding neutral-screened | 6 10 ?!16 | 40 50 60\nROW 4: Neutral-screened cables with hard-drawn copper conductors- two conductors three conductors four conductors two, three, or fou r conductors | 6 or 10 6 or 10 6 or 10 16 | 40 60 50 60\nROW 5: Insulated or bare aluminium excluding neutral- screened | 16 ?!25 | 50 60\nROW 6: Aerial bundled cables (aluminium conductor) | ?!25 | 60",
+    "confidence": "medium",
+    "source_method": "camelot:lattice",
+    "extraction_notes": [
+      "fusion_win:camelot:lattice"
+    ],
+    "table_key": "3.9:2238e3e1fe622ac1",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 1.0,
+      "col_count": 3,
+      "data_row_count": 6,
+      "noise_ratio": 0.2381,
+      "multiline_ratio": 0.4286,
+      "diversity": 0.9048,
+      "placeholder_ratio": 0.0,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.0476,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.0,
+      "data_row_repeat_ratio": 0.1667,
+      "semantic_hard_fail": false,
+      "unified_score": 0.65,
+      "penalty": 0.35,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "Type of conductor",
+          "Size mm 2",
+          "Maximum span m"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "Type of conductor",
+      "Size mm 2",
+      "Maximum span m"
+    ],
+    "header_model": {
+      "table_type": "unknown",
+      "stub_column_index": 0,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 3,
+      "header_tree": [
+        {
+          "name": "Type of conductor",
+          "children": []
+        },
+        {
+          "name": "Size mm 2",
+          "children": []
+        },
+        {
+          "name": "Maximum span m",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "Type of conductor",
+            "Size mm 2",
+            "Maximum span m"
+          ],
+          "analysis": {
+            "score": 0.5344,
+            "text_ratio": 0.8889,
+            "numeric_ratio": 0.1111,
+            "header_hint_hits": 3,
+            "unit_hits": 2,
+            "category_hits": 1,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "Insulated annealed copper including neutral-screened",
+            "?!6",
+            "20"
+          ],
+          "analysis": {
+            "score": 0.2486,
+            "text_ratio": 0.8571,
+            "numeric_ratio": 0.1429,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "Bare hard-drawn copper",
+            "?!6",
+            "60"
+          ],
+          "analysis": {
+            "score": 0.22,
+            "text_ratio": 0.8,
+            "numeric_ratio": 0.2,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "Insulated hard-drawn copper including two-, three- and four-core twisted but excluding neutral-screened",
+            "6 10 ?!16",
+            "40 50 60"
+          ],
+          "analysis": {
+            "score": 0.1811,
+            "text_ratio": 0.7222,
+            "numeric_ratio": 0.2778,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 3,
+          "cells": [
+            "Neutral-screened cables with hard-drawn copper conductors- two conductors three conductors four conductors two, three, or fou r conductors",
+            "6 or 10 6 or 10 6 or 10 16",
+            "40 60 50 60"
+          ],
+          "analysis": {
+            "score": 0.2281,
+            "text_ratio": 0.6562,
+            "numeric_ratio": 0.3438,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 2,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 4,
+          "cells": [
+            "Insulated or bare aluminium excluding neutral- screened",
+            "16 ?!25",
+            "50 60"
+          ],
+          "analysis": {
+            "score": 0.1836,
+            "text_ratio": 0.7273,
+            "numeric_ratio": 0.2727,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 5,
+          "cells": [
+            "Aerial bundled cables (aluminium conductor)",
+            "?!25",
+            "60"
+          ],
+          "analysis": {
+            "score": 0.2486,
+            "text_ratio": 0.8571,
+            "numeric_ratio": 0.1429,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0667
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 3,
+        "changed_cells": 0
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 6
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": []
+  },
+  {
+    "table_id": "table_1c84f0af",
+    "table_number": "3.10",
+    "title": null,
+    "parent_clause_reference": null,
+    "page_start": 24,
+    "page_end": 24,
+    "header_rows": [
+      {
+        "cells": [
+          "Span",
+          "Spacing m | Insulated conductors",
+          "Spacing m_Bare_conductors"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "~10 >10 Q 5 >25 ~45 >45 ~60",
+          "0.2 0.3 0.4 05",
+          "0.4 0.5 0.6 0.7"
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "Span,Spacing m | Insulated conductors,Spacing m Bare conductors\r\n~10 >10 Q 5 >25 ~45 >45 ~60,0.2 0.3 0.4 05,0.4 0.5 0.6 0.7\r\n",
+    "normalized_text_representation": "TABLE 3.10\nCOLUMNS: Span | Spacing m | Insulated conductors | Spacing m Bare conductors\nROW 1: ~10 >10 Q 5 >25 ~45 >45 ~60 | 0.2 0.3 0.4 05 | 0.4 0.5 0.6 0.7",
+    "confidence": "low",
+    "source_method": "camelot:lattice",
+    "extraction_notes": [
+      "fusion_win:camelot:lattice"
+    ],
+    "table_key": "3.10:bac5866d9b2b9687",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 1.0,
+      "col_count": 3,
+      "data_row_count": 1,
+      "noise_ratio": 0.3333,
+      "multiline_ratio": 0.5,
+      "diversity": 1.0,
+      "placeholder_ratio": 0.0,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.0,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.0,
+      "data_row_repeat_ratio": 0.0,
+      "semantic_hard_fail": false,
+      "unified_score": 0.23,
+      "penalty": 0.77,
+      "one_column_value_list": false,
+      "partial_fragment": true
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "Span",
+          "Spacing m | Insulated conductors",
+          "Spacing m Bare conductors"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "Span",
+      "Spacing m | Insulated conductors",
+      "Spacing m Bare conductors"
+    ],
+    "header_model": {
+      "table_type": "numeric_lookup",
+      "stub_column_index": 0,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 3,
+      "header_tree": [
+        {
+          "name": "Span",
+          "children": []
+        },
+        {
+          "name": "Spacing m | Insulated conductors",
+          "children": []
+        },
+        {
+          "name": "Spacing m Bare conductors",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "Span",
+            "Spacing m | Insulated conductors",
+            "Spacing m Bare conductors"
+          ],
+          "analysis": {
+            "score": 0.4,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 2,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "~10 >10 Q 5 >25 ~45 >45 ~60",
+            "0.2 0.3 0.4 05",
+            "0.4 0.5 0.6 0.7"
+          ],
+          "analysis": {
+            "score": -0.055,
+            "text_ratio": 0.25,
+            "numeric_ratio": 0.75,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 3,
+        "changed_cells": 0
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 1
+      }
+    },
+    "reconstruction_confidence": "medium",
+    "reconstruction_notes": []
+  },
+  {
+    "table_id": "table_71c85faf",
+    "table_number": null,
+    "title": null,
+    "parent_clause_reference": null,
+    "page_start": 31,
+    "page_end": 31,
+    "header_rows": [
+      {
+        "cells": [
+          "C ·g (C) | <I> (C) | \"'",
+          "C ·g (C) | U npro te cted area | un de r the ove rhang to_th_e_o_ute_r_edge"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "a,",
+          "Sha ded area s re qu ire"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "0",
+          "el ectri cal equipmen t to be"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "",
+          "a mi nimum of IP33"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "i';'",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "E",
+          "FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES"
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "\"C ·g (C) | < > (C) | \"\"'\",C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge\r\n\"a,\",Sha ded area s re qu ire\r\n0,el ectri cal equipmen t to be\r\n,a mi nimum of IP33\r\ni';',\r\nE,FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES\r\n",
+    "normalized_text_representation": "COLUMNS: C ·g (C) | < > (C) | \"' | C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge\nROW 1: a, | Sha ded area s re qu ire\nROW 2: 0 | el ectri cal equipmen t to be\nROW 3:  | a mi nimum of IP33\nROW 4: i';' | \nROW 5: E | FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES",
+    "confidence": "low",
+    "source_method": "camelot:sweep:stream",
+    "extraction_notes": [],
+    "table_key": "na:73bf81b93c409257",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 0.8333,
+      "col_count": 2,
+      "data_row_count": 5,
+      "noise_ratio": 0.3,
+      "multiline_ratio": 0.0,
+      "diversity": 1.0,
+      "placeholder_ratio": 0.1667,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.2,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.5,
+      "data_row_repeat_ratio": 0.2,
+      "semantic_hard_fail": true,
+      "unified_score": -1.0,
+      "penalty": 1.84,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "C ·g (C) | < > (C) | \"'",
+          "C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "C ·g (C) | < > (C) | \"'",
+      "C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge"
+    ],
+    "header_model": {
+      "table_type": "unknown",
+      "stub_column_index": 1,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 2,
+      "header_tree": [
+        {
+          "name": "C ·g (C) | < > (C) | \"'",
+          "children": []
+        },
+        {
+          "name": "C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "C ·g (C) | <I> (C) | \"'",
+            "C ·g (C) | U npro te cted area | un de r the ove rhang to th e o ute r edge"
+          ],
+          "analysis": {
+            "score": 0.39,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 5,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 1
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "a,",
+            "Sha ded area s re qu ire"
+          ],
+          "analysis": {
+            "score": 0.4,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 2,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0357
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "0",
+            "el ectri cal equipmen t to be"
+          ],
+          "analysis": {
+            "score": 0.2575,
+            "text_ratio": 0.875,
+            "numeric_ratio": 0.125,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0357
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "",
+            "a mi nimum of IP33"
+          ],
+          "analysis": {
+            "score": 0.36,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 1,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 3,
+          "cells": [
+            "i';'",
+            ""
+          ],
+          "analysis": {
+            "score": 0.27,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 1
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 4,
+          "cells": [
+            "E",
+            "FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES"
+          ],
+          "analysis": {
+            "score": 0.2644,
+            "text_ratio": 0.8889,
+            "numeric_ratio": 0.1111,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0714
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 2,
+        "changed_cells": 1
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 5
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": [
+      "Cleaned 1 header cells."
+    ]
+  },
+  {
+    "table_id": "table_826a3e39",
+    "table_number": null,
+    "title": null,
+    "parent_clause_reference": null,
+    "page_start": 31,
+    "page_end": 31,
+    "header_rows": [
+      {
+        "cells": [
+          "c | Q) | E | 0 e. | co -0",
+          "c | Q) | FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES | TO BE A MINIMUM OF IP 33 (FRONT VIEW) | 4.1.4 Adverse effects and interference"
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "\"' C",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "",
+          "All electrical equipment shall be selected so that, during normal"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "\"' \"' C",
+          "operation, including switching, it will not cause harmful effects to"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "<I'.",
+          "other equipment."
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "",
+          "Factors that may need to be considered include the following:"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "\"O",
+          "(a) Power factor."
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "c | Q) | E | 0 e. | co -0,c | Q) | FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES | TO BE A MINIMUM OF IP 33 (FRONT VIEW) | 4.1.4 Adverse effects and interference\r\n\"\"\"' C\",\r\n,\"All electrical equipment shall be selected so that, during normal\"\r\n\"\"\"' \"\"' C\",\"operation, including switching, it will not cause harmful effects to\"\r\n<I'.,other equipment.\r\n,Factors that may need to be considered include the following:\r\n\"\"\"O\",(a) Power factor.\r\n",
+    "normalized_text_representation": "COLUMNS: c | Q) | E | 0 e. | co -0 | c | Q) | FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES | TO BE A MINIMUM OF IP 33 (FRONT VIEW) | 4.1.4 Adverse effects and interference\nROW 1: \"' C | \nROW 2:  | All electrical equipment shall be selected so that, during normal\nROW 3: \"' \"' C | operation, including switching, it will not cause harmful effects to\nROW 4: <I'. | other equipment.\nROW 5:  | Factors that may need to be considered include the following:\nROW 6: \"O | (a) Power factor.",
+    "confidence": "low",
+    "source_method": "camelot:sweep:stream",
+    "extraction_notes": [],
+    "table_key": "na:7500d6a9b701c3dc",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 0.7857,
+      "col_count": 2,
+      "data_row_count": 6,
+      "noise_ratio": 0.5455,
+      "multiline_ratio": 0.2727,
+      "diversity": 1.0,
+      "placeholder_ratio": 0.2143,
+      "garbage_cell_ratio": 0.0909,
+      "symbol_junk_ratio": 0.2727,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.5,
+      "data_row_repeat_ratio": 0.1667,
+      "semantic_hard_fail": true,
+      "unified_score": -1.0,
+      "penalty": 2.1681,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "c | Q) | E | 0 e. | co -0",
+          "c | Q) | FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES | TO BE A MINIMUM OF IP 33 (FRONT VIEW) | 4.1.4 Adverse effects and interference"
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "c | Q) | E | 0 e. | co -0",
+      "c | Q) | FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES | TO BE A MINIMUM OF IP 33 (FRONT VIEW) | 4.1.4 Adverse effects and interference"
+    ],
+    "header_model": {
+      "table_type": "unknown",
+      "stub_column_index": 1,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 2,
+      "header_tree": [
+        {
+          "name": "c | Q) | E | 0 e. | co -0",
+          "children": []
+        },
+        {
+          "name": "c | Q) | FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES | TO BE A MINIMUM OF IP 33 (FRONT VIEW) | 4.1.4 Adverse effects and interference",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "c | Q) | E | 0 e. | co -0",
+            "c | Q) | FIGURE 4.2 AREA UNDER AN OVERHANG REQUIRING ACCESSORIES | TO BE A MINIMUM OF IP 33 (FRONT VIEW) | 4.1.4 Adverse effects and interference"
+          ],
+          "analysis": {
+            "score": 0.4416,
+            "text_ratio": 0.9032,
+            "numeric_ratio": 0.0968,
+            "header_hint_hits": 1,
+            "unit_hits": 3,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "\"' C",
+            ""
+          ],
+          "analysis": {
+            "score": 0.31,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 1,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 1
+          },
+          "max_header_similarity": 0.0333
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "",
+            "All electrical equipment shall be selected so that, during normal"
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0263
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "\"' \"' C",
+            "operation, including switching, it will not cause harmful effects to"
+          ],
+          "analysis": {
+            "score": 0.3,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 1,
+            "category_hits": 1,
+            "multiline_ratio": 0.0,
+            "junk_hits": 2
+          },
+          "max_header_similarity": 0.0789
+        },
+        {
+          "source": "data_rows",
+          "row_index": 3,
+          "cells": [
+            "<I'.",
+            "other equipment."
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 4,
+          "cells": [
+            "",
+            "Factors that may need to be considered include the following:"
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0541
+        },
+        {
+          "source": "data_rows",
+          "row_index": 5,
+          "cells": [
+            "\"O",
+            "(a) Power factor."
+          ],
+          "analysis": {
+            "score": 0.36,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 1,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0312
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 2,
+        "changed_cells": 0
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 6
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": []
+  },
+  {
+    "table_id": "table_11e3412a",
+    "table_number": null,
+    "title": null,
+    "parent_clause_reference": null,
+    "page_start": 33,
+    "page_end": 33,
+    "header_rows": [
+      {
+        "cells": [
+          "(b)",
+          "AS/NZS 3000:2018 217 | High radiant temperature Fixed electrical equipment causing a | focusing or concentration of heat shall be placed at a sufficient | distance from any fixed object or building element so that the object or | element, in normal cond itions, cannot be subjected to a dangerous | temperature ."
+        ],
+        "is_header": true
+      }
+    ],
+    "data_rows": [
+      {
+        "cells": [
+          "NOTES:",
+          ""
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "1",
+          "Some building materials can be affected by pyrolysis- the decomposition of"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "",
+          "organic material as a result of long-term exposure to elevated temperatures."
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "",
+          "Where exposed to high temperatures for a significant period of time such"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "",
+          "materials can degenerate and self-ignite."
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "2",
+          "Tungsten filament lamps, EL V halogen lamps, radiant heaters, infra-red"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "",
+          "lamps, ballasts and transformers are examples of high temperature sources."
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "3",
+          "Restriction of heat dissipation from electrical equipment, e.g. by thermal"
+        ],
+        "is_header": false
+      },
+      {
+        "cells": [
+          "",
+          "insulation , can result in high temperatures in the electrical equipment itself."
+        ],
+        "is_header": false
+      }
+    ],
+    "footer_notes": [],
+    "raw_csv": "(b),\"AS/NZS 3000:2018 217 | High radiant temperature Fixed electrical equipment causing a | focusing or concentration of heat shall be placed at a sufficient | distance from any fixed object or building element so that the object or | element, in normal cond itions, cannot be subjected to a dangerous | temperature .\"\r\nNOTES:,\r\n1,Some building materials can be affected by pyrolysis- the decomposition of\r\n,organic material as a result of long-term exposure to elevated temperatures.\r\n,Where exposed to high temperatures for a significant period of time such\r\n,materials can degenerate and self-ignite.\r\n2,\"Tungsten filament lamps, EL V halogen lamps, radiant heaters, infra-red\"\r\n,\"lamps, ballasts and transformers are examples of high temperature sources.\"\r\n3,\"Restriction of heat dissipation from electrical equipment, e.g. by thermal\"\r\n,\"insulation , can result in high temperatures in the electrical equipment itself.\"\r\n",
+    "normalized_text_representation": "COLUMNS: (b) | AS/NZS 3000:2018 217 | High radiant temperature Fixed electrical equipment causing a | focusing or concentration of heat shall be placed at a sufficient | distance from any fixed object or building element so that the object or | element, in normal cond itions, cannot be subjected to a dangerous | temperature .\nROW 1: NOTES: | \nROW 2: 1 | Some building materials can be affected by pyrolysis- the decomposition of\nROW 3:  | organic material as a result of long-term exposure to elevated temperatures.\nROW 4:  | Where exposed to high temperatures for a significant period of time such\nROW 5:  | materials can degenerate and self-ignite.\nROW 6: 2 | Tungsten filament lamps, EL V halogen lamps, radiant heaters, infra-red\nROW 7:  | lamps, ballasts and transformers are examples of high temperature sources.\nROW 8: 3 | Restriction of heat dissipation from electrical equipment, e.g. by thermal\nROW 9:  | insulation , can result in high temperatures in the electrical equipment itself.",
+    "confidence": "low",
+    "source_method": "camelot:sweep:stream",
+    "extraction_notes": [],
+    "table_key": "na:91754359f45dd6b3",
+    "continuation_of": null,
+    "quality_metrics": {
+      "fill_ratio": 0.7,
+      "col_count": 2,
+      "data_row_count": 9,
+      "noise_ratio": 0.0714,
+      "multiline_ratio": 0.2857,
+      "diversity": 1.0,
+      "placeholder_ratio": 0.3,
+      "garbage_cell_ratio": 0.0,
+      "symbol_junk_ratio": 0.0,
+      "ocr_mojibake_ratio": 0.0,
+      "header_corrupt_ratio": 0.0,
+      "data_row_repeat_ratio": 0.1111,
+      "semantic_hard_fail": true,
+      "unified_score": -0.25,
+      "penalty": 0.95,
+      "one_column_value_list": false,
+      "partial_fragment": false
+    },
+    "has_headers": true,
+    "is_multipage": false,
+    "has_merged_cells": true,
+    "reconstructed_header_rows": [
+      {
+        "cells": [
+          "(b)",
+          "AS/NZS 3000:2018 217 | High radiant temperature Fixed electrical equipment causing a | focusing or concentration of heat shall be placed at a sufficient | distance from any fixed object or building element so that the object or | element, in normal cond itions, cannot be subjected to a dangerous | temperature ."
+        ],
+        "is_header": true
+      }
+    ],
+    "promoted_header_rows": [],
+    "final_columns": [
+      "(b)",
+      "AS/NZS 3000:2018 217 | High radiant temperature Fixed electrical equipment causing a | focusing or concentration of heat shall be placed at a sufficient | distance from any fixed object or building element so that the object or | element, in normal cond itions, cannot be subjected to a dangerous | temperature ."
+    ],
+    "header_model": {
+      "table_type": "unknown",
+      "stub_column_index": 1,
+      "raw_header_row_count": 1,
+      "reconstructed_header_row_count": 1,
+      "final_column_count": 2,
+      "header_tree": [
+        {
+          "name": "(b)",
+          "children": []
+        },
+        {
+          "name": "AS/NZS 3000:2018 217 | High radiant temperature Fixed electrical equipment causing a | focusing or concentration of heat shall be placed at a sufficient | distance from any fixed object or building element so that the object or | element, in normal cond itions, cannot be subjected to a dangerous | temperature .",
+          "children": []
+        }
+      ],
+      "row_debug": [
+        {
+          "source": "header_rows",
+          "row_index": 0,
+          "cells": [
+            "(b)",
+            "AS/NZS 3000:2018 217 | High radiant temperature Fixed electrical equipment causing a | focusing or concentration of heat shall be placed at a sufficient | distance from any fixed object or building element so that the object or | element, in normal cond itions, cannot be subjected to a dangerous | temperature ."
+          ],
+          "analysis": {
+            "score": 0.4606,
+            "text_ratio": 0.9412,
+            "numeric_ratio": 0.0588,
+            "header_hint_hits": 2,
+            "unit_hits": 3,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 1
+          }
+        },
+        {
+          "source": "data_rows",
+          "row_index": 0,
+          "cells": [
+            "NOTES:",
+            ""
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 1,
+          "cells": [
+            "1",
+            "Some building materials can be affected by pyrolysis- the decomposition of"
+          ],
+          "analysis": {
+            "score": 0.2783,
+            "text_ratio": 0.9167,
+            "numeric_ratio": 0.0833,
+            "header_hint_hits": 1,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 1
+          },
+          "max_header_similarity": 0.08
+        },
+        {
+          "source": "data_rows",
+          "row_index": 2,
+          "cells": [
+            "",
+            "organic material as a result of long-term exposure to elevated temperatures."
+          ],
+          "analysis": {
+            "score": 0.41,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 1,
+            "unit_hits": 1,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0816
+        },
+        {
+          "source": "data_rows",
+          "row_index": 3,
+          "cells": [
+            "",
+            "Where exposed to high temperatures for a significant period of time such"
+          ],
+          "analysis": {
+            "score": 0.36,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 1,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.08
+        },
+        {
+          "source": "data_rows",
+          "row_index": 4,
+          "cells": [
+            "",
+            "materials can degenerate and self-ignite."
+          ],
+          "analysis": {
+            "score": 0.37,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 1,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0
+        },
+        {
+          "source": "data_rows",
+          "row_index": 5,
+          "cells": [
+            "2",
+            "Tungsten filament lamps, EL V halogen lamps, radiant heaters, infra-red"
+          ],
+          "analysis": {
+            "score": 0.3145,
+            "text_ratio": 0.9091,
+            "numeric_ratio": 0.0909,
+            "header_hint_hits": 0,
+            "unit_hits": 1,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0196
+        },
+        {
+          "source": "data_rows",
+          "row_index": 6,
+          "cells": [
+            "",
+            "lamps, ballasts and transformers are examples of high temperature sources."
+          ],
+          "analysis": {
+            "score": 0.37,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 1,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.0612
+        },
+        {
+          "source": "data_rows",
+          "row_index": 7,
+          "cells": [
+            "3",
+            "Restriction of heat dissipation from electrical equipment, e.g. by thermal"
+          ],
+          "analysis": {
+            "score": 0.2745,
+            "text_ratio": 0.9091,
+            "numeric_ratio": 0.0909,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.1042
+        },
+        {
+          "source": "data_rows",
+          "row_index": 8,
+          "cells": [
+            "",
+            "insulation , can result in high temperatures in the electrical equipment itself."
+          ],
+          "analysis": {
+            "score": 0.32,
+            "text_ratio": 1.0,
+            "numeric_ratio": 0.0,
+            "header_hint_hits": 0,
+            "unit_hits": 0,
+            "category_hits": 0,
+            "multiline_ratio": 0.0,
+            "junk_hits": 0
+          },
+          "max_header_similarity": 0.1064
+        }
+      ],
+      "clean_debug": {
+        "total_cells": 2,
+        "changed_cells": 0
+      },
+      "body_debug": {
+        "removed_header_like_body_rows": [],
+        "remaining_data_rows": 9
+      }
+    },
+    "reconstruction_confidence": "high",
+    "reconstruction_notes": []
+  }
+]
