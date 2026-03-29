@@ -274,6 +274,8 @@ def _parse_table_number_from_text(
     - Appendix: Table B1, Table C12, Table D12(A), Table D12 ( a )
     - Numeric: Table 3.1, Table 3, 1, Table 3. 1, Table 104.101, Table 41
 
+    P1: Enhanced appendix pattern handling with better spacing tolerance.
+
     anchor:
     - "anywhere": first match in text (captions, running headers with text before "Table …").
     - "line_start": match only at the start of the line (after leading whitespace). Use this
@@ -290,6 +292,8 @@ def _parse_table_number_from_text(
             return None
         offset = len(text) - len(s)
 
+        # P1: Improved appendix patterns with flexible spacing
+        # Match: Table D12(A), Table D12 (A), Table D 12 ( A )
         m = re.match(
             r"(?i)(Table\s+[A-Za-z]\s*\d+\s*\(\s*[A-Za-z0-9]+\s*\))",
             s,
@@ -304,6 +308,7 @@ def _parse_table_number_from_text(
                 g1s, g1e = m.span(1)
                 return canon, offset + g1s, offset + g1e
 
+        # P1: Appendix letter + digits with flexible spacing (Table B 1, Table C12)
         m = re.match(r"(?i)(Table\s+[A-Za-z]\s*\d+)\b", s)
         if m:
             mc = re.match(r"(?i)Table\s+([A-Za-z])\s*(\d+)", m.group(1))
@@ -325,7 +330,8 @@ def _parse_table_number_from_text(
 
         return None
 
-    # 1) Appendix with parenthetical suffix
+    # P1: Improved appendix with parenthetical suffix (more spacing tolerance)
+    # Matches: Table D12(A), Table D 12 ( A ), Table B1(a)
     m = re.search(
         r"(?i)\b(Table\s+[A-Za-z]\s*\d+\s*\(\s*[A-Za-z0-9]+\s*\))",
         text,
@@ -339,7 +345,7 @@ def _parse_table_number_from_text(
             canon = f"{mc.group(1).upper()}{mc.group(2)}({mc.group(3).upper()})"
             return canon, m.start(1), m.end(1)
 
-    # 2) Appendix letter + digits (Table C1, Table B 12)
+    # P1: Appendix letter + digits with better spacing handling (Table C 1, Table B12)
     m = re.search(r"(?i)\b(Table\s+[A-Za-z]\s*\d+)\b", text)
     if m:
         mc = re.match(r"(?i)Table\s+([A-Za-z])\s*(\d+)", m.group(1))
@@ -563,6 +569,249 @@ class TablePipeline:
             return True
         return False
 
+    def _clause_likeness_score(self, table: Table) -> float:
+        """
+        Calculate how clause-like (prose-like) a table is.
+        Returns 0.0 (definitely table) to 1.0 (definitely clause/prose).
+        
+        P0 implementation: Detect prose/clause fragments that shouldn't be in tables.json.
+        """
+        headers = table.header_rows or []
+        data = table.data_rows or []
+        
+        if not headers and not data:
+            return 0.0
+        
+        col_count = len(headers[0].cells) if headers else (len(data[0].cells) if data else 0)
+        
+        # Strong indicator: single column
+        if col_count <= 1:
+            clause_score = 0.5
+        else:
+            clause_score = 0.0
+        
+        # Collect all text for analysis
+        all_text = []
+        first_cell_text = ""
+        
+        if headers:
+            for hr in headers:
+                for idx, cell in enumerate(hr.cells):
+                    text = (cell or "").strip()
+                    if text:
+                        all_text.append(text)
+                        if idx == 0 and not first_cell_text:
+                            first_cell_text = text
+        
+        if data:
+            for idx, dr in enumerate(data):
+                for cell_idx, cell in enumerate(dr.cells):
+                    text = (cell or "").strip()
+                    if text:
+                        all_text.append(text)
+                        if idx == 0 and cell_idx == 0 and not first_cell_text:
+                            first_cell_text = text
+        
+        if not all_text:
+            return 0.0
+        
+        full_text = " ".join(all_text)
+        
+        # Check for very long first cell (typical in clause fragments)
+        if first_cell_text and len(first_cell_text) > 80:
+            clause_score += 0.25
+        
+        # Check for clause numbering patterns (1.2.3, 3.8.1, etc.)
+        clause_number_pattern = re.compile(r'\b\d+(?:\.\d+){1,5}\b')
+        clause_numbers = clause_number_pattern.findall(full_text)
+        if len(clause_numbers) >= 2:
+            clause_score += 0.2
+        
+        # Check for normative language (shall, must, may, etc.)
+        normative_words = re.compile(
+            r'\b(shall|must not|must|should|may|in accordance with|'
+            r'provided that|unless|where|however|the following|'
+            r'requirements?|specification|compliance)\b',
+            re.IGNORECASE
+        )
+        normative_matches = normative_words.findall(full_text)
+        if len(normative_matches) >= 3:
+            clause_score += 0.3
+        elif len(normative_matches) >= 1:
+            clause_score += 0.15
+        
+        # Check for list markers (a), (b), (i), (ii)
+        list_marker_pattern = re.compile(r'\([a-z]\)|\([ivxIVX]+\)')
+        list_markers = list_marker_pattern.findall(full_text)
+        if len(list_markers) >= 2:
+            clause_score += 0.2
+        
+        # Check for prose flow indicators (long sentences, connective words)
+        sentences = re.split(r'[.;]', full_text)
+        long_sentences = sum(1 for s in sentences if len(s.strip()) > 100)
+        if long_sentences >= 2:
+            clause_score += 0.2
+        
+        # Check average cell length (tables have shorter cells)
+        avg_cell_length = sum(len(t) for t in all_text) / len(all_text)
+        if avg_cell_length > 60:
+            clause_score += 0.15
+        
+        # Check for standard section headers that appear in clause text
+        section_pattern = re.compile(
+            r'\b(section|clause|appendix|note|exception|general|scope|'
+            r'definitions?|references?)\b',
+            re.IGNORECASE
+        )
+        section_matches = section_pattern.findall(full_text)
+        if len(section_matches) >= 2:
+            clause_score += 0.1
+        
+        # Check for lack of tabular structure indicators
+        # Real tables often have: units, numeric data, short labels
+        numeric_cells = sum(1 for t in all_text if re.search(r'\d', t))
+        if numeric_cells < len(all_text) * 0.2:  # Less than 20% cells have numbers
+            clause_score += 0.1
+        
+        # Check column balance (clauses often have unbalanced columns)
+        if col_count > 1 and data:
+            first_col_lens = []
+            other_col_lens = []
+            for dr in data:
+                if dr.cells:
+                    first_col_lens.append(len((dr.cells[0] or "").strip()))
+                    for cell in dr.cells[1:]:
+                        other_col_lens.append(len((cell or "").strip()))
+            
+            if first_col_lens and other_col_lens:
+                avg_first = sum(first_col_lens) / len(first_col_lens)
+                avg_other = sum(other_col_lens) / len(other_col_lens) if other_col_lens else 0
+                if avg_first > avg_other * 3:  # First column much longer
+                    clause_score += 0.15
+        
+        return min(1.0, clause_score)
+
+    def _is_clause_shaped_content(self, table: Table) -> bool:
+        """
+        P0: Determine if a table is actually clause/prose content.
+        Returns True if content should be rejected as not-a-table.
+        """
+        clause_score = self._clause_likeness_score(table)
+        
+        # Get quality metrics
+        m = table.quality_metrics or {}
+        col_count = int(m.get("col_count", 0))
+        
+        # High threshold for rejection - we want high confidence it's prose
+        if clause_score >= 0.65:
+            logger.debug(
+                f"Table {table.table_id} rejected as clause-shaped content "
+                f"(clause_score={clause_score:.2f}, cols={col_count})"
+            )
+            return True
+        
+        # For single-column content, be more aggressive
+        if col_count == 1 and clause_score >= 0.5:
+            logger.debug(
+                f"Single-column table {table.table_id} rejected as clause-shaped "
+                f"(clause_score={clause_score:.2f})"
+            )
+            return True
+        
+        return False
+
+    def _compute_tabular_score(self, rows: List[List[str]]) -> float:
+        """
+        P0: Score how tabular (structured/grid-like) content is.
+        Returns 0.0 (not tabular) to 1.0 (very tabular).
+        
+        Used for sweep gating to filter ragged text blocks.
+        """
+        if not rows or len(rows) < 2:
+            return 0.0
+        
+        col_count = max(len(r) for r in rows)
+        if col_count <= 1:
+            return 0.0
+        
+        score = 0.0
+        
+        # Column consistency: do rows have similar column counts?
+        col_counts = [len(r) for r in rows]
+        consistent_col_count = sum(1 for c in col_counts if c == col_count)
+        col_consistency = consistent_col_count / len(rows)
+        score += col_consistency * 0.3
+        
+        # Cell length uniformity: tabular data has more uniform cell lengths
+        all_cells = [cell for row in rows for cell in row]
+        cell_lens = [len((c or "").strip()) for c in all_cells if (c or "").strip()]
+        if cell_lens:
+            avg_len = sum(cell_lens) / len(cell_lens)
+            # Prefer shorter, uniform cells
+            if avg_len < 40:
+                score += 0.2
+            # Check variance
+            variance = sum((l - avg_len) ** 2 for l in cell_lens) / len(cell_lens)
+            std_dev = variance ** 0.5
+            if std_dev < avg_len * 0.8:  # Low variance relative to mean
+                score += 0.15
+        
+        # Numeric/symbolic content: tables often have numbers, units, symbols
+        numeric_pattern = re.compile(r'\d')
+        symbol_pattern = re.compile(r'[%°×±≤≥]')
+        cells_with_numbers = sum(1 for c in all_cells if numeric_pattern.search(c or ""))
+        cells_with_symbols = sum(1 for c in all_cells if symbol_pattern.search(c or ""))
+        
+        if all_cells:
+            numeric_ratio = cells_with_numbers / len(all_cells)
+            symbol_ratio = cells_with_symbols / len(all_cells)
+            score += min(0.25, numeric_ratio * 0.5 + symbol_ratio * 0.5)
+        
+        # Alignment indicators: delimiters, colons, dashes
+        delimiter_pattern = re.compile(r'[:|—–-]')
+        cells_with_delimiters = sum(1 for c in all_cells if delimiter_pattern.search(c or ""))
+        if all_cells:
+            delimiter_ratio = cells_with_delimiters / len(all_cells)
+            score += min(0.1, delimiter_ratio * 0.3)
+        
+        return min(1.0, score)
+
+    def _sweep_result_acceptable(self, rt: _RawTable, page_words: List[dict]) -> bool:
+        """
+        P0: Gate sweep results before adding them to output.
+        Requires minimum column count (>=2) OR explicit caption anchor OR high tabular score.
+        
+        This prevents ragged text blocks (clause text) from being added as single-column tables.
+        """
+        if not rt.rows:
+            return False
+        
+        col_count = max(len(r) for r in rt.rows) if rt.rows else 0
+        
+        # Multi-column content is generally acceptable
+        if col_count >= 2:
+            return True
+        
+        # Single-column requires either:
+        # 1. Explicit caption anchor (table_number present)
+        if rt.table_number:
+            return True
+        
+        # 2. High tabular score (structured/grid-like despite single column)
+        tabular_score = self._compute_tabular_score(rt.rows)
+        if tabular_score >= 0.5:
+            logger.debug(
+                f"Sweep single-column accepted: tabular_score={tabular_score:.2f}"
+            )
+            return True
+        
+        # Otherwise reject
+        logger.debug(
+            f"Sweep result rejected: cols={col_count}, "
+            f"table_number={rt.table_number}, tabular_score={tabular_score:.2f}"
+        )
+        return False
+
     def _should_drop_defective_table(self, table: Table) -> bool:
         """Always remove structurally useless outputs (not gated by omit_unnumbered_table_fragments)."""
         data = table.data_rows or []
@@ -570,6 +819,9 @@ class TablePipeline:
         if not data:
             return True
         if self._looks_like_schematic_or_diagram_table(table):
+            return True
+        # P0: Reject clause-shaped content
+        if self._is_clause_shaped_content(table):
             return True
         m = table.quality_metrics or {}
         dr = int(m.get("data_row_count", len(data)))
@@ -639,6 +891,7 @@ class TablePipeline:
 
     def process(self, source_pdf_path: str, clauses: Optional[List[Any]] = None) -> List[Table]:
         self._fusion_by_page = {}
+        # P4: Enhanced diagnostic tracking
         self._diag = {
             "header_rows_detected": 0,
             "duplicate_headers_removed": 0,
@@ -659,6 +912,10 @@ class TablePipeline:
             "continuation_body_merges": 0,
             "caption_multi_engine_picks": 0,
             "caption_multi_engine_expand_retries": 0,
+            # P4: New upgrade diagnostics
+            "clause_shaped_rejected": 0,
+            "sweep_gated_rejected": 0,
+            "schematic_rejected": 0,
         }
         clauses = clauses or []
         raw_tables = self._extract_raw_tables_pdfplumber(source_pdf_path)
@@ -673,6 +930,17 @@ class TablePipeline:
             if self._should_drop_defective_table(table):
                 self._diag["defective_table_drops"] += 1
                 self._diag["tables_omitted"] += 1
+                # P4: Track specific rejection reasons
+                if self._is_clause_shaped_content(table):
+                    self._diag["clause_shaped_rejected"] += 1
+                    if not table.extraction_notes:
+                        table.extraction_notes = []
+                    clause_score = self._clause_likeness_score(table)
+                    table.extraction_notes.append(
+                        f"rejected:clause_shaped(score={clause_score:.2f})"
+                    )
+                elif self._looks_like_schematic_or_diagram_table(table):
+                    self._diag["schematic_rejected"] += 1
                 continue
             if self._should_omit_emitted_table(table):
                 self._diag["tables_omitted"] += 1
@@ -681,6 +949,13 @@ class TablePipeline:
 
         tables = self._dedupe_by_table_key(tables)
 
+        # P4: Enhanced diagnostic logging
+        logger.info(
+            f"Table pipeline complete: {len(tables)} tables extracted. "
+            f"Upgrade metrics: clause_shaped_rejected={self._diag.get('clause_shaped_rejected', 0)}, "
+            f"sweep_gated_rejected={self._diag.get('sweep_gated_rejected', 0)}, "
+            f"schematic_rejected={self._diag.get('schematic_rejected', 0)}"
+        )
         logger.info(
             "TablePipeline diagnostics: header_rows_detected=%s duplicate_headers_removed=%s "
             "confidence_penalties_applied=%s image_recovery_attempted=%s image_recovery_applied=%s "
@@ -1310,6 +1585,9 @@ class TablePipeline:
                         filtered = self._filter_noise_rows_raw(rt)
                         if len(filtered.rows) < 2:
                             continue
+                        # P0 sweep gating: require min columns or caption anchor
+                        if not self._sweep_result_acceptable(filtered, page_words):
+                            continue
                         out.append(filtered)
                         self._diag["page_sweep_raw_added"] += 1
 
@@ -1779,17 +2057,36 @@ class TablePipeline:
     def _infer_caption(
         self, page_words: List[dict], bbox: Tuple[float, float, float, float]
     ) -> Tuple[Optional[str], Optional[str], bool]:
+        """
+        P1: Improved caption detection with wider search and better appendix handling.
+        """
         x0, y0, x1, _y1 = bbox
+        
+        # P1: Wider vertical search window (increased from 72 to 100)
+        # P1: Expanded horizontal tolerance (increased from 28 to 40)
         tight = [
             w
             for w in page_words
             if (w.get("bottom", 0) <= y0 + 14)
-            and (y0 - w.get("top", 0) <= 72)
-            and (w.get("x1", 0) >= x0 - 28)
-            and (w.get("x0", 0) <= x1 + 28)
+            and (y0 - w.get("top", 0) <= 100)  # P1: wider vertical window
+            and (w.get("x1", 0) >= x0 - 40)    # P1: wider horizontal tolerance
+            and (w.get("x0", 0) <= x1 + 40)
         ]
+        
+        # P1: If no caption found strictly above, try lateral/overlapping search
+        if not tight:
+            lateral = [
+                w
+                for w in page_words
+                if (abs(w.get("top", 0) - y0) <= 20)  # Near same vertical level
+                and (w.get("x0", 0) <= x0 + 80)       # Left or slightly overlapping
+            ]
+            if lateral:
+                tight = lateral
+        
         if not tight:
             return None, None, False
+        
         lines = self._cluster_words_into_lines(tight, y_tol=4.0)
         lines.sort(key=lambda ln: -max(w.get("bottom", 0) for w in ln))
 
@@ -1798,6 +2095,13 @@ class TablePipeline:
             text = re.sub(r"\s+", " ", text)
             if not text:
                 continue
+            
+            # P1: Tolerate short leading noise before "Table"
+            # Remove up to 15 chars of prefix if "Table" appears after it
+            table_match = re.search(r"\bTable\b", text, re.IGNORECASE)
+            if table_match and table_match.start() > 0 and table_match.start() <= 15:
+                text = text[table_match.start():]
+            
             parsed = _parse_table_number_from_text(text)
             if not parsed:
                 continue
