@@ -16,6 +16,13 @@ from models.table import ConfidenceLevel, Table, TableRow
 
 logger = logging.getLogger(__name__)
 
+try:
+    from services.ai_table_service import get_ai_service
+    _ai_service_available = True
+except ImportError:
+    _ai_service_available = False
+    logger.warning("AI table service not available - AI enhancement disabled")
+
 
 def _fusion_enabled() -> bool:
     try:
@@ -411,6 +418,18 @@ class TablePipeline:
     def __init__(self) -> None:
         self._diag: Dict[str, int] = {}
         self._fusion_by_page: Dict[int, List[_RawTable]] = {}
+        
+        # Initialize AI service if available
+        self._ai_service = None
+        if _ai_service_available:
+            try:
+                self._ai_service = get_ai_service()
+                logger.info("AI table service initialized (discovery=%s, caption=%s, validation=%s)",
+                           self._ai_service.discovery_enabled,
+                           self._ai_service.caption_enabled,
+                           self._ai_service.validation_enabled)
+            except Exception as e:
+                logger.warning("Failed to initialize AI service: %s", e)
 
     def _normalize_scalar_to_str(self, value: Any) -> str:
         if value is None:
@@ -1036,6 +1055,24 @@ class TablePipeline:
             self._diag["caption_multi_engine_picks"],
             self._diag["caption_multi_engine_expand_retries"],
         )
+        
+        # AI metrics reporting (if AI service is available)
+        if self._ai_service:
+            ai_metrics = self._ai_service.get_metrics()
+            logger.info(
+                "AI Enhancement metrics: discovery_tables=%s total_calls=%s (discovery=%s, caption=%s, validation=%s) "
+                "total_tokens=%s (prompt=%s, completion=%s) estimated_cost=$%.4f",
+                self._diag.get("ai_discovery_tables", 0),
+                ai_metrics["total_calls"],
+                ai_metrics["discovery_calls"],
+                ai_metrics["caption_calls"],
+                ai_metrics["validation_calls"],
+                ai_metrics["total_tokens"],
+                ai_metrics["prompt_tokens"],
+                ai_metrics["completion_tokens"],
+                ai_metrics["estimated_cost"]
+            )
+        
         return tables
 
     def _extract_best_tiered(
@@ -1084,6 +1121,37 @@ class TablePipeline:
                         self._diag["image_recovery_applied"] += 1
                 else:
                     notes.append("image_ocr_rejected_noise")
+
+        # AI-powered structure validation (if enabled)
+        if self._ai_service and self._ai_service.validation_enabled:
+            # Only validate borderline tables (low-medium confidence)
+            if best_q.score < 0.6 or best_q.semantic_hard_fail:
+                try:
+                    # Convert page to image
+                    import pdfplumber
+                    with pdfplumber.open(source_pdf_path) as pdf:
+                        page = pdf.pages[best_rt.page_start - 1]
+                        page_image = page.to_image(resolution=150).original
+                    
+                    # Call AI validation
+                    validation_result = self._ai_service.validate_structure(
+                        page_image=page_image,
+                        page_num=best_rt.page_start,
+                        table_bbox=best_rt.bbox,
+                        extracted_data=best_rt.rows
+                    )
+                    
+                    if not validation_result.is_valid:
+                        # AI rejected this table - mark for omission
+                        notes.append(f"ai_validation_rejected:{validation_result.reason}")
+                        best_q = best_q._replace(semantic_hard_fail=True)
+                        logger.info("AI validation rejected table on page %s: %s", best_rt.page_start, validation_result.reason)
+                    else:
+                        # AI validated the table
+                        notes.append("ai_validation_passed")
+                        logger.debug("AI validation passed for table on page %s", best_rt.page_start)
+                except Exception as e:
+                    logger.warning("AI validation failed on page %s: %s", best_rt.page_start, e)
 
         return best_table, best_rt, notes
 
@@ -1194,6 +1262,65 @@ class TablePipeline:
                     line_bbox=(x0, top, x1, bottom),
                 )
             )
+        out.sort(key=lambda a: a.line_bbox[1])
+        
+        # AI-powered caption detection (if enabled)
+        if self._ai_service and self._ai_service.caption_enabled:
+            try:
+                # Extract full text from page words
+                page_text = " ".join(w.get("text", "") for w in page_words if w.get("text"))
+                page_num = page_words[0].get("page_number", 0) if page_words else 0
+                
+                # Call AI caption detection
+                ai_captions = self._ai_service.detect_captions(
+                    page_text=page_text,
+                    page_num=page_num
+                )
+                
+                # Convert AI captions to _CaptionAnchor objects
+                for ai_cap in ai_captions:
+                    # Try to find matching line bbox for this caption
+                    matching_line = None
+                    search_text = ai_cap.table_number.lower()
+                    for ln in lines:
+                        line_text = " ".join(
+                            (w.get("text") or "").strip().lower()
+                            for w in sorted(ln, key=lambda w: float(w.get("x0", 0.0)))
+                        )
+                        if search_text in line_text:
+                            matching_line = ln
+                            break
+                    
+                    if matching_line:
+                        x0 = min(float(w.get("x0", 0.0)) for w in matching_line)
+                        x1 = max(float(w.get("x1", 0.0)) for w in matching_line)
+                        top = min(float(w.get("top", 0.0)) for w in matching_line)
+                        bottom = max(float(w.get("bottom", 0.0)) for w in matching_line)
+                        line_bbox = (x0, top, x1, bottom)
+                    else:
+                        # Fallback: use approximate bbox
+                        if page_words:
+                            first_word = page_words[0]
+                            x0 = float(first_word.get("x0", 0.0))
+                            top = float(first_word.get("top", 0.0))
+                            line_bbox = (x0, top, x0 + 200, top + 15)
+                        else:
+                            line_bbox = (0.0, 0.0, 200.0, 15.0)
+                    
+                    # Check if this caption already exists (avoid duplicates)
+                    if not any(a.table_number == ai_cap.table_number for a in out):
+                        out.append(
+                            _CaptionAnchor(
+                                table_number=ai_cap.table_number,
+                                title=ai_cap.description or "",
+                                continuation=False,
+                                line_bbox=line_bbox,
+                            )
+                        )
+                        logger.debug("AI caption detection found: %s", ai_cap.table_number)
+            except Exception as e:
+                logger.warning("AI caption detection failed: %s", e)
+        
         out.sort(key=lambda a: a.line_bbox[1])
         return out
 
@@ -1643,9 +1770,92 @@ class TablePipeline:
                         out.append(filtered)
                         self._diag["page_sweep_raw_added"] += 1
 
+        # AI-powered table discovery (if enabled)
+        if self._ai_service and self._ai_service.discovery_enabled:
+            logger.info("Running AI table discovery...")
+            ai_discovered_count = 0
+            
+            with pdfplumber.open(source_pdf_path) as pdf:
+                for page_num in range(1, last_page + 1):
+                    page = pdf.pages[page_num - 1]
+                    
+                    # Get existing table bboxes on this page to avoid duplicates
+                    existing_bboxes = [rt.bbox for rt in out if rt.page_start == page_num]
+                    
+                    # Convert page to image for AI vision
+                    try:
+                        page_image = page.to_image(resolution=150).original
+                    except Exception as e:
+                        logger.debug("Failed to convert page %s to image: %s", page_num, e)
+                        continue
+                    
+                    # Call AI discovery
+                    try:
+                        ai_regions = self._ai_service.discover_tables(
+                            page_image=page_image,
+                            page_num=page_num,
+                            existing_table_bboxes=existing_bboxes
+                        )
+                    except Exception as e:
+                        logger.warning("AI discovery failed on page %s: %s", page_num, e)
+                        continue
+                    
+                    # Extract tables from AI-discovered regions
+                    for region in ai_regions:
+                        # Convert percentage bbox to absolute coordinates
+                        bbox = self._percent_bbox_to_absolute(
+                            region.bbox_percent,
+                            float(page.width),
+                            float(page.height)
+                        )
+                        
+                        # Extract table from this region using pdfplumber
+                        try:
+                            crop = page.crop(bbox)
+                            tables_found = crop.find_tables(table_settings=tbl_settings) or []
+                            
+                            if tables_found:
+                                for t in tables_found:
+                                    rows = t.extract() or []
+                                    norm_rows = self._normalize_rows(rows)
+                                    if not norm_rows or len(norm_rows) < 2:
+                                        continue
+                                    
+                                    out.append(_RawTable(
+                                        page_start=page_num,
+                                        page_end=page_num,
+                                        bbox=bbox,
+                                        rows=norm_rows,
+                                        table_number=region.table_number,
+                                        title=region.description,
+                                        source_method="ai_discovery+pdfplumber",
+                                        continuation_caption=False
+                                    ))
+                                    ai_discovered_count += 1
+                                    self._diag["ai_discovery_tables"] = ai_discovered_count
+                        except Exception as e:
+                            logger.debug("AI region extraction failed page %s: %s", page_num, e)
+            
+            logger.info("AI discovery found %d additional tables", ai_discovered_count)
+
         if not out:
             logger.warning("No tables extracted by pdfplumber (incl. loose pass / page sweep)")
         return out
+
+    @staticmethod
+    def _percent_bbox_to_absolute(
+        bbox_percent: Tuple[float, float, float, float],
+        page_width: float,
+        page_height: float
+    ) -> Tuple[float, float, float, float]:
+        """Convert percentage-based bbox (0-100) to absolute pixel coordinates."""
+        x0_pct, y0_pct, x1_pct, y1_pct = bbox_percent
+        return (
+            (x0_pct / 100.0) * page_width,
+            (y0_pct / 100.0) * page_height,
+            (x1_pct / 100.0) * page_width,
+            (y1_pct / 100.0) * page_height
+        )
 
     @staticmethod
     def _bbox_iou(
