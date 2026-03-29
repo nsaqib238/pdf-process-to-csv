@@ -575,6 +575,7 @@ class TablePipeline:
         Returns 0.0 (definitely table) to 1.0 (definitely clause/prose).
         
         P0 implementation: Detect prose/clause fragments that shouldn't be in tables.json.
+        Iteration 1: Enhanced detection for 2-column change lists and TOC entries.
         """
         headers = table.header_rows or []
         data = table.data_rows or []
@@ -587,6 +588,9 @@ class TablePipeline:
         # Strong indicator: single column
         if col_count <= 1:
             clause_score = 0.5
+        elif col_count == 2:
+            # 2-column content gets moderate starting score (may be change list)
+            clause_score = 0.2
         else:
             clause_score = 0.0
         
@@ -660,12 +664,28 @@ class TablePipeline:
         # Check for standard section headers that appear in clause text
         section_pattern = re.compile(
             r'\b(section|clause|appendix|note|exception|general|scope|'
-            r'definitions?|references?)\b',
+            r'definitions?|references?|changes to|amendments?|revisions?)\b',
             re.IGNORECASE
         )
         section_matches = section_pattern.findall(full_text)
         if len(section_matches) >= 2:
-            clause_score += 0.1
+            clause_score += 0.15
+        
+        # Iteration 1: Detect change/amendment list patterns
+        change_pattern = re.compile(
+            r'\b(changes? to|amendments? to|revisions? to|modifications? to|'
+            r'updates? to|alterations?|replaced with|clarified|expanded|added|revised|removed)\b',
+            re.IGNORECASE
+        )
+        change_matches = change_pattern.findall(full_text)
+        if len(change_matches) >= 3:
+            clause_score += 0.3
+        
+        # Iteration 1: Detect table of contents patterns
+        toc_pattern = re.compile(r'\b\d+\.\d+.*?\.\.+\s*\d+$', re.MULTILINE)
+        toc_matches = toc_pattern.findall(full_text)
+        if len(toc_matches) >= 2:
+            clause_score += 0.4  # Strong indicator of TOC
         
         # Check for lack of tabular structure indicators
         # Real tables often have: units, numeric data, short labels
@@ -677,17 +697,28 @@ class TablePipeline:
         if col_count > 1 and data:
             first_col_lens = []
             other_col_lens = []
+            first_col_empty = 0
             for dr in data:
                 if dr.cells:
-                    first_col_lens.append(len((dr.cells[0] or "").strip()))
+                    first_text = (dr.cells[0] or "").strip()
+                    first_col_lens.append(len(first_text))
+                    if not first_text or len(first_text) < 3:
+                        first_col_empty += 1
                     for cell in dr.cells[1:]:
                         other_col_lens.append(len((cell or "").strip()))
+            
+            # Iteration 1: Many empty/short first column cells suggests ragged list
+            if len(first_col_lens) > 0 and first_col_empty / len(first_col_lens) > 0.3:
+                clause_score += 0.2
             
             if first_col_lens and other_col_lens:
                 avg_first = sum(first_col_lens) / len(first_col_lens)
                 avg_other = sum(other_col_lens) / len(other_col_lens) if other_col_lens else 0
                 if avg_first > avg_other * 3:  # First column much longer
                     clause_score += 0.15
+                # Iteration 1: Check if 2nd column is consistently prose-length
+                if col_count == 2 and avg_other > 50:  # Long prose in 2nd column
+                    clause_score += 0.2
         
         return min(1.0, clause_score)
 
@@ -702,8 +733,8 @@ class TablePipeline:
         m = table.quality_metrics or {}
         col_count = int(m.get("col_count", 0))
         
-        # High threshold for rejection - we want high confidence it's prose
-        if clause_score >= 0.65:
+        # Iteration 1: Lowered threshold from 0.65 to 0.55 for better precision
+        if clause_score >= 0.55:
             logger.debug(
                 f"Table {table.table_id} rejected as clause-shaped content "
                 f"(clause_score={clause_score:.2f}, cols={col_count})"
@@ -714,6 +745,14 @@ class TablePipeline:
         if col_count == 1 and clause_score >= 0.5:
             logger.debug(
                 f"Single-column table {table.table_id} rejected as clause-shaped "
+                f"(clause_score={clause_score:.2f})"
+            )
+            return True
+        
+        # Iteration 1: For 2-column content with high score, also reject
+        if col_count == 2 and clause_score >= 0.5:
+            logger.debug(
+                f"2-column table {table.table_id} rejected as clause-shaped list "
                 f"(clause_score={clause_score:.2f})"
             )
             return True
