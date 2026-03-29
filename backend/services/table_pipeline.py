@@ -273,8 +273,10 @@ def _parse_table_number_from_text(
     Supports:
     - Appendix: Table B1, Table C12, Table D12(A), Table D12 ( a )
     - Numeric: Table 3.1, Table 3, 1, Table 3. 1, Table 104.101, Table 41
+    - Alternative formats: TABLE 3.1, Table: 3.1, Table— 3.1, Table – 3.1
 
     P1: Enhanced appendix pattern handling with better spacing tolerance.
+    Iteration 3: Added support for uppercase TABLE, punctuation (: — –), extra spacing.
 
     anchor:
     - "anywhere": first match in text (captions, running headers with text before "Table …").
@@ -292,15 +294,15 @@ def _parse_table_number_from_text(
             return None
         offset = len(text) - len(s)
 
-        # P1: Improved appendix patterns with flexible spacing
-        # Match: Table D12(A), Table D12 (A), Table D 12 ( A )
+        # Iteration 3: Enhanced patterns to support TABLE (uppercase), punctuation (: — –)
+        # Match: Table D12(A), TABLE D12(A), Table: D12 (A), Table— D 12 ( A )
         m = re.match(
-            r"(?i)(Table\s+[A-Za-z]\s*\d+\s*\(\s*[A-Za-z0-9]+\s*\))",
+            r"(?i)(TABLE?\s*[:—–]?\s*[A-Za-z]\s*\d+\s*\(\s*[A-Za-z0-9]+\s*\))",
             s,
         )
         if m:
             mc = re.match(
-                r"(?i)Table\s+([A-Za-z])\s*(\d+)\s*\(\s*([A-Za-z0-9]+)\s*\)",
+                r"(?i)TABLE?\s*[:—–]?\s*([A-Za-z])\s*(\d+)\s*\(\s*([A-Za-z0-9]+)\s*\)",
                 m.group(1),
             )
             if mc:
@@ -308,59 +310,67 @@ def _parse_table_number_from_text(
                 g1s, g1e = m.span(1)
                 return canon, offset + g1s, offset + g1e
 
-        # P1: Appendix letter + digits with flexible spacing (Table B 1, Table C12)
-        m = re.match(r"(?i)(Table\s+[A-Za-z]\s*\d+)\b", s)
+        # Iteration 3: Appendix letter + digits with uppercase/punctuation support
+        # Match: Table B1, TABLE C12, Table: B 1, Table— C12
+        m = re.match(r"(?i)(TABLE?\s*[:—–]?\s*[A-Za-z]\s*\d+)\b", s)
         if m:
-            mc = re.match(r"(?i)Table\s+([A-Za-z])\s*(\d+)", m.group(1))
+            mc = re.match(r"(?i)TABLE?\s*[:—–]?\s*([A-Za-z])\s*(\d+)", m.group(1))
             if mc:
                 canon = f"{mc.group(1).upper()}{mc.group(2)}"
                 g1s, g1e = m.span(1)
                 return canon, offset + g1s, offset + g1e
 
-        m = re.match(r"(?i)(Table\s+(\d+(?:\s*[.,]\s*\d+)+))\b", s)
+        # Iteration 3: Numeric tables with uppercase/punctuation
+        # Match: Table 3.1, TABLE 3.1, Table: 3.1, Table— 3, 1
+        m = re.match(r"(?i)(TABLE?\s*[:—–]?\s*(\d+(?:\s*[.,]\s*\d+)+))\b", s)
         if m:
             canon = _normalize_numeric_table_id(m.group(2))
             g1s, g1e = m.span(1)
             return canon, offset + g1s, offset + g1e
 
-        m = re.match(r"(?i)(Table\s+(\d+))\b", s)
+        # Iteration 3: Plain integer with uppercase/punctuation
+        # Match: Table 41, TABLE 41, Table: 41
+        m = re.match(r"(?i)(TABLE?\s*[:—–]?\s*(\d+))\b", s)
         if m:
             g1s, g1e = m.span(1)
             return m.group(2), offset + g1s, offset + g1e
 
         return None
 
-    # P1: Improved appendix with parenthetical suffix (more spacing tolerance)
-    # Matches: Table D12(A), Table D 12 ( A ), Table B1(a)
+    # Iteration 3: Enhanced anywhere patterns with uppercase/punctuation support
+    # Matches: Table D12(A), TABLE D 12 ( A ), Table: B1(a), Table— D12(A)
     m = re.search(
-        r"(?i)\b(Table\s+[A-Za-z]\s*\d+\s*\(\s*[A-Za-z0-9]+\s*\))",
+        r"(?i)\b(TABLE?\s*[:—–]?\s*[A-Za-z]\s*\d+\s*\(\s*[A-Za-z0-9]+\s*\))",
         text,
     )
     if m:
         mc = re.match(
-            r"(?i)Table\s+([A-Za-z])\s*(\d+)\s*\(\s*([A-Za-z0-9]+)\s*\)",
+            r"(?i)TABLE?\s*[:—–]?\s*([A-Za-z])\s*(\d+)\s*\(\s*([A-Za-z0-9]+)\s*\)",
             m.group(1),
         )
         if mc:
             canon = f"{mc.group(1).upper()}{mc.group(2)}({mc.group(3).upper()})"
             return canon, m.start(1), m.end(1)
 
-    # P1: Appendix letter + digits with better spacing handling (Table C 1, Table B12)
-    m = re.search(r"(?i)\b(Table\s+[A-Za-z]\s*\d+)\b", text)
+    # Iteration 3: Appendix letter + digits with uppercase/punctuation
+    # Matches: Table C1, TABLE B12, Table: C 1, Table— B12
+    m = re.search(r"(?i)\b(TABLE?\s*[:—–]?\s*[A-Za-z]\s*\d+)\b", text)
     if m:
-        mc = re.match(r"(?i)Table\s+([A-Za-z])\s*(\d+)", m.group(1))
+        mc = re.match(r"(?i)TABLE?\s*[:—–]?\s*([A-Za-z])\s*(\d+)", m.group(1))
         if mc:
             canon = f"{mc.group(1).upper()}{mc.group(2)}"
             return canon, m.start(1), m.end(1)
 
-    # 3) Numeric with comma/dot/spacing between digit groups
-    m = re.search(r"(?i)\b(Table\s+(\d+(?:\s*[.,]\s*\d+)+))\b", text)
+    # Iteration 3: Numeric with comma/dot/spacing and uppercase/punctuation
+    # Matches: Table 3.1, TABLE 3.1, Table: 3, 1, Table— 3.1
+    m = re.search(r"(?i)\b(TABLE?\s*[:—–]?\s*(\d+(?:\s*[.,]\s*\d+)+))\b", text)
     if m:
         canon = _normalize_numeric_table_id(m.group(2))
         return canon, m.start(1), m.end(1)
 
-    # 4) Plain integer table number (Table 41)
-    m = re.search(r"(?i)\b(Table\s+(\d+))\b", text)
+    # Iteration 3: Plain integer with uppercase/punctuation
+    # Matches: Table 41, TABLE 41, Table: 41, Table— 41
+    m = re.search(r"(?i)\b(TABLE?\s*[:—–]?\s*(\d+))\b", text)
     if m:
         return m.group(2), m.start(1), m.end(1)
 
@@ -477,32 +487,34 @@ class TablePipeline:
         if q.semantic_hard_fail:
             return False
         if relax_for_hard_baseline:
-            if q.placeholder_ratio > 0.24:
+            # Iteration 3: Relaxed thresholds for hard baseline recovery
+            if q.placeholder_ratio > 0.28:  # Was 0.24
                 return False
-            if q.garbage_cell_ratio > 0.22:
+            if q.garbage_cell_ratio > 0.25:  # Was 0.22
                 return False
-            if q.symbol_junk_ratio > 0.22:
+            if q.symbol_junk_ratio > 0.25:  # Was 0.22
                 return False
-            if q.ocr_mojibake_ratio > 0.08:
+            if q.ocr_mojibake_ratio > 0.10:  # Was 0.08
                 return False
-            if q.header_corrupt_ratio > 0.45:
+            if q.header_corrupt_ratio > 0.50:  # Was 0.45
                 return False
-            if q.col_count >= 2 and q.fill_ratio >= 0.28:
+            if q.col_count >= 2 and q.fill_ratio >= 0.24:  # Was 0.28
                 return True
-            return q.score > -0.35
-        if q.placeholder_ratio > 0.18:
+            return q.score > -0.40  # Was -0.35
+        # Iteration 3: Relaxed standard thresholds
+        if q.placeholder_ratio > 0.22:  # Was 0.18
             return False
-        if q.garbage_cell_ratio > 0.14:
+        if q.garbage_cell_ratio > 0.17:  # Was 0.14
             return False
-        if q.symbol_junk_ratio > 0.14:
+        if q.symbol_junk_ratio > 0.17:  # Was 0.14
             return False
-        if q.ocr_mojibake_ratio > 0.045:
+        if q.ocr_mojibake_ratio > 0.055:  # Was 0.045
             return False
-        if q.header_corrupt_ratio > 0.28:
+        if q.header_corrupt_ratio > 0.32:  # Was 0.28
             return False
-        if q.col_count >= 5 and q.fill_ratio < 0.18:
+        if q.col_count >= 5 and q.fill_ratio < 0.15:  # Was 0.18
             return False
-        if q.fill_ratio < 0.12 and q.col_count >= 3:
+        if q.fill_ratio < 0.10 and q.col_count >= 3:  # Was 0.12
             return False
         return True
 
@@ -733,8 +745,8 @@ class TablePipeline:
         m = table.quality_metrics or {}
         col_count = int(m.get("col_count", 0))
         
-        # Iteration 1: Lowered threshold from 0.65 to 0.55 for better precision
-        if clause_score >= 0.55:
+        # Iteration 2: Relaxed threshold from 0.55 to 0.60 to improve recall (capture more valid tables)
+        if clause_score >= 0.60:
             logger.debug(
                 f"Table {table.table_id} rejected as clause-shaped content "
                 f"(clause_score={clause_score:.2f}, cols={col_count})"
@@ -896,35 +908,36 @@ class TablePipeline:
         notes = table.extraction_notes or []
         tabula_fusion = any("fusion_win:tabula" in (n or "") for n in notes)
 
-        if m.get("semantic_hard_fail") and sc < 0.38:
+        # Iteration 3: Relaxed thresholds for unnumbered fragments
+        if m.get("semantic_hard_fail") and sc < 0.32:  # Was 0.38
             return True
-        if sc < 0.1:
+        if sc < 0.08:  # Was 0.1
             return True
-        if sc < 0.26 and cols <= 3:
+        if sc < 0.22 and cols <= 3:  # Was 0.26
             return True
-        if sc < 0.22 and cols <= 4 and float(m.get("garbage_cell_ratio", 0)) > 0.09:
+        if sc < 0.18 and cols <= 4 and float(m.get("garbage_cell_ratio", 0)) > 0.09:  # Was 0.22
             return True
         # Tiny noisy header + almost no body (e.g. page-160 style)
-        if cols <= 2 and dr <= 1 and nr > 0.42:
+        if cols <= 2 and dr <= 1 and nr > 0.48:  # Was 0.42
             return True
-        if cols <= 2 and dr <= 2 and sc < 0.48 and nr > 0.35:
+        if cols <= 2 and dr <= 2 and sc < 0.42 and nr > 0.38:  # Was 0.48 and 0.35
             return True
         # Narrow but long grids are often real (lookup / numeric tables); only omit extreme junk.
-        if tabula_fusion and cols <= 2 and dr >= 28 and sc < 0.28:
+        if tabula_fusion and cols <= 2 and dr >= 28 and sc < 0.24:  # Was 0.28
             return True
-        if cols <= 2 and dr >= 24 and sc < 0.58:
+        if cols <= 2 and dr >= 24 and sc < 0.52:  # Was 0.58
             return True
-        if cols <= 2 and sj > 0.018 and sc < 0.82:
+        if cols <= 2 and sj > 0.022 and sc < 0.78:  # Was 0.018 and 0.82
             return True
-        if ocr_m > 0.04:
+        if ocr_m > 0.05:  # Was 0.04
             return True
-        if cols <= 3 and dr <= 2 and sc < 0.5 and nr > 0.38:
+        if cols <= 3 and dr <= 2 and sc < 0.45 and nr > 0.42:  # Was 0.5 and 0.38
             return True
         # Unnumbered 1-row / near-empty grids: almost always PDF noise or mis-split fragments
         if not table.table_number and dr == 0:
             return True
         if not table.table_number and dr == 1 and cols <= 8:
-            if sc < 0.74 or nr > 0.15 or cols <= 6 or ocr_m > 0.018:
+            if sc < 0.68 or nr > 0.18 or cols <= 6 or ocr_m > 0.022:  # Was 0.74, 0.15, and 0.018
                 return True
         return False
 
@@ -2972,17 +2985,29 @@ class TablePipeline:
     def _should_trigger_image_recovery(
         self, raw: _RawTable, table: Table, q: _QualityComponents
     ) -> bool:
+        """Iteration 3: More aggressive OCR triggering for image-based tables."""
         if raw.page_start != raw.page_end:
             return False
         col_count, row_count, multiline_ratio = self._table_shape_metrics(table)
         conf = str(table.confidence).lower()
-        if q.score < 0.48 and row_count >= 2:
+        
+        # Iteration 3: Lowered thresholds to trigger OCR more readily
+        if q.score < 0.55 and row_count >= 2:  # Was 0.48
             return True
-        if conf in {"low", "medium"} and row_count >= 2 and q.score < 0.55:
+        if conf in {"low", "medium"} and row_count >= 2 and q.score < 0.62:  # Was 0.55
             return True
-        if col_count <= 2 and multiline_ratio > 0.32:
+        if col_count <= 2 and multiline_ratio > 0.28:  # Was 0.32
             return True
         if col_count == 1 and table.table_number is not None and row_count >= 3:
+            return True
+        # Iteration 3: Trigger OCR for tables with very few rows (likely incomplete extraction)
+        if row_count <= 2 and table.table_number is not None:
+            return True
+        # Iteration 3: Trigger OCR for tables with high noise ratio
+        if q.noise_ratio > 0.25 and row_count >= 2:
+            return True
+        # Iteration 3: Trigger OCR for tables with low fill ratio
+        if q.fill_ratio < 0.30 and row_count >= 2 and col_count >= 2:
             return True
         return False
 
@@ -3006,49 +3031,136 @@ class TablePipeline:
         return False
 
     def _recover_table_from_image(self, source_pdf_path: str, raw: _RawTable) -> Optional[_RawTable]:
+        """Iteration 3: Enhanced OCR with multiple PSM modes and higher resolution."""
         try:
             import pdfplumber
             import pytesseract
         except Exception:
             return None
-        try:
-            with pdfplumber.open(source_pdf_path) as pdf:
-                page = pdf.pages[raw.page_start - 1]
-                crop = page.crop(raw.bbox)
-                img = crop.to_image(resolution=250).original
-                ocr_text = pytesseract.image_to_string(img, config="--psm 6")
-        except Exception:
-            return None
-        rows = self._rows_from_ocr_text(ocr_text)
-        norm_rows = self._normalize_rows(rows)  # type: ignore[arg-type]
-        if len(norm_rows) < 2:
-            return None
-        return _RawTable(
-            page_start=raw.page_start,
-            page_end=raw.page_end,
-            bbox=raw.bbox,
-            rows=norm_rows,
-            table_number=raw.table_number,
-            title=raw.title,
-            source_method=f"{raw.source_method}+image_ocr",
-            continuation_caption=raw.continuation_caption,
-        )
+        
+        # Iteration 3: Try multiple Tesseract PSM (Page Segmentation Mode) strategies
+        psm_modes = [
+            ("6", "Assume uniform text block"),  # Original default
+            ("4", "Assume single column of variable sizes"),
+            ("3", "Fully automatic page segmentation"),
+            ("1", "Automatic with OSD (Orientation and Script Detection)"),
+        ]
+        
+        best_result = None
+        best_score = 0
+        
+        for psm, description in psm_modes:
+            try:
+                with pdfplumber.open(source_pdf_path) as pdf:
+                    page = pdf.pages[raw.page_start - 1]
+                    crop = page.crop(raw.bbox)
+                    # Iteration 3: Increased resolution from 250 to 300 for better OCR quality
+                    img = crop.to_image(resolution=300).original
+                    ocr_text = pytesseract.image_to_string(img, config=f"--psm {psm}")
+            except Exception as e:
+                logger.debug(f"OCR failed with PSM {psm}: {e}")
+                continue
+            
+            rows = self._rows_from_ocr_text(ocr_text)
+            norm_rows = self._normalize_rows(rows)  # type: ignore[arg-type]
+            
+            if len(norm_rows) < 2:
+                continue
+            
+            # Score this OCR result based on row count, column consistency, and content quality
+            score = self._score_ocr_result(norm_rows)
+            
+            if score > best_score:
+                best_score = score
+                best_result = _RawTable(
+                    page_start=raw.page_start,
+                    page_end=raw.page_end,
+                    bbox=raw.bbox,
+                    rows=norm_rows,
+                    table_number=raw.table_number,
+                    title=raw.title,
+                    source_method=f"{raw.source_method}+image_ocr_psm{psm}",
+                    continuation_caption=raw.continuation_caption,
+                )
+                logger.debug(
+                    f"OCR PSM {psm} ({description}): {len(norm_rows)} rows, score={score:.2f}"
+                )
+        
+        return best_result
+    
+    def _score_ocr_result(self, rows: List[List[str]]) -> float:
+        """Iteration 3: Score OCR results to pick the best PSM mode."""
+        if not rows:
+            return 0.0
+        
+        score = 0.0
+        
+        # More rows is better (up to a point)
+        row_count = len(rows)
+        score += min(20, row_count) * 0.5
+        
+        # Column consistency is good (all rows have similar column counts)
+        col_counts = [len(r) for r in rows]
+        if col_counts:
+            avg_cols = sum(col_counts) / len(col_counts)
+            col_variance = sum((c - avg_cols) ** 2 for c in col_counts) / len(col_counts)
+            if col_variance < 2.0:  # Low variance means consistent structure
+                score += 5.0
+            elif col_variance < 5.0:
+                score += 2.0
+        
+        # Non-empty cells are good
+        all_cells = [cell for row in rows for cell in row]
+        non_empty = sum(1 for c in all_cells if c.strip())
+        if all_cells:
+            fill_ratio = non_empty / len(all_cells)
+            score += fill_ratio * 10.0
+        
+        # Penalize noise artifacts
+        noise_count = sum(1 for row in rows if self._row_is_noise_artifact(row))
+        noise_ratio = noise_count / len(rows) if rows else 0
+        score -= noise_ratio * 8.0
+        
+        return max(0.0, score)
 
     def _rows_from_ocr_text(self, text: str) -> List[List[str]]:
+        """Iteration 3: Enhanced OCR text parsing with better delimiter detection."""
         rows: List[List[str]] = []
         if not text:
             return rows
+        
         for line in text.splitlines():
             s = line.strip()
             if not s:
                 continue
+            
+            # Iteration 3: Try multiple splitting strategies
+            # Strategy 1: Split on multiple spaces (2+)
             cells = [
                 self._normalize_scalar_to_str(c)
                 for c in re.split(r"\s{2,}", s)
                 if c.strip()
             ]
+            
+            # Strategy 2: If single column detected, try tab splitting
+            if len(cells) == 1 and "\t" in s:
+                cells = [
+                    self._normalize_scalar_to_str(c)
+                    for c in s.split("\t")
+                    if c.strip()
+                ]
+            
+            # Strategy 3: If still single column, try pipe delimiter
+            if len(cells) == 1 and "|" in s:
+                cells = [
+                    self._normalize_scalar_to_str(c)
+                    for c in s.split("|")
+                    if c.strip()
+                ]
+            
             if cells and not self._row_is_noise_artifact(cells):
                 rows.append(cells)
+        
         return rows
 
     def _csv(self, rows: List[TableRow]) -> Optional[str]:
