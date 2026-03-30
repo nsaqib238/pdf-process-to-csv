@@ -1735,23 +1735,56 @@ class TablePipeline:
 
         # AI-powered table discovery (if enabled)
         if self._ai_service and self._ai_service.discovery_enabled:
-            logger.info("Running AI table discovery with weak table detection...")
+            # Get AI discovery mode from settings
+            ai_mode = getattr(self.settings, "ai_discovery_mode", "weak_signals").lower()
+            logger.info("Running AI table discovery (mode: %s)...", ai_mode)
             ai_discovered_count = 0
             
-            # Detect pages with weak table signals that need AI analysis
-            pages_needing_ai = self._detect_weak_table_pages(out, source_pdf_path, last_page)
-            
-            if pages_needing_ai:
+            # Determine pages to analyze based on mode
+            if ai_mode == "comprehensive":
+                # Analyze ALL pages
+                pages_needing_ai = set(range(1, last_page + 1))
                 logger.info(
-                    "Weak table detection identified %d pages needing AI analysis: %s",
-                    len(pages_needing_ai),
-                    sorted(pages_needing_ai)
+                    "Comprehensive mode: analyzing ALL %d pages with AI vision",
+                    len(pages_needing_ai)
                 )
-            else:
-                logger.info("No weak table signals detected - skipping AI discovery")
+                max_cost = float(getattr(self.settings, "ai_comprehensive_max_cost", 2.0))
+                logger.info("Cost limit: $%.2f", max_cost)
+            
+            elif ai_mode == "balanced":
+                # Enhanced weak signals (future: add keyword matching, gap analysis)
+                # For now, same as weak_signals but could be expanded
+                pages_needing_ai = self._detect_weak_table_pages(out, source_pdf_path, last_page)
+                logger.info(
+                    "Balanced mode: analyzing %d pages with weak signals (expandable)",
+                    len(pages_needing_ai)
+                )
+            
+            else:  # "weak_signals" (default)
+                # Only pages with detected problems
+                pages_needing_ai = self._detect_weak_table_pages(out, source_pdf_path, last_page)
+                if pages_needing_ai:
+                    logger.info(
+                        "Weak signals mode: %d pages need AI analysis: %s",
+                        len(pages_needing_ai),
+                        sorted(list(pages_needing_ai))[:10]  # Show first 10
+                    )
+                else:
+                    logger.info("Weak signals mode: No weak table signals detected - skipping AI discovery")
             
             with pdfplumber.open(source_pdf_path) as pdf:
-                for page_num in pages_needing_ai:
+                for page_num in sorted(pages_needing_ai):
+                    # Check cost limit for comprehensive mode
+                    if ai_mode == "comprehensive":
+                        current_cost = getattr(self._ai_service.metrics, 'total_cost_usd', 0.0)
+                        max_cost = float(getattr(self.settings, "ai_comprehensive_max_cost", 2.0))
+                        if current_cost >= max_cost:
+                            logger.warning(
+                                "AI cost limit reached ($%.2f / $%.2f). Stopping AI discovery at page %d.",
+                                current_cost, max_cost, page_num
+                            )
+                            break
+                    
                     page = pdf.pages[page_num - 1]
                     
                     # Get existing table bboxes on this page to avoid duplicates
@@ -1811,7 +1844,20 @@ class TablePipeline:
                         except Exception as e:
                             logger.debug("AI region extraction failed page %s: %s", page_num, e)
             
-            logger.info("AI discovery found %d additional tables from %d pages", ai_discovered_count, len(pages_needing_ai))
+            # Log final summary
+            final_cost = getattr(self._ai_service.metrics, 'total_cost_usd', 0.0)
+            logger.info(
+                "AI discovery complete: %d tables found from %d pages analyzed (cost: $%.4f)",
+                ai_discovered_count, len(pages_needing_ai), final_cost
+            )
+            
+            # Provide recommendations based on mode and results
+            if ai_mode == "weak_signals" and ai_discovered_count < 5:
+                logger.info(
+                    "💡 Tip: For better coverage, try AI_DISCOVERY_MODE=comprehensive "
+                    "(~$%.2f for %d pages, expect +15-20 tables)",
+                    last_page * 0.007, last_page
+                )
 
         if not out:
             logger.warning("No tables extracted by pdfplumber (incl. loose pass / page sweep)")

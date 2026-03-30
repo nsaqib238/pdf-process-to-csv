@@ -87,6 +87,13 @@ class Settings(BaseSettings):
     ai_discovery_confidence_threshold: float = 0.7
     ai_validation_quality_threshold: float = 0.6
     
+    # AI Discovery Mode
+    # - "weak_signals": Only pages with problems (conservative, ~2-5% of pages, low cost)
+    # - "comprehensive": All pages (expensive, ~$0.007/page, maximum coverage)
+    # - "balanced": Enhanced weak signals + gap analysis (recommended, medium cost)
+    ai_discovery_mode: str = "weak_signals"
+    ai_comprehensive_max_cost: float = 2.0  # USD, cost limit for comprehensive mode
+    
     # Cost tracking
     ai_log_token_usage: bool = True
     ai_alert_cost_threshold: float = 5.0  # USD per job
