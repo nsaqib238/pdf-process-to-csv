@@ -1,8 +1,8 @@
 [
   {
-    "table_id": "table_e405250e",
+    "table_id": "table_a3bac74a",
     "table_number": "3.2",
-    "title": "Limiting temperatures for insulated cables table",
+    "title": "Limiting temperatures for insulated cables based on type of cable insulation",
     "parent_clause_reference": null,
     "page_start": 6,
     "page_end": 6,
@@ -66,11 +66,13 @@
     ],
     "footer_notes": [],
     "raw_csv": "> Type of cable insulation<1,\"Operating temperature of conductor, •c | Normal use<2>\",\"Operating temperature of conductor, •c | Maximum permissiblel 7>\",\"Operating temperature of conductor, •c | Minimum ambient 13>\"\r\n\"Thermoplastic'4J V-75 HFl-75-TP, TPE-75 V-90 HFl-90-TP, TP-90 V-90HT\",75 75 75 75 75,75 75 90 90 105,0 - 20 0 - 20 0\r\n\"Elastomeric R-EP-90 R-CPE-90, R-HF-90, R-CSP-90 R-HF- 110, R-E-110 R-S-150\",90 90 110 150,90 90 110 150,- 40 - 20 • - 50\r\n\"Cross-linked polyethylene X-90, X-90UV, X-HF-90 X-HF-110\",90 110,90 110,• •\r\nMIMS<5>,100,250,(6)\r\n\"Other types PE, LLDPE\",70,70,•\r\n",
-    "normalized_text_representation": "TABLE 3.2\nTITLE: Limiting temperatures for insulated cables table\nCOLUMNS: > Type of cable insulation<1 | Operating temperature of conductor, •c | Normal use<2> | Operating temperature of conductor, •c | Maximum permissiblel 7> | Operating temperature of conductor, •c | Minimum ambient 13>\nROW 1: Thermoplastic'4J V-75 HFl-75-TP, TPE-75 V-90 HFl-90-TP, TP-90 V-90HT | 75 75 75 75 75 | 75 75 90 90 105 | 0 - 20 0 - 20 0\nROW 2: Elastomeric R-EP-90 R-CPE-90, R-HF-90, R-CSP-90 R-HF- 110, R-E-110 R-S-150 | 90 90 110 150 | 90 90 110 150 | - 40 - 20 • - 50\nROW 3: Cross-linked polyethylene X-90, X-90UV, X-HF-90 X-HF-110 | 90 110 | 90 110 | • •\nROW 4: MIMS<5> | 100 | 250 | (6)\nROW 5: Other types PE, LLDPE | 70 | 70 | •",
+    "normalized_text_representation": "TABLE 3.2\nTITLE: Limiting temperatures for insulated cables based on type of cable insulation\nCOLUMNS: > Type of cable insulation<1 | Operating temperature of conductor, •c | Normal use<2> | Operating temperature of conductor, •c | Maximum permissiblel 7> | Operating temperature of conductor, •c | Minimum ambient 13>\nROW 1: Thermoplastic'4J V-75 HFl-75-TP, TPE-75 V-90 HFl-90-TP, TP-90 V-90HT | 75 75 75 75 75 | 75 75 90 90 105 | 0 - 20 0 - 20 0\nROW 2: Elastomeric R-EP-90 R-CPE-90, R-HF-90, R-CSP-90 R-HF- 110, R-E-110 R-S-150 | 90 90 110 150 | 90 90 110 150 | - 40 - 20 • - 50\nROW 3: Cross-linked polyethylene X-90, X-90UV, X-HF-90 X-HF-110 | 90 110 | 90 110 | • •\nROW 4: MIMS<5> | 100 | 250 | (6)\nROW 5: Other types PE, LLDPE | 70 | 70 | •",
     "confidence": "medium",
     "source_method": "camelot:lattice",
     "extraction_notes": [
-      "fusion_win:camelot:lattice"
+      "fusion_win:camelot:lattice",
+      "ai_validation_passed",
+      "ai_suggested_corrections:2"
     ],
     "table_key": "3.2:c7b751666a38753c",
     "continuation_of": null,
@@ -278,7 +280,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_8adfebce",
+    "table_id": "table_53d14a9a",
     "table_number": "3.5",
     "title": "Underground wiring system categories table",
     "parent_clause_reference": null,
@@ -566,7 +568,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_7df12eb9",
+    "table_id": "table_a202e68c",
     "table_number": null,
     "title": null,
     "parent_clause_reference": null,
@@ -902,7 +904,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_d09827d8",
+    "table_id": "table_8e1661db",
     "table_number": "3.9",
     "title": "Aerial conductor maximum spans table",
     "parent_clause_reference": null,
@@ -1190,7 +1192,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_f502b951",
+    "table_id": "table_3606e8eb",
     "table_number": "E8",
     "title": ".1",
     "parent_clause_reference": null,
@@ -1742,7 +1744,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_53ca3361",
+    "table_id": "table_26bb2269",
     "table_number": "C3",
     "title": null,
     "parent_clause_reference": null,
@@ -1930,7 +1932,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_cc73ebcf",
+    "table_id": "table_7787c133",
     "table_number": null,
     "title": null,
     "parent_clause_reference": null,
@@ -2162,7 +2164,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_2501f6ed",
+    "table_id": "table_f9612c46",
     "table_number": "C10",
     "title": "CJ)",
     "parent_clause_reference": null,
@@ -2374,7 +2376,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_4feac7c5",
+    "table_id": "table_30d8c47b",
     "table_number": "C11",
     "title": null,
     "parent_clause_reference": null,
@@ -3460,7 +3462,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_08312265",
+    "table_id": "table_d1f24c42",
     "table_number": "C12",
     "title": "CJ)",
     "parent_clause_reference": null,
@@ -3660,7 +3662,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_769cc6a4",
+    "table_id": "table_f2a050e7",
     "table_number": "D1",
     "title": null,
     "parent_clause_reference": null,
@@ -4148,7 +4150,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_b48e1e44",
+    "table_id": "table_52e3ad00",
     "table_number": "D2",
     "title": null,
     "parent_clause_reference": null,
@@ -4496,7 +4498,7 @@
     ]
   },
   {
-    "table_id": "table_ec1251ec",
+    "table_id": "table_2edd8225",
     "table_number": "D3",
     "title": null,
     "parent_clause_reference": null,
@@ -5618,7 +5620,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_20c80ef7",
+    "table_id": "table_2017ea9d",
     "table_number": "D4",
     "title": null,
     "parent_clause_reference": null,
@@ -6382,7 +6384,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_a89e0d8b",
+    "table_id": "table_4a91dd43",
     "table_number": "D11",
     "title": "CJ)",
     "parent_clause_reference": null,
@@ -8962,7 +8964,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_3e6b8dec",
+    "table_id": "table_0e769a51",
     "table_number": null,
     "title": null,
     "parent_clause_reference": null,
@@ -9752,7 +9754,7 @@
     ]
   },
   {
-    "table_id": "table_88acb354",
+    "table_id": "table_03df86ab",
     "table_number": "E11",
     "title": null,
     "parent_clause_reference": null,
@@ -10178,7 +10180,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_4da6c82e",
+    "table_id": "table_b9d08358",
     "table_number": "K1",
     "title": null,
     "parent_clause_reference": null,
@@ -10485,7 +10487,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_37621000",
+    "table_id": "table_ad93227d",
     "table_number": "E104",
     "title": ".101 of AS/NZS 61439.2:2016)",
     "parent_clause_reference": null,
