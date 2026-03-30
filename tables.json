@@ -1,6 +1,6 @@
 [
   {
-    "table_id": "table_93aa837b",
+    "table_id": "table_74a7e6cf",
     "table_number": null,
     "title": null,
     "parent_clause_reference": null,
@@ -336,7 +336,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_6d691ec0",
+    "table_id": "table_40e14673",
     "table_number": "3.9",
     "title": "Aerial conductor maximum spans table",
     "parent_clause_reference": null,
@@ -624,237 +624,9 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_f933ef4c",
-    "table_number": "TABLE 4.3",
-    "title": "Guide to recessed luminaire classification, application and general restrictions on use",
-    "parent_clause_reference": null,
-    "page_start": 41,
-    "page_end": 44,
-    "header_rows": [
-      {
-        "cells": [
-          "Abuttedt 1>_No_No | Abutted!''_Yes",
-          "Normal uset 2>- covered_No_No | Normal use<2>- covered_No",
-          "Use with insulationt 3l_No_Yes | Use with insulation!3l_Yes",
-          "Accessibility to high temperature partsl•l_Fully_accessible_Fully_accessible | Accessibility to high temperature parts<•> | Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to side and top of luminaire",
-          "Surface of luminaire normal operating temperature limit | No limit on side or top surface of luminaire Mounting surface of luminaire limited to 90°C | No limit on side or top surface of luminaire Mounting surface of luminaire limited lo 90°C | 90°C limit on side or top or mounting surface of luminaire"
-        ],
-        "is_header": true
-      }
-    ],
-    "data_rows": [],
-    "footer_notes": [],
-    "raw_csv": "Abuttedt 1> No No | Abutted!'' Yes - Yes,Categories - Yes,Categories - No,Categories - Yes,Categories - No\r\n",
-    "normalized_text_representation": "TABLE TABLE 4.3\nTITLE: Guide to recessed luminaire classification, application and general restrictions on use\nCOLUMNS: Abuttedt 1> No No | Abutted!'' Yes - Yes | Categories - Yes | Categories - No | Categories - Yes | Categories - No",
-    "confidence": "medium",
-    "source_method": "ai_discovery+pdfplumber",
-    "extraction_notes": [],
-    "table_key": "TABLE 4.3:fed87141ea8af2ca",
-    "continuation_of": null,
-    "quality_metrics": {
-      "fill_ratio": 1.0,
-      "col_count": 5,
-      "data_row_count": 2,
-      "noise_ratio": 0.4667,
-      "multiline_ratio": 0.2667,
-      "diversity": 0.6667,
-      "placeholder_ratio": 0.0,
-      "garbage_cell_ratio": 0.0,
-      "symbol_junk_ratio": 0.0,
-      "ocr_mojibake_ratio": 0.0,
-      "header_corrupt_ratio": 0.0,
-      "data_row_repeat_ratio": 0.0,
-      "semantic_hard_fail": false,
-      "unified_score": 0.43,
-      "penalty": 0.57,
-      "one_column_value_list": false,
-      "partial_fragment": true
-    },
-    "has_headers": true,
-    "is_multipage": true,
-    "has_merged_cells": true,
-    "reconstructed_header_rows": [
-      {
-        "cells": [
-          "Abuttedt 1> No No | Abutted!'' Yes",
-          "Normal uset 2>- covered No No | Normal use<2>- covered No",
-          "Use with insulationt 3l No Yes | Use with insulation!3l Yes",
-          "Accessibility to high temperature partsl• Fully accessible Fully accessible | Accessibility to high temperature parts<•> | Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to side and top of luminaire",
-          "Surface of luminaire normal operating temperature limit | No limit on side or top surface of luminaire Mounting surface of luminaire limited to 90°C | No limit on side or top surface of luminaire Mounting surface of luminaire limited lo 90°C | 90°C limit on side or top or mounting surface of luminaire"
-        ],
-        "is_header": true
-      },
-      {
-        "cells": [
-          "Yes",
-          "Yes",
-          "Yes",
-          "Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to sides and top of luminaire",
-          "limit on side or top or mounting surface of luminaire"
-        ],
-        "is_header": true
-      },
-      {
-        "cells": [
-          "Yes",
-          "Yes",
-          "Yes",
-          "Restricted access In this Standard, this is assessed for access to high temperature parts by use of a IP4X- 1 mm probe to sides and top and front face of luminaire",
-          "90°C limit on side or top or mounting surface of luminaire"
-        ],
-        "is_header": true
-      }
-    ],
-    "promoted_header_rows": [
-      {
-        "cells": [
-          "Yes",
-          "Yes",
-          "Yes",
-          "Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to sides and top of luminaire",
-          "go•c limit on side or top or mounting surface of luminaire"
-        ],
-        "is_header": true
-      },
-      {
-        "cells": [
-          "Yes",
-          "Yes",
-          "Yes",
-          "Restricted access In this Standard, this is assessed for access to high temperature parts by use of a IP4X- 1 mm probe to sides and top and front face of luminaire",
-          "90°C limit on side or top or mounting surface of luminaire"
-        ],
-        "is_header": true
-      }
-    ],
-    "final_columns": [
-      "Abuttedt 1> No No | Abutted!'' Yes - Yes",
-      "Categories - Yes",
-      "Categories - No",
-      "Categories - Yes",
-      "Categories - No"
-    ],
-    "header_model": {
-      "table_type": "matrix",
-      "stub_column_index": 0,
-      "raw_header_row_count": 1,
-      "reconstructed_header_row_count": 3,
-      "final_column_count": 5,
-      "header_tree": [
-        {
-          "name": "Abuttedt 1> No No | Abutted!'' Yes - Yes",
-          "children": []
-        },
-        {
-          "name": "Categories",
-          "children": [
-            "Yes",
-            "No"
-          ]
-        },
-        {
-          "name": "Categories",
-          "children": [
-            "Yes",
-            "No"
-          ]
-        },
-        {
-          "name": "Accessibility to high temperature partsl• Fully accessible Fully accessible | Accessibility to high temperature parts<•> | Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to side and top of luminaire - Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to sides and top of luminaire - Restricted access In this Standard, this is assessed for access to high temperature parts by use of a IP4X- 1 mm probe to sides and top and front face of luminaire",
-          "children": []
-        },
-        {
-          "name": "Surface of luminaire normal operating temperature limit | No limit on side or top surface of luminaire Mounting surface of luminaire limited to 90°C | No limit on side or top surface of luminaire Mounting surface of luminaire limited lo 90°C | 90°C limit on side or top or mounting surface of luminaire - limit on side or top or mounting surface of luminaire - 90°C limit on side or top or mounting surface of luminaire",
-          "children": []
-        }
-      ],
-      "row_debug": [
-        {
-          "source": "header_rows",
-          "row_index": 0,
-          "cells": [
-            "Abuttedt 1> No No | Abutted!'' Yes",
-            "Normal uset 2>- covered No No | Normal use<2>- covered No",
-            "Use with insulationt 3l No Yes | Use with insulation!3l Yes",
-            "Accessibility to high temperature partsl•l Fully accessible Fully accessible | Accessibility to high temperature parts<•> | Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to side and top of luminaire",
-            "Surface of luminaire normal operating temperature limit | No limit on side or top surface of luminaire Mounting surface of luminaire limited to 90°C | No limit on side or top surface of luminaire Mounting surface of luminaire limited lo 90°C | 90°C limit on side or top or mounting surface of luminaire"
-          ],
-          "analysis": {
-            "score": 0.5411,
-            "text_ratio": 0.9421,
-            "numeric_ratio": 0.0579,
-            "header_hint_hits": 18,
-            "unit_hits": 2,
-            "category_hits": 11,
-            "multiline_ratio": 0.0,
-            "junk_hits": 4
-          }
-        },
-        {
-          "source": "data_rows",
-          "row_index": 0,
-          "cells": [
-            "Yes",
-            "Yes",
-            "Yes",
-            "Limited access In this Standard, this is assessed for access to high temperature parts by use of a 5.6 mm probe to sides and top of luminaire",
-            "go•c limit on side or top or mounting surface of luminaire"
-          ],
-          "analysis": {
-            "score": 0.6578,
-            "text_ratio": 0.9756,
-            "numeric_ratio": 0.0244,
-            "header_hint_hits": 4,
-            "unit_hits": 2,
-            "category_hits": 3,
-            "multiline_ratio": 0.0,
-            "junk_hits": 1
-          },
-          "max_header_similarity": 0.5577
-        },
-        {
-          "source": "data_rows",
-          "row_index": 1,
-          "cells": [
-            "Yes",
-            "Yes",
-            "Yes",
-            "Restricted access In this Standard, this is assessed for access to high temperature parts by use of a IP4X- 1 mm probe to sides and top and front face of luminaire",
-            "90°C limit on side or top or mounting surface of luminaire"
-          ],
-          "analysis": {
-            "score": 0.6478,
-            "text_ratio": 0.9556,
-            "numeric_ratio": 0.0444,
-            "header_hint_hits": 4,
-            "unit_hits": 2,
-            "category_hits": 3,
-            "multiline_ratio": 0.0,
-            "junk_hits": 1
-          },
-          "max_header_similarity": 0.7568
-        }
-      ],
-      "clean_debug": {
-        "total_cells": 15,
-        "changed_cells": 2
-      },
-      "body_debug": {
-        "removed_header_like_body_rows": [],
-        "remaining_data_rows": 0
-      }
-    },
-    "reconstruction_confidence": "medium",
-    "reconstruction_notes": [
-      "Detected 2 possible repeated header-like body rows (see promoted_header_rows).",
-      "Cleaned 2 header cells.",
-      "Flattened header names truncated to match table column width."
-    ]
-  },
-  {
-    "table_id": "table_eaff0611",
+    "table_id": "table_45ee9e47",
     "table_number": "TABLE 8.1",
-    "title": "Maximum values of earth fault-loop impedance for the total circuit including the supply transformer.",
+    "title": "Maximum values of earth fault-loop impedance for the total circuit including the supply transformer values relating to operation of protective devices on the final subcircuit.",
     "parent_clause_reference": null,
     "page_start": 86,
     "page_end": 86,
@@ -1007,7 +779,7 @@
     ],
     "footer_notes": [],
     "raw_csv": "device rating Amps Amps Amps (6) (10),device rating Amps Amps Amps (9.6) (5.8),device rating Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (5.1) (3.1),Disconnecti on times Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (3.1) (1.8),Disconnecti on times Amps | 0. 4 s | Maximum earth fault-loop impedance Zs n (11.5) (6.4),Disconnecti on times Amps Ss | Maximum earth fault-loop impedance Zs n (15.3) (9.2)\r\n16,3.6,1.9,1.2,3. 1,5.0\r\n20,2.9,1.5,0.9,2. 1,3.6\r\n25,2.3,1.2,0.7,1.6,2.7\r\n32,1.8,1.0,0.6,1.3,2.2\r\n40,1.4,0.8,0.5,1.0,1.6\r\n50,1.2,0.6,0.4,0.7,1.3\r\n63,0.9,0.5,0.3,0.6,0.9\r\n80,0.7,0.4,0.2,0.4,0.7\r\n100,0.6,0.3,0.2,0.3,0.5\r\n125,0.5,0.2,0.1,0.2,0.4\r\n160,0.4,0.2,0.1,0.2,0.3\r\n200,0.3,0.2,0.1,0. 1,0.2\r\n",
-    "normalized_text_representation": "TABLE TABLE 8.1\nTITLE: Maximum values of earth fault-loop impedance for the total circuit including the supply transformer.\nCOLUMNS: device rating Amps Amps Amps (6) (10) | device rating Amps Amps Amps (9.6) (5.8) | device rating Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (5.1) (3.1) | Disconnecti on times Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (3.1) (1.8) | Disconnecti on times Amps | 0. 4 s | Maximum earth fault-loop impedance Zs n (11.5) (6.4) | Disconnecti on times Amps Ss | Maximum earth fault-loop impedance Zs n (15.3) (9.2)\nROW 1: 16 | 3.6 | 1.9 | 1.2 | 3. 1 | 5.0\nROW 2: 20 | 2.9 | 1.5 | 0.9 | 2. 1 | 3.6\nROW 3: 25 | 2.3 | 1.2 | 0.7 | 1.6 | 2.7\nROW 4: 32 | 1.8 | 1.0 | 0.6 | 1.3 | 2.2\nROW 5: 40 | 1.4 | 0.8 | 0.5 | 1.0 | 1.6\nROW 6: 50 | 1.2 | 0.6 | 0.4 | 0.7 | 1.3\nROW 7: 63 | 0.9 | 0.5 | 0.3 | 0.6 | 0.9\nROW 8: 80 | 0.7 | 0.4 | 0.2 | 0.4 | 0.7\nROW 9: 100 | 0.6 | 0.3 | 0.2 | 0.3 | 0.5\nROW 10: 125 | 0.5 | 0.2 | 0.1 | 0.2 | 0.4\nROW 11: 160 | 0.4 | 0.2 | 0.1 | 0.2 | 0.3\nROW 12: 200 | 0.3 | 0.2 | 0.1 | 0. 1 | 0.2",
+    "normalized_text_representation": "TABLE TABLE 8.1\nTITLE: Maximum values of earth fault-loop impedance for the total circuit including the supply transformer values relating to operation of protective devices on the final subcircuit.\nCOLUMNS: device rating Amps Amps Amps (6) (10) | device rating Amps Amps Amps (9.6) (5.8) | device rating Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (5.1) (3.1) | Disconnecti on times Amps | 0.4 s | Maximum earth fault-loop impedance Zs n (3.1) (1.8) | Disconnecti on times Amps | 0. 4 s | Maximum earth fault-loop impedance Zs n (11.5) (6.4) | Disconnecti on times Amps Ss | Maximum earth fault-loop impedance Zs n (15.3) (9.2)\nROW 1: 16 | 3.6 | 1.9 | 1.2 | 3. 1 | 5.0\nROW 2: 20 | 2.9 | 1.5 | 0.9 | 2. 1 | 3.6\nROW 3: 25 | 2.3 | 1.2 | 0.7 | 1.6 | 2.7\nROW 4: 32 | 1.8 | 1.0 | 0.6 | 1.3 | 2.2\nROW 5: 40 | 1.4 | 0.8 | 0.5 | 1.0 | 1.6\nROW 6: 50 | 1.2 | 0.6 | 0.4 | 0.7 | 1.3\nROW 7: 63 | 0.9 | 0.5 | 0.3 | 0.6 | 0.9\nROW 8: 80 | 0.7 | 0.4 | 0.2 | 0.4 | 0.7\nROW 9: 100 | 0.6 | 0.3 | 0.2 | 0.3 | 0.5\nROW 10: 125 | 0.5 | 0.2 | 0.1 | 0.2 | 0.4\nROW 11: 160 | 0.4 | 0.2 | 0.1 | 0.2 | 0.3\nROW 12: 200 | 0.3 | 0.2 | 0.1 | 0. 1 | 0.2",
     "confidence": "high",
     "source_method": "camelot:stream",
     "extraction_notes": [
@@ -1404,7 +1176,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_52f1b646",
+    "table_id": "table_9d15748c",
     "table_number": "C1",
     "title": "provides an allocation of load for different types of equipment",
     "parent_clause_reference": null,
@@ -1690,7 +1462,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_2ca87642",
+    "table_id": "table_6494b569",
     "table_number": "C3",
     "title": null,
     "parent_clause_reference": null,
@@ -1878,9 +1650,9 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_7165109d",
-    "table_number": "TABLE C8",
-    "title": "Voltage drop simplified method table showing cable conductor sizes and corresponding amperage for single-phase and three-phase circuits.",
+    "table_id": "table_09ea2074",
+    "table_number": null,
+    "title": null,
     "parent_clause_reference": null,
     "page_start": 107,
     "page_end": 107,
@@ -1930,13 +1702,13 @@
     ],
     "footer_notes": [],
     "raw_csv": "2.5 mm 2 | 4 mm 2 | 6 mm 2 | 10 mm 2 | 16 mm 2 | 25 mm 2,128 (205) (306) (515) (818) (1289),256 (412) (615) (1034) (1643) (2588)\r\n35 mm2,1773,3560\r\n50 mm2,2377,4772\r\n70 mm2,3342,6712\r\n95 mm2,4445,8927\r\n",
-    "normalized_text_representation": "TABLE TABLE C8\nTITLE: Voltage drop simplified method table showing cable conductor sizes and corresponding amperage for single-phase and three-phase circuits.\nCOLUMNS: 2.5 mm 2 | 4 mm 2 | 6 mm 2 | 10 mm 2 | 16 mm 2 | 25 mm 2 | 128 (205) (306) (515) (818) (1289) | 256 (412) (615) (1034) (1643) (2588)\nROW 1: 35 mm2 | 1773 | 3560\nROW 2: 50 mm2 | 2377 | 4772\nROW 3: 70 mm2 | 3342 | 6712\nROW 4: 95 mm2 | 4445 | 8927",
-    "confidence": "high",
+    "normalized_text_representation": "COLUMNS: 2.5 mm 2 | 4 mm 2 | 6 mm 2 | 10 mm 2 | 16 mm 2 | 25 mm 2 | 128 (205) (306) (515) (818) (1289) | 256 (412) (615) (1034) (1643) (2588)\nROW 1: 35 mm2 | 1773 | 3560\nROW 2: 50 mm2 | 2377 | 4772\nROW 3: 70 mm2 | 3342 | 6712\nROW 4: 95 mm2 | 4445 | 8927",
+    "confidence": "medium",
     "source_method": "camelot:stream",
     "extraction_notes": [
       "fusion_win:camelot:stream"
     ],
-    "table_key": "TABLE C8:2360acb56af82ba9",
+    "table_key": "na:4b778597a0ee137b",
     "continuation_of": null,
     "quality_metrics": {
       "fill_ratio": 1.0,
@@ -1952,8 +1724,8 @@
       "header_corrupt_ratio": 0.0,
       "data_row_repeat_ratio": 0.25,
       "semantic_hard_fail": false,
-      "unified_score": 1.0,
-      "penalty": 0.0,
+      "unified_score": 0.78,
+      "penalty": 0.22,
       "one_column_value_list": false,
       "partial_fragment": false
     },
@@ -2110,7 +1882,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_52d6c202",
+    "table_id": "table_45a88dc4",
     "table_number": "C10",
     "title": "CJ)",
     "parent_clause_reference": null,
@@ -2322,7 +2094,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_54a7f26a",
+    "table_id": "table_131e1d16",
     "table_number": "C11",
     "title": null,
     "parent_clause_reference": null,
@@ -3408,7 +3180,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_c47676df",
+    "table_id": "table_732df6be",
     "table_number": "C12",
     "title": "CJ)",
     "parent_clause_reference": null,
@@ -3608,7 +3380,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_371ea2fc",
+    "table_id": "table_64ce1623",
     "table_number": "D1",
     "title": null,
     "parent_clause_reference": null,
@@ -4096,9 +3868,9 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_915ed6ea",
+    "table_id": "table_07fcf5d2",
     "table_number": "TABLE D2",
-    "title": "Force exerted by aerial line conductors, detailing various sizes and their corresponding weights, sag, tension, and strength ratings.",
+    "title": "Force exerted by aerial line conductors, detailing various specifications for different conductor sizes and configurations.",
     "parent_clause_reference": null,
     "page_start": 119,
     "page_end": 119,
@@ -4174,7 +3946,7 @@
     ],
     "footer_notes": [],
     "raw_csv": "0.35 max,10 15 20 30 40 50,0.09 0.17 0.26 0.43 0.57 0.73,0.2 0.4 0.6 1.0 1.3 2.0,0.49 0.58 0.67 0.92 1.23 1.50,12.4\r\n0.2 max,10 15 20 30 40 50,0.09 0.17 0.26 0.43 0.57 0.73,0.2 04 0.6 1.0 1.3 2.0,0.28 0.33 0.38 0.52 0.70 0.86,7\r\n0.4 max,10 15 20 30 40 50,0.09 0.17 0.26 0.43 0.57 0.73,0.2 04 0.6 1.0 1.3 2.0,0.56 0.66 0.77 1.05 1.40 1.71,14\r\n0.7 max,10 15 20 30 40 50,0.09 0.17 0.26 0.43 0.57 0.73,0.2 0.4 0.6 1.0 1.3 2.0,0.97 1.16 1.35 1.83 2.46 3.00,24.8\r\n1.35 max,10 15 20 30 40 50,0.09 0.17 0.26 0.59 1.05 1.64,0.2 0.4 0.6 1.0 1.3 2.0,1.88 2.23 2.57 2.57 2.57 2.57,53.2\r\n2.7 max,10 15 20 30 40 50,0.09 0.17 0.26 0.59 1.05 1.64,0.2 0.4 0.6 1.0 1.3 2.0,3.75 4.47 5.14 5.14 5.14 5.14,106.4\r\n",
-    "normalized_text_representation": "TABLE TABLE D2\nTITLE: Force exerted by aerial line conductors, detailing various sizes and their corresponding weights, sag, tension, and strength ratings.\nCOLUMNS: 0.35 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 0.4 0.6 1.0 1.3 2.0 | 0.49 0.58 0.67 0.92 1.23 1.50 | 12.4\nROW 1: 0.2 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 04 0.6 1.0 1.3 2.0 | 0.28 0.33 0.38 0.52 0.70 0.86 | 7\nROW 2: 0.4 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 04 0.6 1.0 1.3 2.0 | 0.56 0.66 0.77 1.05 1.40 1.71 | 14\nROW 3: 0.7 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 0.4 0.6 1.0 1.3 2.0 | 0.97 1.16 1.35 1.83 2.46 3.00 | 24.8\nROW 4: 1.35 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.59 1.05 1.64 | 0.2 0.4 0.6 1.0 1.3 2.0 | 1.88 2.23 2.57 2.57 2.57 2.57 | 53.2\nROW 5: 2.7 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.59 1.05 1.64 | 0.2 0.4 0.6 1.0 1.3 2.0 | 3.75 4.47 5.14 5.14 5.14 5.14 | 106.4",
+    "normalized_text_representation": "TABLE TABLE D2\nTITLE: Force exerted by aerial line conductors, detailing various specifications for different conductor sizes and configurations.\nCOLUMNS: 0.35 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 0.4 0.6 1.0 1.3 2.0 | 0.49 0.58 0.67 0.92 1.23 1.50 | 12.4\nROW 1: 0.2 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 04 0.6 1.0 1.3 2.0 | 0.28 0.33 0.38 0.52 0.70 0.86 | 7\nROW 2: 0.4 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 04 0.6 1.0 1.3 2.0 | 0.56 0.66 0.77 1.05 1.40 1.71 | 14\nROW 3: 0.7 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.43 0.57 0.73 | 0.2 0.4 0.6 1.0 1.3 2.0 | 0.97 1.16 1.35 1.83 2.46 3.00 | 24.8\nROW 4: 1.35 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.59 1.05 1.64 | 0.2 0.4 0.6 1.0 1.3 2.0 | 1.88 2.23 2.57 2.57 2.57 2.57 | 53.2\nROW 5: 2.7 max | 10 15 20 30 40 50 | 0.09 0.17 0.26 0.59 1.05 1.64 | 0.2 0.4 0.6 1.0 1.3 2.0 | 3.75 4.47 5.14 5.14 5.14 5.14 | 106.4",
     "confidence": "medium",
     "source_method": "ai_discovery+pdfplumber",
     "extraction_notes": [],
@@ -4408,7 +4180,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_28277dfe",
+    "table_id": "table_7b6a6f3b",
     "table_number": "D2",
     "title": null,
     "parent_clause_reference": null,
@@ -4756,7 +4528,7 @@
     ]
   },
   {
-    "table_id": "table_363abe2a",
+    "table_id": "table_fec96bfa",
     "table_number": "D3",
     "title": null,
     "parent_clause_reference": null,
@@ -5878,7 +5650,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_2d2859f2",
+    "table_id": "table_fb9cd26d",
     "table_number": "D11",
     "title": "CJ)",
     "parent_clause_reference": null,
@@ -8458,7 +8230,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_876ebd15",
+    "table_id": "table_5ef03d90",
     "table_number": null,
     "title": null,
     "parent_clause_reference": null,
@@ -9248,7 +9020,7 @@
     ]
   },
   {
-    "table_id": "table_e33f39b2",
+    "table_id": "table_bbe9199e",
     "table_number": "E11",
     "title": null,
     "parent_clause_reference": null,
@@ -9674,7 +9446,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_a217ce34",
+    "table_id": "table_ae3b0f92",
     "table_number": "K1",
     "title": null,
     "parent_clause_reference": null,
@@ -9981,7 +9753,7 @@
     "reconstruction_notes": []
   },
   {
-    "table_id": "table_380d9619",
+    "table_id": "table_cf329aef",
     "table_number": "E104",
     "title": ".101 of AS/NZS 61439.2:2016)",
     "parent_clause_reference": null,
