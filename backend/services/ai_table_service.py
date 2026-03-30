@@ -330,13 +330,32 @@ class AITableService:
         # Build prompt
         prompt = f"""You are analyzing page {page_num} from a technical standards document (AS/NZS 3000:2018).
 
-TASK: Identify all tables on this page, including:
+TASK: Identify ONLY TABLES on this page - structured data in rows and columns.
+
+WHAT TO INCLUDE:
 - Tables with clear gridlines
 - Tables with minimal or no gridlines (spacing-based)
 - Tables embedded in text sections
 - Tables with non-standard captions
 
-For each table, provide:
+WHAT TO EXCLUDE (CRITICAL - DO NOT MARK THESE AS TABLES):
+❌ Clause text (e.g., "3.8.1 General requirements...")
+❌ Paragraphs and body text (even if formatted with indents)
+❌ Numbered lists or bullet points
+❌ Section headings and subheadings
+❌ Definitions or glossary entries
+❌ Figures, diagrams, or images
+❌ Running headers/footers
+❌ Page numbers
+❌ Single-column content that is not tabular
+
+A TABLE MUST HAVE:
+✓ Multiple columns of structured data
+✓ Rows representing distinct data records
+✓ Clear visual or spacing-based grid structure
+✓ Data values, not continuous prose
+
+For each table found, provide:
 - Approximate bounding box (top, left, bottom, right as percentages of page height/width, 0-100)
 - Table number if visible (e.g., "Table 3.2", "TABLE D12(A)", "3.8")
 - Brief description
@@ -356,13 +375,8 @@ OUTPUT FORMAT (JSON):
   ]
 }}
 
-RULES:
-- Do NOT include figures, diagrams, or images as tables
-- Do NOT include running headers/footers
-- Do NOT include clause text formatted as lists (even if numbered)
-- Include tables even without clear captions if grid structure is evident
-- Bounding boxes should be tight around the table content
-- If no tables found, return {{"tables": []}}
+REMEMBER: When in doubt, DO NOT mark it as a table. We only want structured tabular data, not clause text.
+If no tables found, return {{"tables": []}}
 """
         
         # Call Vision API
