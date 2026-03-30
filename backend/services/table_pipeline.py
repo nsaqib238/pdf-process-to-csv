@@ -1736,7 +1736,12 @@ class TablePipeline:
         # AI-powered table discovery (if enabled)
         if self._ai_service and self._ai_service.discovery_enabled:
             # Get AI discovery mode from settings
-            ai_mode = getattr(self.settings, "ai_discovery_mode", "weak_signals").lower()
+            try:
+                from config import settings
+                ai_mode = getattr(settings, "ai_discovery_mode", "weak_signals").lower()
+            except Exception:
+                ai_mode = "weak_signals"
+            
             logger.info("Running AI table discovery (mode: %s)...", ai_mode)
             ai_discovered_count = 0
             
@@ -1748,7 +1753,11 @@ class TablePipeline:
                     "Comprehensive mode: analyzing ALL %d pages with AI vision",
                     len(pages_needing_ai)
                 )
-                max_cost = float(getattr(self.settings, "ai_comprehensive_max_cost", 2.0))
+                try:
+                    from config import settings
+                    max_cost = float(getattr(settings, "ai_comprehensive_max_cost", 2.0))
+                except Exception:
+                    max_cost = 2.0
                 logger.info("Cost limit: $%.2f", max_cost)
             
             elif ai_mode == "balanced":
@@ -1777,7 +1786,11 @@ class TablePipeline:
                     # Check cost limit for comprehensive mode
                     if ai_mode == "comprehensive":
                         current_cost = getattr(self._ai_service.metrics, 'total_cost_usd', 0.0)
-                        max_cost = float(getattr(self.settings, "ai_comprehensive_max_cost", 2.0))
+                        try:
+                            from config import settings
+                            max_cost = float(getattr(settings, "ai_comprehensive_max_cost", 2.0))
+                        except Exception:
+                            max_cost = 2.0
                         if current_cost >= max_cost:
                             logger.warning(
                                 "AI cost limit reached ($%.2f / $%.2f). Stopping AI discovery at page %d.",
