@@ -1142,28 +1142,57 @@ class TablePipeline:
             # Only validate borderline tables (low-medium confidence)
             if best_q.score < 0.6 or best_q.semantic_hard_fail:
                 try:
-                    # Convert page to image
+                    # Convert page to image and crop to table region
                     import pdfplumber
                     with pdfplumber.open(source_pdf_path) as pdf:
                         page = pdf.pages[best_rt.page_start - 1]
                         page_image = page.to_image(resolution=150).original
                     
-                    # Call AI validation
+                    # Crop to table region
+                    x0, y0, x1, y1 = best_rt.bbox
+                    scale = 150 / 72  # Resolution scale factor
+                    crop_box = (
+                        int(x0 * scale),
+                        int(y0 * scale),
+                        int(x1 * scale),
+                        int(y1 * scale)
+                    )
+                    page_crop_image = page_image.crop(crop_box)
+                    
+                    # Convert best_table to table_json format
+                    table_json = best_table.model_dump()
+                    
+                    # Build quality issues list
+                    quality_issues = []
+                    if best_q.semantic_hard_fail:
+                        quality_issues.append("semantic_hard_fail")
+                    if best_q.noise_ratio > 0.3:
+                        quality_issues.append(f"high_noise_ratio:{best_q.noise_ratio:.2f}")
+                    if best_q.fill_ratio < 0.4:
+                        quality_issues.append(f"low_fill_ratio:{best_q.fill_ratio:.2f}")
+                    if best_q.garbage_cell_ratio > 0.2:
+                        quality_issues.append(f"garbage_cells:{best_q.garbage_cell_ratio:.2f}")
+                    if not quality_issues:
+                        quality_issues.append("borderline_quality_score")
+                    
+                    # Call AI validation with correct parameters
                     validation_result = self._ai_service.validate_structure(
-                        page_image=page_image,
-                        page_num=best_rt.page_start,
-                        table_bbox=best_rt.bbox,
-                        extracted_data=best_rt.rows
+                        table_json=table_json,
+                        page_crop_image=page_crop_image,
+                        quality_score=best_q.score,
+                        quality_issues=quality_issues
                     )
                     
-                    if not validation_result.is_valid:
+                    if validation_result and not validation_result.is_table:
                         # AI rejected this table - mark for omission
-                        notes.append(f"ai_validation_rejected:{validation_result.reason}")
+                        notes.append(f"ai_validation_rejected:{validation_result.reasoning}")
                         best_q = best_q._replace(semantic_hard_fail=True)
-                        logger.info("AI validation rejected table on page %s: %s", best_rt.page_start, validation_result.reason)
-                    else:
+                        logger.info("AI validation rejected table on page %s: %s", best_rt.page_start, validation_result.reasoning)
+                    elif validation_result and validation_result.is_table:
                         # AI validated the table
                         notes.append("ai_validation_passed")
+                        if not validation_result.structure_correct:
+                            notes.append(f"ai_suggested_corrections:{len(validation_result.suggested_corrections)}")
                         logger.debug("AI validation passed for table on page %s", best_rt.page_start)
                 except Exception as e:
                     logger.warning("AI validation failed on page %s: %s", best_rt.page_start, e)
