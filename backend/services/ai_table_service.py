@@ -82,6 +82,8 @@ class AITableService:
         self.metrics = AICallMetrics()
         self.call_count = 0
         
+        logger.info("Initializing AI Table Service...")
+        
         try:
             from config import settings
             self.settings = settings
@@ -90,6 +92,11 @@ class AITableService:
             self.discovery_enabled = bool(getattr(settings, "enable_ai_table_discovery", False))
             self.caption_enabled = bool(getattr(settings, "enable_ai_caption_detection", False))
             self.validation_enabled = bool(getattr(settings, "enable_ai_structure_validation", False))
+            
+            logger.info(f"AI feature flags from .env:")
+            logger.info(f"  - ENABLE_AI_TABLE_DISCOVERY: {self.discovery_enabled}")
+            logger.info(f"  - ENABLE_AI_CAPTION_DETECTION: {self.caption_enabled}")
+            logger.info(f"  - ENABLE_AI_STRUCTURE_VALIDATION: {self.validation_enabled}")
             
             # Get configuration
             self.api_key = getattr(settings, "openai_api_key", None)
@@ -102,19 +109,28 @@ class AITableService:
             self.log_tokens = bool(getattr(settings, "ai_log_token_usage", True))
             self.cost_alert_threshold = float(getattr(settings, "ai_alert_cost_threshold", 5.0))
             
+            if self.api_key:
+                logger.info(f"  - OpenAI API key: {'*' * 10}{self.api_key[-8:] if len(self.api_key) > 8 else '***'}")
+            else:
+                logger.warning("  - OpenAI API key: NOT SET")
+            
             # Initialize OpenAI client if any AI feature is enabled
             self.client = None
             if (self.discovery_enabled or self.caption_enabled or self.validation_enabled):
                 if not self.api_key:
                     logger.warning(
-                        "AI features enabled but OPENAI_API_KEY not set. "
+                        "⚠️  AI features enabled but OPENAI_API_KEY not set. "
                         "AI enhancement will be skipped."
                     )
                 else:
+                    logger.info("Attempting to initialize OpenAI client...")
                     self._initialize_openai()
+            else:
+                logger.info("No AI features enabled. Skipping OpenAI initialization.")
         
         except Exception as e:
-            logger.warning(f"AI service initialization failed: {e}. AI features disabled.")
+            logger.error(f"❌ AI service initialization failed: {e}", exc_info=True)
+            logger.warning("AI features will be disabled.")
             self.discovery_enabled = False
             self.caption_enabled = False
             self.validation_enabled = False
@@ -124,20 +140,21 @@ class AITableService:
         """Initialize OpenAI client."""
         try:
             from openai import OpenAI
+            logger.info(f"Creating OpenAI client with model: {self.model}")
             self.client = OpenAI(
                 api_key=self.api_key,
                 timeout=self.timeout,
                 max_retries=self.max_retries
             )
-            logger.info(f"OpenAI client initialized with model: {self.model}")
+            logger.info(f"✅ OpenAI client initialized successfully with model: {self.model}")
         except ImportError:
             logger.error(
-                "OpenAI SDK not installed. Run: pip install openai\n"
+                "❌ OpenAI SDK not installed. Run: pip install openai\n"
                 "AI features will be disabled."
             )
             self.client = None
         except Exception as e:
-            logger.error(f"Failed to initialize OpenAI client: {e}")
+            logger.error(f"❌ Failed to initialize OpenAI client: {e}", exc_info=True)
             self.client = None
     
     def _can_make_call(self) -> bool:
