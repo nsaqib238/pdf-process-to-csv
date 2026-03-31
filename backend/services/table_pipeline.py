@@ -6,6 +6,7 @@ import csv
 import hashlib
 import logging
 import re
+import time
 import uuid
 from dataclasses import dataclass, replace
 from io import StringIO
@@ -1863,6 +1864,13 @@ class TablePipeline:
                             page_num=page_num,
                             existing_table_bboxes=existing_bboxes
                         )
+                        
+                        # Rate limiting: Add delay to stay under OpenAI token limits
+                        # Each Vision API call uses ~37K tokens. With 200K tokens/min limit,
+                        # we can safely process ~5 pages/min. Add 12-second delay between pages.
+                        if ai_mode == "comprehensive" and ai_regions:
+                            logger.debug("Rate limiting: sleeping 12s to avoid OpenAI 429 errors...")
+                            time.sleep(12)
                     except Exception as e:
                         logger.warning("AI discovery failed on page %s: %s", page_num, e)
                         continue
