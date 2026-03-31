@@ -769,7 +769,18 @@ class TablePipeline:
         """
         P0: Determine if a table is actually clause/prose content.
         Returns True if content should be rejected as not-a-table.
+        
+        EXEMPTION: AI-discovered tables are exempt from clause-shaped filtering
+        because AI Discovery already validated them as tables.
         """
+        # EXEMPTION: Skip clause-shaped filter for AI-discovered tables
+        source_method = table.source_method or ""
+        if "ai_discovery" in source_method:
+            logger.debug(
+                f"Table {table.table_id} exempt from clause-shaped filter (AI-discovered)"
+            )
+            return False
+        
         clause_score = self._clause_likeness_score(table)
         
         # Get quality metrics
@@ -1185,9 +1196,15 @@ class TablePipeline:
                     
                     if validation_result and not validation_result.is_table:
                         # AI rejected this table - mark for omission
-                        notes.append(f"ai_validation_rejected:{validation_result.reasoning}")
-                        best_q = replace(best_q, semantic_hard_fail=True)
-                        logger.info("AI validation rejected table on page %s: %s", best_rt.page_start, validation_result.reasoning)
+                        # EXEMPTION: Don't reject AI-discovered tables (trust AI discovery over AI validation)
+                        is_ai_discovered = "ai_discovery" in best_rt.source_method
+                        if is_ai_discovered:
+                            notes.append(f"ai_validation_rejected_but_exempted_for_ai_discovery:{validation_result.reasoning}")
+                            logger.info("AI validation rejected AI-discovered table on page %s, but exempted: %s", best_rt.page_start, validation_result.reasoning)
+                        else:
+                            notes.append(f"ai_validation_rejected:{validation_result.reasoning}")
+                            best_q = replace(best_q, semantic_hard_fail=True)
+                            logger.info("AI validation rejected table on page %s: %s", best_rt.page_start, validation_result.reasoning)
                     elif validation_result and validation_result.is_table:
                         # AI validated the table
                         notes.append("ai_validation_passed")
