@@ -3,13 +3,20 @@ Configuration settings for PDF processing pipeline
 """
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional
+import os
+from pathlib import Path
+
+# Get the directory where this config.py file is located
+BASE_DIR = Path(__file__).resolve().parent
+ENV_FILE = BASE_DIR / ".env"
 
 
 class Settings(BaseSettings):
     """Application settings"""
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=str(ENV_FILE) if ENV_FILE.exists() else ".env",
+        env_file_encoding="utf-8",
         case_sensitive=False,
         extra="ignore",
     )
@@ -79,7 +86,9 @@ class Settings(BaseSettings):
     enable_ai_structure_validation: bool = False
     
     openai_api_key: Optional[str] = None
+    openai_project_id: Optional[str] = None
     openai_model: str = "gpt-4o"
+    openai_temperature: float = 0.0
     openai_max_retries: int = 3
     openai_timeout_seconds: int = 60
     
