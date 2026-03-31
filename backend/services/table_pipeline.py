@@ -1889,6 +1889,7 @@ class TablePipeline:
                             crop = page.crop(bbox)
                             tables_found = crop.find_tables(table_settings=tbl_settings) or []
                             
+                            # If find_tables() found something, use it
                             if tables_found:
                                 for t in tables_found:
                                     rows = t.extract() or []
@@ -1908,6 +1909,42 @@ class TablePipeline:
                                     ))
                                     ai_discovered_count += 1
                                     self._diag["ai_discovery_tables"] = ai_discovered_count
+                            else:
+                                # For borderless tables, find_tables() returns nothing.
+                                # Extract text directly and parse it as a table.
+                                text = crop.extract_text() or ""
+                                if text.strip():
+                                    # Split by lines and try to parse as table rows
+                                    lines = [line.strip() for line in text.split('\n') if line.strip()]
+                                    if len(lines) >= 2:
+                                        # Simple heuristic: split by multiple spaces or tabs
+                                        rows = []
+                                        for line in lines:
+                                            # Split by 2+ spaces or tabs
+                                            import re
+                                            cells = re.split(r'\s{2,}|\t+', line)
+                                            cells = [c.strip() for c in cells if c.strip()]
+                                            if cells:
+                                                rows.append(cells)
+                                        
+                                        norm_rows = self._normalize_rows(rows)
+                                        if norm_rows and len(norm_rows) >= 2:
+                                            out.append(_RawTable(
+                                                page_start=page_num,
+                                                page_end=page_num,
+                                                bbox=bbox,
+                                                rows=norm_rows,
+                                                table_number=region.table_number,
+                                                title=region.description,
+                                                source_method="ai_discovery+text_extraction",
+                                                continuation_caption=False
+                                            ))
+                                            ai_discovered_count += 1
+                                            self._diag["ai_discovery_tables"] = ai_discovered_count
+                                            logger.debug(
+                                                "AI-discovered borderless table %s on page %s: extracted %d rows via text parsing",
+                                                region.table_number, page_num, len(norm_rows)
+                                            )
                         except Exception as e:
                             logger.debug("AI region extraction failed page %s: %s", page_num, e)
             
