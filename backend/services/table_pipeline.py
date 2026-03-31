@@ -7,7 +7,7 @@ import hashlib
 import logging
 import re
 import uuid
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from io import StringIO
 from collections import Counter
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -1186,7 +1186,7 @@ class TablePipeline:
                     if validation_result and not validation_result.is_table:
                         # AI rejected this table - mark for omission
                         notes.append(f"ai_validation_rejected:{validation_result.reasoning}")
-                        best_q = best_q._replace(semantic_hard_fail=True)
+                        best_q = replace(best_q, semantic_hard_fail=True)
                         logger.info("AI validation rejected table on page %s: %s", best_rt.page_start, validation_result.reasoning)
                     elif validation_result and validation_result.is_table:
                         # AI validated the table
