@@ -1895,6 +1895,10 @@ class TablePipeline:
                                     rows = t.extract() or []
                                     norm_rows = self._normalize_rows(rows)
                                     if not norm_rows or len(norm_rows) < 2:
+                                        logger.debug(
+                                            "AI-discovered table %s on page %s skipped: find_tables() returned %d rows, normalized to %d rows (need >= 2)",
+                                            region.table_number, page_num, len(rows), len(norm_rows) if norm_rows else 0
+                                        )
                                         continue
                                     
                                     out.append(_RawTable(
@@ -1945,6 +1949,16 @@ class TablePipeline:
                                                 "AI-discovered borderless table %s on page %s: extracted %d rows via text parsing",
                                                 region.table_number, page_num, len(norm_rows)
                                             )
+                                        else:
+                                            logger.debug(
+                                                "AI-discovered borderless table %s on page %s skipped: text extraction got %d rows, normalized to %d rows (need >= 2)",
+                                                region.table_number, page_num, len(rows), len(norm_rows) if norm_rows else 0
+                                            )
+                                else:
+                                    logger.debug(
+                                        "AI-discovered table %s on page %s skipped: no text extracted from region",
+                                        region.table_number, page_num
+                                    )
                         except Exception as e:
                             logger.debug("AI region extraction failed page %s: %s", page_num, e)
             
