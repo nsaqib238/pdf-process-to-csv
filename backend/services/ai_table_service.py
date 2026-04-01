@@ -184,13 +184,20 @@ class AITableService:
         """
         Estimate API call cost based on token usage.
         
-        OpenAI GPT-4o pricing (as of 2024):
-        - Text input: $2.50 per 1M tokens
-        - Vision input: $2.50 per 1M tokens
-        - Output: $10 per 1M tokens
+        OpenAI pricing:
+        - GPT-4o: Input $2.50/1M, Output $10/1M
+        - GPT-4o-mini: Input $0.15/1M, Output $0.60/1M
+        - GPT-4o-mini-2024-07-18: Input $0.15/1M, Output $0.60/1M
         """
-        input_cost = (prompt_tokens / 1_000_000) * 2.50
-        output_cost = (completion_tokens / 1_000_000) * 10.0
+        # Determine pricing based on model
+        if 'mini' in self.model.lower():
+            # gpt-4o-mini pricing (much cheaper)
+            input_cost = (prompt_tokens / 1_000_000) * 0.15
+            output_cost = (completion_tokens / 1_000_000) * 0.60
+        else:
+            # gpt-4o pricing (standard)
+            input_cost = (prompt_tokens / 1_000_000) * 2.50
+            output_cost = (completion_tokens / 1_000_000) * 10.0
         return input_cost + output_cost
     
     def _call_vision_api(
