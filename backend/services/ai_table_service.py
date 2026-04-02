@@ -109,6 +109,14 @@ class AITableService:
             self.log_tokens = bool(getattr(settings, "ai_log_token_usage", True))
             self.cost_alert_threshold = float(getattr(settings, "ai_alert_cost_threshold", 5.0))
             
+            # Log loaded configuration for debugging
+            logger.info(f"AI configuration loaded:")
+            logger.info(f"  - Model: {self.model}")
+            logger.info(f"  - Max calls per job: {self.max_calls}")
+            logger.info(f"  - Cost alert threshold: ${self.cost_alert_threshold:.2f}")
+            logger.info(f"  - Discovery confidence threshold: {self.discovery_threshold}")
+            logger.info(f"  - Validation quality threshold: {self.validation_threshold}")
+            
             if self.api_key:
                 logger.info(f"  - OpenAI API key: {'*' * 10}{self.api_key[-8:] if len(self.api_key) > 8 else '***'}")
             else:

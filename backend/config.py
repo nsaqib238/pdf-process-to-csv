@@ -92,7 +92,7 @@ class Settings(BaseSettings):
     openai_max_retries: int = 3
     openai_timeout_seconds: int = 60
     
-    ai_max_calls_per_job: int = 100
+    ai_max_calls_per_job: int = 300  # Updated to allow full document processing
     ai_discovery_confidence_threshold: float = 0.7
     ai_validation_quality_threshold: float = 0.6
     
@@ -100,12 +100,12 @@ class Settings(BaseSettings):
     # - "weak_signals": Only pages with problems (conservative, ~2-5% of pages, low cost)
     # - "comprehensive": All pages (expensive, ~$0.007/page, maximum coverage)
     # - "balanced": Enhanced weak signals + gap analysis (recommended, medium cost)
-    ai_discovery_mode: str = "weak_signals"
-    ai_comprehensive_max_cost: float = 2.0  # USD, cost limit for comprehensive mode
+    ai_discovery_mode: str = "comprehensive"  # Updated to match .env default
+    ai_comprehensive_max_cost: float = 12.0  # USD, cost limit for comprehensive mode (updated for gpt-4o-mini)
     
     # Cost tracking
     ai_log_token_usage: bool = True
-    ai_alert_cost_threshold: float = 5.0  # USD per job
+    ai_alert_cost_threshold: float = 15.0  # USD per job (updated for full document processing)
 
     # API settings
     api_host: str = "0.0.0.0"
