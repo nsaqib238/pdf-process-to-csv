@@ -1,170 +1,116 @@
 """
-Table processor facade.
+Simplified Table Processor - Uses Modal.com Complete Data
+=========================================================
+Modal.com provides complete table extraction, backend just validates.
 """
-import logging
-from typing import Any, Dict, List, Optional
 
-from config import settings
+import logging
+from typing import List, Dict, Any, Optional
 from models.table import Table
-from services.header_reconstructor import apply_reconstruction_to_tables
-from services.table_pipeline import TablePipeline
 
 logger = logging.getLogger(__name__)
 
 
 class TableProcessor:
-    """Thin wrapper around the dedicated table pipeline."""
+    """Process tables from Modal.com (complete data, no extraction needed)"""
 
     def __init__(self):
         self.tables: List[Table] = []
-        self.pipeline = TablePipeline()
 
-    def process_tables(
+    def process_tables_from_modal(
         self,
-        extracted_data: Dict,
-        page_map: Dict[str, int],
-        source_pdf_path: Optional[str] = None,
-        clauses: Optional[List[Any]] = None,
+        modal_tables: List[Dict],
+        clauses: List[Any] = None
     ) -> List[Table]:
-        if not source_pdf_path:
-            logger.warning("Table pipeline skipped: source PDF path missing")
-            self.tables = []
-            return self.tables
+        """
+        Process tables from Modal.com complete extraction.
+        
+        Modal provides:
+        - Complete table content (headers, data rows)
+        - Table numbers and titles
+        - Structure metadata
+        
+        Backend just:
+        - Converts to Table objects
+        - Links to parent clauses (if provided)
+        - Validates data quality
 
-        # Try Modal.com first if enabled
-        if getattr(settings, "use_modal_extraction", False):
-            try:
-                from pathlib import Path
-                from services.modal_table_service import modal_service
+        Args:
+            modal_tables: Complete tables from Modal.com
+            clauses: Optional list of clauses for parent linking
 
-                logger.info(
-                    "🚀 Attempting Modal.com table extraction..."
-                )
-                modal_result = modal_service.extract_tables(
-                    Path(source_pdf_path),
-                    filename=Path(source_pdf_path).name
-                )
+        Returns:
+            List of Table objects
+        """
+        logger.info(f"Processing {len(modal_tables)} tables from Modal.com")
 
-                if modal_result.get("success"):
-                    modal_tables = modal_result.get("tables", [])
-                    low_conf_count = modal_result.get(
-                        "low_confidence_count", 0
-                    )
-                    high_conf_count = modal_result.get(
-                        "high_confidence_count", 0
-                    )
+        if not modal_tables:
+            logger.warning("No tables provided from Modal.com")
+            return []
 
-                    logger.info(
-                        f"✅ Modal.com extracted {len(modal_tables)} "
-                        f"tables ({high_conf_count} high confidence, "
-                        f"{low_conf_count} low confidence)"
-                    )
+        # Convert Modal format to Table objects
+        self.tables = self._convert_dicts_to_table_objects(modal_tables)
 
-                    # Check if we should use Modal results or fall back
-                    fallback_mode = getattr(
-                        settings, "modal_fallback_mode", "openai"
-                    )
+        # Link tables to parent clauses if provided
+        if clauses:
+            self._link_tables_to_clauses(clauses)
+            logger.info("✅ Linked tables to parent clauses")
 
-                    if low_conf_count == 0 or fallback_mode == "skip":
-                        # All tables have high confidence or skip mode
-                        logger.info(
-                            f"✅ Using Modal.com complete table data: "
-                            f"{len(modal_tables)} tables"
-                        )
-                        pipeline_tables = (
-                            modal_service.convert_to_pipeline_format(
-                                modal_tables
-                            )
-                        )
-                        self.tables = (
-                            self._convert_dicts_to_table_objects(
-                                pipeline_tables
-                            )
-                        )
-                        # SKIP header reconstruction - Modal already extracted complete data
-                        logger.info(
-                            f"✅ Processed {len(self.tables)} tables "
-                            f"via Modal.com (complete extraction, no post-processing needed)"
-                        )
-                        return self.tables
-                    elif fallback_mode == "fail":
-                        # Fail mode - error on low confidence
-                        raise Exception(
-                            f"Modal.com returned {low_conf_count} "
-                            f"low confidence tables. "
-                            f"Fallback mode is 'fail'."
-                        )
-                    else:
-                        # OpenAI fallback mode
-                        logger.warning(
-                            f"⚠️  {low_conf_count} tables below "
-                            f"confidence threshold. "
-                            f"Falling back to OpenAI/geometric pipeline."
-                        )
-                        # Fall through to existing pipeline
-                else:
-                    # Modal extraction failed
-                    error = modal_result.get("error", "Unknown error")
-                    logger.warning(
-                        f"⚠️  Modal.com extraction failed: {error}"
-                    )
-
-                    fallback_mode = getattr(
-                        settings, "modal_fallback_mode", "openai"
-                    )
-                    if fallback_mode == "fail":
-                        raise Exception(f"Modal.com failed: {error}")
-                    elif fallback_mode == "skip":
-                        logger.info(
-                            "Falling back to geometric extraction only "
-                            "(skip mode)"
-                        )
-                    else:
-                        logger.info(
-                            "Falling back to OpenAI/geometric pipeline"
-                        )
-                    # Fall through to existing pipeline
-
-            except Exception as e:
-                logger.error(
-                    f"❌ Modal.com extraction error: {e}",
-                    exc_info=True
-                )
-                fallback_mode = getattr(
-                    settings, "modal_fallback_mode", "openai"
-                )
-                if fallback_mode == "fail":
-                    raise
-                logger.info(
-                    "Falling back to OpenAI/geometric pipeline "
-                    "due to error"
-                )
-
-        # Existing pipeline (OpenAI + geometric extraction)
-        self.tables = self.pipeline.process(source_pdf_path, clauses=clauses or [])
-        if getattr(settings, "enable_header_reconstruction", True):
-            self.tables = apply_reconstruction_to_tables(self.tables)
-        logger.info(f"Processed {len(self.tables)} tables")
+        logger.info(f"✅ Processed {len(self.tables)} tables from Modal.com")
         return self.tables
-    
+
     def _convert_dicts_to_table_objects(self, table_dicts: List[Dict]) -> List[Table]:
-        """Convert dictionary format tables to Table objects."""
-        table_objects = []
+        """Convert table dicts to Table model objects."""
+        tables = []
+        
         for table_dict in table_dicts:
             try:
-                # Create Table object from dictionary
-                table = Table(
-                    table_number=table_dict.get("table_number", ""),
-                    page=table_dict.get("page", 0),
-                    detection_method=table_dict.get("detection_method", "modal_table_transformer"),
-                    bbox=table_dict.get("bbox", {}),
-                    data=table_dict.get("data", []),
-                    parent_clause_id=table_dict.get("parent_clause_id"),
-                    confidence=table_dict.get("confidence", 0.0),
-                    metadata=table_dict.get("metadata", {})
-                )
-                table_objects.append(table)
+                table = Table(**table_dict)
+                tables.append(table)
             except Exception as e:
-                logger.warning(f"Failed to convert table dict to Table object: {e}")
+                logger.error(f"Error converting table to object: {e}")
+                logger.debug(f"Table dict: {table_dict}")
                 continue
-        return table_objects
+
+        return tables
+
+    def _link_tables_to_clauses(self, clauses: List[Any]):
+        """Link tables to their parent clauses based on page location."""
+        if not clauses:
+            return
+
+        # Build clause lookup by page
+        clause_by_page = {}
+        for clause in clauses:
+            for page in range(clause.page_start, clause.page_end + 1):
+                if page not in clause_by_page:
+                    clause_by_page[page] = []
+                clause_by_page[page].append(clause)
+
+        # Link each table to nearest clause
+        for table in self.tables:
+            page = table.page_start
+            
+            if page in clause_by_page:
+                page_clauses = clause_by_page[page]
+                
+                # Find the deepest (most specific) clause on this page
+                # Prefer clauses with matching numbers (e.g., table 3.6.1 → clause 3.6.1)
+                best_clause = None
+                
+                if table.table_number:
+                    # Try exact or prefix match
+                    for clause in page_clauses:
+                        if clause.clause_number == table.table_number:
+                            best_clause = clause
+                            break
+                        if table.table_number.startswith(clause.clause_number + "."):
+                            best_clause = clause
+                
+                # If no match, use deepest clause on page
+                if not best_clause and page_clauses:
+                    best_clause = max(page_clauses, key=lambda c: c.level)
+                
+                if best_clause:
+                    table.parent_clause_id = best_clause.clause_id
+                    table.parent_clause_number = best_clause.clause_number
