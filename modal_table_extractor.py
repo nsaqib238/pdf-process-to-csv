@@ -34,7 +34,7 @@ image = (
 @app.function(
     image=image,
     gpu="T4",              # $0.43/hour (cheapest)
-    timeout=900,           # 15 minutes max
+    timeout=1800,          # 30 minutes for large PDFs (158 pages)
     memory=16384,          # 16GB RAM
     min_containers=0,      # 0 = cold start, 1+ = always warm ($10/day)
     scaledown_window=300,  # Keep container 5min after last request
@@ -86,7 +86,7 @@ def extract_tables_gpu(pdf_bytes: bytes, filename: str = "document.pdf") -> dict
         # Convert PDF to images
         print("🖼️  Converting PDF to images...")
         convert_start = time.time()
-        images = convert_from_bytes(pdf_bytes, dpi=200)
+        images = convert_from_bytes(pdf_bytes, dpi=150)  # Reduced from 200 for speed
         convert_time = time.time() - convert_start
         print(f"✓ Converted {len(images)} pages in {convert_time:.2f}s")
         
