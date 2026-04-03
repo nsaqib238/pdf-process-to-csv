@@ -26,6 +26,7 @@ image = (
         "Pillow==10.1.0",
         "timm==0.9.12",
         "numpy==1.24.3",
+        "fastapi[standard]==0.115.0",  # Web framework for endpoints
     )
 )
 
