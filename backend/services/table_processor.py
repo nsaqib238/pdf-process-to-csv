@@ -68,7 +68,7 @@ class TableProcessor:
                     if low_conf_count == 0 or fallback_mode == "skip":
                         # All tables have high confidence or skip mode
                         logger.info(
-                            f"✅ Using Modal.com results: "
+                            f"✅ Using Modal.com complete table data: "
                             f"{len(modal_tables)} tables"
                         )
                         pipeline_tables = (
@@ -81,17 +81,10 @@ class TableProcessor:
                                 pipeline_tables
                             )
                         )
-                        if getattr(
-                            settings, "enable_header_reconstruction", True
-                        ):
-                            self.tables = (
-                                apply_reconstruction_to_tables(
-                                    self.tables
-                                )
-                            )
+                        # SKIP header reconstruction - Modal already extracted complete data
                         logger.info(
-                            f"Processed {len(self.tables)} tables "
-                            f"via Modal.com"
+                            f"✅ Processed {len(self.tables)} tables "
+                            f"via Modal.com (complete extraction, no post-processing needed)"
                         )
                         return self.tables
                     elif fallback_mode == "fail":

@@ -248,37 +248,52 @@ class ModalTableService:
     def convert_to_pipeline_format(self, modal_tables: List[Dict]) -> List[Dict]:
         """
         Convert Modal.com table format to pipeline table format.
-
-        Modal format:
+        
+        NEW: Modal now returns COMPLETE table data including:
+        - table_number and title (from caption extraction)
+        - header_rows and data_rows (from structure recognition + OCR)
+        - row_count and column_count (from structure analysis)
+        
+        Modal format (new structure extraction):
         {
             "page": 12,
+            "table_number": "3.1",
+            "title": "Installation methods",
             "confidence": 0.95,
             "bbox": {"x0": 100, "y0": 200, "x1": 500, "y1": 400},
-            "width": 400,
-            "height": 200,
-            "page_width": 595,
-            "page_height": 842
+            "header_rows": [["Type", "Rating", "Application"]],
+            "data_rows": [["Type A", "10A", "Indoor"], ...],
+            "row_count": 10,
+            "column_count": 3,
+            "has_merged_cells": true,
+            "extraction_method": "table_transformer_structure"
         }
 
         Pipeline format:
         {
-            "table_number": "MODAL_P12_T1",
+            "table_number": "3.1",  # From Modal caption extraction
+            "title": "Installation methods",
             "page": 12,
-            "detection_method": "modal_table_transformer",
+            "detection_method": "modal_table_transformer_structure",
             "confidence": 0.95,
             "bbox": {...},
-            "data": []  # Empty, will be extracted later
+            "header_rows": [...],  # Complete data from Modal
+            "data_rows": [...],
+            "has_merged_cells": true,
+            "metadata": {...}
         }
 
         Args:
-            modal_tables: List of tables from Modal.com
+            modal_tables: List of tables from Modal.com (with complete data)
 
         Returns:
-            List of tables in pipeline format
+            List of tables in pipeline format (ready to use, no pdfplumber needed)
         """
+        from models.table import TableRow
+        
         pipeline_tables = []
 
-        # Group tables by page for numbering
+        # Group tables by page for fallback numbering
         tables_by_page = {}
         for table in modal_tables:
             page = table.get("page", 0)
@@ -286,37 +301,113 @@ class ModalTableService:
                 tables_by_page[page] = []
             tables_by_page[page].append(table)
 
-        # Convert to pipeline format with page-specific numbering
+        # Convert to pipeline format
         for page, page_tables in sorted(tables_by_page.items()):
             for idx, table in enumerate(page_tables, 1):
+                # Use Modal's table number if available, otherwise generate
+                table_number = table.get("table_number") or f"MODAL_P{page}_T{idx}"
+                
+                # Convert header_rows to TableRow objects
+                header_rows = []
+                for row_cells in table.get("header_rows", []):
+                    header_rows.append(TableRow(
+                        cells=row_cells,
+                        is_header=True
+                    ))
+                
+                # Convert data_rows to TableRow objects
+                data_rows = []
+                for row_cells in table.get("data_rows", []):
+                    data_rows.append(TableRow(
+                        cells=row_cells,
+                        is_header=False
+                    ))
+                
+                # Build normalized text representation
+                normalized_text = self._build_normalized_text(
+                    table_number,
+                    table.get("title"),
+                    header_rows,
+                    data_rows
+                )
+                
                 pipeline_table = {
-                    "table_number": f"MODAL_P{page}_T{idx}",
-                    "page": page,
-                    "detection_method": "modal_table_transformer",
+                    "table_number": table_number,
+                    "title": table.get("title"),
+                    "page_start": page,
+                    "page_end": page,
+                    "detection_method": table.get(
+                        "extraction_method", 
+                        "modal_table_transformer_structure"
+                    ),
                     "confidence": table.get("confidence", 0.0),
                     "bbox": table.get("bbox", {}),
-                    "width": table.get("width", 0),
-                    "height": table.get("height", 0),
-                    "page_width": table.get("page_width", 0),
-                    "page_height": table.get("page_height", 0),
-                    "data": [],  # Will be populated by table extraction
+                    "header_rows": header_rows,
+                    "data_rows": data_rows,
+                    "has_merged_cells": table.get("has_merged_cells", False),
+                    "normalized_text_representation": normalized_text,
+                    "source_method": table.get(
+                        "extraction_method",
+                        "modal_table_transformer_structure"
+                    ),
                     "metadata": {
                         "model": table.get(
                             "model",
-                            "microsoft/table-transformer-detection"
+                            "microsoft/table-transformer-structure-recognition"
                         ),
-                        "detection_method": table.get(
-                            "detection_method", "table_transformer"
-                        )
+                        "row_count": table.get("row_count", 0),
+                        "column_count": table.get("column_count", 0),
+                        "structure_confidence": table.get("structure_confidence", 0.0),
+                        "has_merged_cells": table.get("has_merged_cells", False),
+                        "processing_time": table.get("processing_time", 0.0),
                     }
                 }
                 pipeline_tables.append(pipeline_table)
 
         logger.info(
             f"✅ Converted {len(pipeline_tables)} Modal tables to "
-            f"pipeline format"
+            f"pipeline format (complete data, no extraction needed)"
         )
         return pipeline_tables
+    
+    def _build_normalized_text(
+        self, 
+        table_number: str, 
+        title: str,
+        header_rows: List,
+        data_rows: List
+    ) -> str:
+        """
+        Build normalized text representation from table data.
+        
+        Args:
+            table_number: Table number (e.g., "3.1")
+            title: Table title
+            header_rows: List of TableRow objects (headers)
+            data_rows: List of TableRow objects (data)
+            
+        Returns:
+            Normalized text representation
+        """
+        lines = []
+        
+        if table_number:
+            lines.append(f"TABLE {table_number}")
+        
+        if title:
+            lines.append(f"TITLE: {title}")
+        
+        # Add headers
+        if header_rows:
+            header_cells = header_rows[0].cells if hasattr(header_rows[0], 'cells') else header_rows[0]
+            lines.append("COLUMNS: " + " | ".join(str(c) for c in header_cells))
+        
+        # Add data rows
+        for i, row in enumerate(data_rows, start=1):
+            cells = row.cells if hasattr(row, 'cells') else row
+            lines.append(f"ROW {i}: " + " | ".join(str(c) for c in cells))
+        
+        return "\n".join(lines).strip()
 
 
 # Global instance
