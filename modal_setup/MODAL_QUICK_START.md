@@ -76,15 +76,38 @@ https://yourname--as3000-table-extractor-web-extract-tables.modal.run/extract
 
 ### Option A: Command Line Test (Simplest)
 
+**First, find your PDF file:**
+
+On Windows:
 ```bash
-# Test with your AS3000 PDF
-modal run modal_table_extractor.py "path/to/AS3000.pdf"
+# Check backend/uploads folder
+dir backend\uploads\*.pdf
+
+# Or check root folder
+dir "Tables AS3000 2018.pdf"
 ```
 
-Example:
+**Then run Modal with the correct syntax:**
+
 ```bash
-modal run modal_table_extractor.py "backend/uploads/AS3000.pdf"
+# Correct syntax (note --pdf-path flag):
+modal run modal_table_extractor.py --pdf-path "path/to/your.pdf"
 ```
+
+**Examples:**
+
+```bash
+# Example 1: PDF in backend/uploads/
+modal run modal_table_extractor.py --pdf-path "backend/uploads/46a36665-752b-48b2-9585-debd5163a1ce.pdf"
+
+# Example 2: PDF in root folder
+modal run modal_table_extractor.py --pdf-path "Tables AS3000 2018.pdf"
+
+# Example 3: Full Windows path
+modal run modal_table_extractor.py --pdf-path "C:\Users\contr\Documents\GitHub\pdf-process-to-csv\backend\uploads\AS3000.pdf"
+```
+
+**Important:** Use `--pdf-path` flag (not just the path alone)
 
 **Expected output**:
 ```
@@ -280,8 +303,12 @@ modal token new
 # Deploy
 modal deploy modal_table_extractor.py
 
-# Test (command line)
-modal run modal_table_extractor.py "path/to/pdf"
+# Test (command line) - USE --pdf-path FLAG!
+modal run modal_table_extractor.py --pdf-path "path/to/pdf"
+
+# Example Windows paths:
+modal run modal_table_extractor.py --pdf-path "backend\uploads\AS3000.pdf"
+modal run modal_table_extractor.py --pdf-path "Tables AS3000 2018.pdf"
 
 # Test (HTTP API)
 python test_modal_api.py "path/to/pdf"
