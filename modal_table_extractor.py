@@ -209,17 +209,17 @@ def web_extract_tables():
 
 
 @app.local_entrypoint()
-def test_local():
+def test_local(pdf_path: str):
     """
-    Test locally: modal run modal_table_extractor.py <pdf_path>
+    Test locally: modal run modal_table_extractor.py --pdf-path <path_to_pdf>
     """
     import sys
     
-    if len(sys.argv) < 2:
-        print("Usage: modal run modal_table_extractor.py <path_to_pdf>")
+    if not pdf_path:
+        print("Usage: modal run modal_table_extractor.py --pdf-path <path_to_pdf>")
+        print("Example: modal run modal_table_extractor.py --pdf-path backend/uploads/AS3000.pdf")
         sys.exit(1)
     
-    pdf_path = sys.argv[1]
     print(f"📄 Testing with: {pdf_path}")
     
     with open(pdf_path, "rb") as f:
