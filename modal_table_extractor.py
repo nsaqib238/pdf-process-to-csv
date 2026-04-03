@@ -36,7 +36,7 @@ image = (
     timeout=900,           # 15 minutes max
     memory=16384,          # 16GB RAM
     min_containers=0,      # 0 = cold start, 1+ = always warm ($10/day)
-    container_idle_timeout=300,  # Keep container 5min after last request
+    scaledown_window=300,  # Keep container 5min after last request
 )
 def extract_tables_gpu(pdf_bytes: bytes, filename: str = "document.pdf") -> dict:
     """
