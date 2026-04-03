@@ -9,7 +9,7 @@ from pathlib import Path
 import logging
 
 from services.pdf_processor import PDFProcessor
-from services.modal_table_service import modal_service
+from services.modal_service import ModalService
 from config import settings
 
 # Configure logging
@@ -51,25 +51,9 @@ OUTPUT_DIR = Path("outputs")
 UPLOAD_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-# Initialize PDF processor
+# Initialize services
 pdf_processor = PDFProcessor()
-
-# Log AI configuration status
-try:
-    from services.ai_table_service import get_ai_service
-    ai_service = get_ai_service()
-    if ai_service:
-        logger.info("✅ AI Service Status:")
-        logger.info(f"   - Discovery enabled: {ai_service.discovery_enabled}")
-        logger.info(f"   - Caption detection enabled: {ai_service.caption_enabled}")
-        logger.info(f"   - Structure validation enabled: {ai_service.validation_enabled}")
-        logger.info(f"   - Model: {getattr(settings, 'openai_model', 'gpt-4o')}")
-        logger.info(f"   - Discovery mode: {getattr(settings, 'ai_discovery_mode', 'weak_signals')}")
-        logger.info(f"   - Max cost: ${getattr(settings, 'ai_comprehensive_max_cost', 2.0)}")
-    else:
-        logger.warning("⚠️  AI Service: NOT INITIALIZED (check OPENAI_API_KEY in .env)")
-except Exception as e:
-    logger.warning(f"⚠️  AI Service initialization check failed: {e}")
+modal_service = ModalService()
 
 logger.info("="*80)
 logger.info("Server ready. Logs are being written to: backend_logs.txt")
