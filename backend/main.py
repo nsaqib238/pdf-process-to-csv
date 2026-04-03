@@ -9,6 +9,7 @@ from pathlib import Path
 import logging
 
 from services.pdf_processor import PDFProcessor
+from services.modal_table_service import modal_service
 from config import settings
 
 # Configure logging
@@ -79,6 +80,53 @@ logger.info("="*80)
 async def root():
     """Health check endpoint"""
     return {"status": "ok", "message": "PDF Processing Pipeline API"}
+
+
+@app.post("/api/modal/warmup")
+async def modal_warmup():
+    """
+    Warmup Modal.com container before processing PDFs.
+    This initializes the container and loads the model (2-3 minutes cold start).
+    Subsequent PDF uploads within 5 minutes will be fast (30-45 seconds).
+    
+    Returns:
+        {
+            "status": "warm" | "warming" | "error",
+            "message": "Status message",
+            "model_loaded": bool,
+            "warmup_time": float (seconds),
+            "timestamp": float
+        }
+    """
+    try:
+        logger.info("🔥 Warmup request received")
+        
+        # Check if Modal is configured
+        if not modal_service.is_available():
+            logger.warning("⚠️  Modal.com not configured")
+            return {
+                "status": "error",
+                "message": "Modal.com integration not configured. Set MODAL_ENDPOINT in .env",
+                "model_loaded": False,
+                "configured": False
+            }
+        
+        # Call warmup
+        result = modal_service.warmup()
+        
+        if result.get("status") == "warm":
+            logger.info(
+                f"✅ Modal warmup successful: {result.get('warmup_time')}s"
+            )
+        else:
+            logger.warning(f"⚠️  Modal warmup status: {result.get('status')}")
+        
+        return result
+        
+    except Exception as e:
+        error_msg = f"Warmup endpoint error: {str(e)}"
+        logger.error(error_msg, exc_info=True)
+        raise HTTPException(status_code=500, detail=error_msg)
 
 
 @app.post("/api/process-pdf")

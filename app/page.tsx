@@ -74,6 +74,11 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null)
   const [dragActive, setDragActive] = useState(false)
   const [processMode, setProcessMode] = useState<ProcessMode>('full')
+  
+  // Modal warmup state
+  const [modalWarmupStatus, setModalWarmupStatus] = useState<'idle' | 'warming' | 'warm' | 'error'>('idle')
+  const [modalWarmupMessage, setModalWarmupMessage] = useState<string>('')
+  const [modalWarmupTime, setModalWarmupTime] = useState<number>(0)
 
   useEffect(() => {
     try {
@@ -139,6 +144,41 @@ export default function Home() {
         setFile(selectedFile)
         setError(null)
       }
+    }
+  }
+
+  const handleModalWarmup = async () => {
+    setModalWarmupStatus('warming')
+    setModalWarmupMessage('Initializing Modal.com container...')
+    setError(null)
+
+    try {
+      const response = await axios.post(buildApiUrl('/api/modal/warmup'), {}, {
+        timeout: 5 * 60 * 1000, // 5 minutes for cold start
+      })
+
+      const data = response.data
+      
+      if (data.status === 'warm') {
+        setModalWarmupStatus('warm')
+        setModalWarmupMessage('Modal.com is ready! Container warmed up successfully.')
+        setModalWarmupTime(data.warmup_time || 0)
+      } else if (data.status === 'warming') {
+        setModalWarmupStatus('warming')
+        setModalWarmupMessage(data.message || 'Container is still warming up...')
+      } else {
+        setModalWarmupStatus('error')
+        setModalWarmupMessage(data.message || 'Warmup failed')
+        setError(data.message || 'Modal warmup failed')
+      }
+    } catch (err: any) {
+      console.error('Modal warmup error:', err)
+      setModalWarmupStatus('error')
+      const errorMsg = axios.isAxiosError(err) && err.response?.data?.detail 
+        ? err.response.data.detail
+        : 'Failed to warmup Modal.com. It will auto-warmup when you upload a PDF.'
+      setModalWarmupMessage(errorMsg)
+      setError(errorMsg)
     }
   }
 
@@ -285,6 +325,67 @@ export default function Home() {
                 <p className="text-sm text-red-800">{error}</p>
               </div>
             )}
+
+            {/* Modal Warmup Section */}
+            <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <h3 className="text-sm font-semibold text-purple-900 mb-1">
+                    🚀 Modal.com GPU Pre-Warmup (Optional)
+                  </h3>
+                  <p className="text-xs text-purple-700 mb-3">
+                    Warm up Modal.com before upload to ensure fast processing (30-45s instead of 2-3 min cold start)
+                  </p>
+                  
+                  {/* Warmup Status */}
+                  {modalWarmupStatus !== 'idle' && (
+                    <div className={`mb-3 p-2 rounded text-xs ${
+                      modalWarmupStatus === 'warming' ? 'bg-yellow-100 text-yellow-800 border border-yellow-300' :
+                      modalWarmupStatus === 'warm' ? 'bg-green-100 text-green-800 border border-green-300' :
+                      'bg-red-100 text-red-800 border border-red-300'
+                    }`}>
+                      {modalWarmupStatus === 'warming' && (
+                        <div className="flex items-center">
+                          <svg className="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          <span>{modalWarmupMessage}</span>
+                        </div>
+                      )}
+                      {modalWarmupStatus === 'warm' && (
+                        <div className="flex items-center">
+                          <svg className="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          <span>{modalWarmupMessage} ({modalWarmupTime.toFixed(1)}s)</span>
+                        </div>
+                      )}
+                      {modalWarmupStatus === 'error' && (
+                        <span>{modalWarmupMessage}</span>
+                      )}
+                    </div>
+                  )}
+                </div>
+                
+                <button
+                  type="button"
+                  onClick={handleModalWarmup}
+                  disabled={modalWarmupStatus === 'warming'}
+                  className={`ml-4 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    modalWarmupStatus === 'warming'
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : modalWarmupStatus === 'warm'
+                        ? 'bg-green-600 text-white hover:bg-green-700'
+                        : 'bg-purple-600 text-white hover:bg-purple-700'
+                  }`}
+                >
+                  {modalWarmupStatus === 'warming' ? 'Warming...' :
+                   modalWarmupStatus === 'warm' ? '✓ Warm' :
+                   'Warm Up'}
+                </button>
+              </div>
+            </div>
 
             {/* Run mode */}
             <fieldset className="mt-6 space-y-3">

@@ -35,6 +35,88 @@ class ModalTableService:
         """Check if Modal.com service is configured and available"""
         return bool(self.endpoint)
 
+    def warmup(self) -> Dict[str, Any]:
+        """
+        Warmup Modal.com container before processing PDFs.
+        This initializes the container and loads the model,
+        reducing subsequent processing time from 2-3 minutes to 30-45 seconds.
+
+        Returns:
+            Dict with:
+                - status: "warm" or "error"
+                - message: Status message
+                - model_loaded: bool
+                - warmup_time: float (seconds)
+                - timestamp: float (unix timestamp)
+
+        Example:
+            >>> result = modal_service.warmup()
+            >>> if result["status"] == "warm":
+            >>>     # Container is ready, proceed with PDF upload
+            >>>     pass
+        """
+        if not self.is_available():
+            return {
+                "status": "error",
+                "message": "Modal.com endpoint not configured",
+                "model_loaded": False
+            }
+
+        try:
+            logger.info("🔥 Warming up Modal.com container...")
+            
+            # Call the warmup endpoint (GET /warmup)
+            warmup_url = self.endpoint.replace("/extract", "/warmup")
+            
+            response = requests.get(
+                warmup_url,
+                timeout=self.timeout  # Allow full timeout for cold start
+            )
+
+            if response.status_code != 200:
+                error_msg = (
+                    f"Modal warmup returned status {response.status_code}: "
+                    f"{response.text}"
+                )
+                logger.error(error_msg)
+                return {
+                    "status": "error",
+                    "message": error_msg,
+                    "model_loaded": False
+                }
+
+            result = response.json()
+            warmup_time = result.get("warmup_time", 0)
+            
+            logger.info(
+                f"✅ Modal.com container warmed up in {warmup_time:.2f}s"
+            )
+            logger.info("🚀 Ready for fast PDF processing (30-45s per doc)")
+
+            return result
+
+        except requests.exceptions.Timeout:
+            # Even if timeout, container might be warming up
+            logger.warning(
+                f"Modal warmup timed out after {self.timeout}s, "
+                f"but container may still be initializing"
+            )
+            return {
+                "status": "warming",
+                "message": f"Warmup in progress (timeout after {self.timeout}s)",
+                "model_loaded": False,
+                "note": "Container may still be initializing, retry in 30s"
+            }
+
+        except Exception as e:
+            error_msg = f"Modal warmup error: {str(e)}"
+            logger.error(error_msg, exc_info=True)
+            return {
+                "status": "error",
+                "message": error_msg,
+                "model_loaded": False
+            }
+
     def extract_tables(self, pdf_path: Path, filename: str = None) -> Dict[str, Any]:
         """
         Extract tables from PDF using Modal.com Table Transformer.
