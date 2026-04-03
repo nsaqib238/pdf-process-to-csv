@@ -97,8 +97,11 @@ def test_modal_extraction(pdf_path: str, modal_url: str):
 
 
 if __name__ == "__main__":
-    # Update this with your Modal endpoint URL from deployment
-    MODAL_URL = "YOUR_MODAL_ENDPOINT_URL_HERE"
+    # Your Modal endpoint URL from deployment
+    MODAL_URL = "https://nsaqib238--as3000-table-extractor-web-extract-tables.modal.run"
+    
+    # Uncomment below if you need to update the URL:
+    # MODAL_URL = "YOUR_MODAL_ENDPOINT_URL_HERE"
     
     if MODAL_URL == "YOUR_MODAL_ENDPOINT_URL_HERE":
         print("⚠️  Please update MODAL_URL in this file with your actual endpoint!")
