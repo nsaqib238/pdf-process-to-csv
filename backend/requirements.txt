@@ -31,3 +31,9 @@ Pillow>=10.0
 # Optional: AI-powered table enhancement (OpenAI GPT-4 Vision)
 # Requires OPENAI_API_KEY in .env and enable_ai_table_discovery=true in config
 openai>=1.12.0
+
+# Modal.com integration for self-hosted AI table extraction
+# Alternative to OpenAI with 99.8% cost savings
+modal>=0.63.0
+requests>=2.31.0
+urllib3>=2.0.7
