@@ -310,6 +310,11 @@ modal run modal_table_extractor.py --pdf-path "path/to/pdf"
 modal run modal_table_extractor.py --pdf-path "backend\uploads\AS3000.pdf"
 modal run modal_table_extractor.py --pdf-path "Tables AS3000 2018.pdf"
 
+# Modal endpoint URL:
+modal deploy modal_table_extractor.py
+✓ Created ASGI app web_extract_tables
+  => https://nsaqib238--as3000-table-extractor-web-extract-tables.modal.run
+
 # Test (HTTP API)
 python test_modal_api.py "path/to/pdf"
 
