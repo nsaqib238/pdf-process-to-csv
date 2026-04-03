@@ -163,40 +163,49 @@ def extract_tables_gpu(pdf_bytes: bytes, filename: str = "document.pdf") -> dict
 
 
 @app.function(image=image)
-@modal.web_endpoint(method="POST")
-def web_extract_tables(request_data: dict):
-    """
-    HTTP endpoint for table extraction.
+@modal.asgi_app()
+def web_extract_tables():
+    from fastapi import FastAPI, Request
     
-    POST JSON:
-    {
-        "pdf_base64": "base64_encoded_pdf",
-        "filename": "AS3000.pdf"
-    }
+    web_app = FastAPI()
     
-    Returns extraction results.
-    """
-    import base64
-    
-    try:
-        pdf_base64 = request_data.get("pdf_base64")
-        filename = request_data.get("filename", "document.pdf")
+    @web_app.post("/extract")
+    async def extract_endpoint(request: Request):
+        """
+        HTTP endpoint for table extraction.
         
-        if not pdf_base64:
+        POST JSON to /extract:
+        {
+            "pdf_base64": "base64_encoded_pdf",
+            "filename": "AS3000.pdf"
+        }
+        
+        Returns extraction results.
+        """
+        import base64
+        
+        try:
+            request_data = await request.json()
+            pdf_base64 = request_data.get("pdf_base64")
+            filename = request_data.get("filename", "document.pdf")
+            
+            if not pdf_base64:
+                return {
+                    "success": False,
+                    "error": "Missing pdf_base64 in request"
+                }
+            
+            pdf_bytes = base64.b64decode(pdf_base64)
+            result = extract_tables_gpu.remote(pdf_bytes, filename)
+            return result
+            
+        except Exception as e:
             return {
                 "success": False,
-                "error": "Missing pdf_base64 in request"
+                "error": str(e)
             }
-        
-        pdf_bytes = base64.b64decode(pdf_base64)
-        result = extract_tables_gpu.remote(pdf_bytes, filename)
-        return result
-        
-    except Exception as e:
-        return {
-            "success": False,
-            "error": str(e)
-        }
+    
+    return web_app
 
 
 @app.local_entrypoint()

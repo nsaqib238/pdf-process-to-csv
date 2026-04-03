@@ -36,8 +36,11 @@ def test_modal_extraction(pdf_path: str, modal_url: str):
     # Call Modal API
     print(f"📤 Sending to Modal.com...")
     try:
+        # Add /extract to the URL if not already present
+        api_url = modal_url if modal_url.endswith('/extract') else f"{modal_url}/extract"
+        
         response = requests.post(
-            modal_url,
+            api_url,
             json={
                 "pdf_base64": pdf_base64,
                 "filename": pdf_path.split("/")[-1]

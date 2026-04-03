@@ -54,7 +54,7 @@ modal deploy modal_table_extractor.py
 **Expected output**:
 ```
 ✓ Initialized. View run at https://modal.com/...
-✓ Created web function web_extract_tables
+✓ Created ASGI app web_extract_tables
   => https://yourname--as3000-table-extractor-web-extract-tables.modal.run
 
 ✓ App deployed! 🎉
@@ -65,7 +65,10 @@ modal deploy modal_table_extractor.py
 https://yourname--as3000-table-extractor-web-extract-tables.modal.run
 ```
 
-You'll need this in the next step.
+**Important**: When calling the API, use `/extract` endpoint:
+```
+https://yourname--as3000-table-extractor-web-extract-tables.modal.run/extract
+```
 
 ---
 
@@ -108,11 +111,13 @@ RESULTS
 
 ### Option B: HTTP API Test (More realistic)
 
-1. **Edit `test_modal_api.py`** - Update line 75:
+1. **Edit `test_modal_api.py`** - Update line 98:
 ```python
 MODAL_URL = "https://yourname--as3000-table-extractor-web-extract-tables.modal.run"
 ```
 Replace with YOUR actual endpoint URL from Step 3.
+
+**Note**: The test script automatically adds `/extract` to the URL.
 
 2. **Run test**:
 ```bash
