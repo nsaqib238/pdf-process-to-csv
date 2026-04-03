@@ -107,6 +107,13 @@ class Settings(BaseSettings):
     ai_log_token_usage: bool = True
     ai_alert_cost_threshold: float = 15.0  # USD per job (updated for full document processing)
 
+    # Modal.com Integration (Self-hosted AI)
+    use_modal_extraction: bool = False
+    modal_endpoint: Optional[str] = None
+    modal_timeout: int = 300  # seconds
+    modal_fallback_mode: str = "openai"  # openai, fail, or skip
+    modal_confidence_threshold: float = 0.70
+
     # API settings
     api_host: str = "0.0.0.0"
     api_port: int = 8000

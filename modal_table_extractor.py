@@ -35,6 +35,8 @@ image = (
     gpu="T4",              # $0.43/hour (cheapest)
     timeout=900,           # 15 minutes max
     memory=16384,          # 16GB RAM
+    keep_warm=0,           # 0 = cold start, 1+ = always warm ($10/day)
+    container_idle_timeout=300,  # Keep container 5min after last request
 )
 def extract_tables_gpu(pdf_bytes: bytes, filename: str = "document.pdf") -> dict:
     """
@@ -206,6 +208,25 @@ def web_extract_tables():
             }
     
     return web_app
+
+
+@app.function(
+    image=image,
+    schedule=modal.Cron("*/15 8-18 * * 1-5"),  # Every 15min, 8am-6pm, Mon-Fri
+)
+def keep_warm_ping():
+    """
+    Scheduled ping to keep container warm during business hours.
+    Runs every 15 minutes from 8am-6pm Monday-Friday.
+    Cost: ~$2-3/month vs $300/month for 24/7 keep_warm=1
+    
+    This reduces cold start from 2-3min to 30-45sec during business hours.
+    Outside business hours, cold starts are acceptable for cost savings.
+    """
+    import time
+    print(f"🏓 Keep-warm ping at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    print("✅ Container is warm and ready")
+    return {"status": "warm", "timestamp": time.time()}
 
 
 @app.local_entrypoint()
