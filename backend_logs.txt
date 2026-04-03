@@ -4385,3 +4385,32 @@ WARNING: No glyph for 32 (CID 0020) in font HiddenHorzOCR
 2026-03-31 00:14:00,084 - services.output_generator - INFO - Generated tables JSON: outputs\e20353aa-b705-4f36-b080-94a74f91b484\tables.json (19 tables)
 2026-03-31 00:14:00,085 - services.pdf_processor - INFO - Tables-only processing completed (Job ID: e20353aa-b705-4f36-b080-94a74f91b484, 19 tables)
 2026-03-31 00:14:00,085 - __main__ - INFO - Tables-only finished (Job ID: e20353aa-b705-4f36-b080-94a74f91b484)
+2026-04-02 06:36:57,656 - __main__ - INFO - ================================================================================
+2026-04-02 06:36:57,657 - __main__ - INFO - PDF Processing Pipeline Starting...
+2026-04-02 06:36:57,657 - __main__ - INFO - ================================================================================
+2026-04-02 06:36:57,658 - services.ai_table_service - INFO - Initializing AI Table Service...
+2026-04-02 06:36:57,658 - services.ai_table_service - INFO - AI feature flags from .env:
+2026-04-02 06:36:57,658 - services.ai_table_service - INFO -   - ENABLE_AI_TABLE_DISCOVERY: True
+2026-04-02 06:36:57,658 - services.ai_table_service - INFO -   - ENABLE_AI_CAPTION_DETECTION: True
+2026-04-02 06:36:57,658 - services.ai_table_service - INFO -   - ENABLE_AI_STRUCTURE_VALIDATION: True
+2026-04-02 06:36:57,658 - services.ai_table_service - INFO - AI configuration loaded:
+2026-04-02 06:36:57,659 - services.ai_table_service - INFO -   - Model: gpt-4o-mini
+2026-04-02 06:36:57,659 - services.ai_table_service - INFO -   - Max calls per job: 300
+2026-04-02 06:36:57,659 - services.ai_table_service - INFO -   - Cost alert threshold: $15.00
+2026-04-02 06:36:57,659 - services.ai_table_service - INFO -   - Discovery confidence threshold: 0.7
+2026-04-02 06:36:57,659 - services.ai_table_service - INFO -   - Validation quality threshold: 0.6
+2026-04-02 06:36:57,659 - services.ai_table_service - INFO -   - OpenAI API key: **********vK8mhioA
+2026-04-02 06:36:57,659 - services.ai_table_service - INFO - Attempting to initialize OpenAI client...
+2026-04-02 06:36:59,622 - services.ai_table_service - INFO - Creating OpenAI client with model: gpt-4o-mini
+2026-04-02 06:36:59,768 - services.ai_table_service - INFO - ✅ OpenAI client initialized successfully with model: gpt-4o-mini
+2026-04-02 06:36:59,768 - services.table_pipeline - INFO - AI table service initialized (discovery=True, caption=True, validation=True)
+2026-04-02 06:36:59,768 - __main__ - INFO - ✅ AI Service Status:
+2026-04-02 06:36:59,768 - __main__ - INFO -    - Discovery enabled: True
+2026-04-02 06:36:59,768 - __main__ - INFO -    - Caption detection enabled: True
+2026-04-02 06:36:59,768 - __main__ - INFO -    - Structure validation enabled: True
+2026-04-02 06:36:59,769 - __main__ - INFO -    - Model: gpt-4o-mini
+2026-04-02 06:36:59,769 - __main__ - INFO -    - Discovery mode: comprehensive
+2026-04-02 06:36:59,769 - __main__ - INFO -    - Max cost: $12.0
+2026-04-02 06:36:59,769 - __main__ - INFO - ================================================================================
+2026-04-02 06:36:59,769 - __main__ - INFO - Server ready. Logs are being written to: backend_logs.txt
+2026-04-02 06:36:59,769 - __main__ - INFO - ================================================================================
