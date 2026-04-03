@@ -722,7 +722,7 @@ def extract_pdf_complete(pdf_bytes: bytes, filename: str = "document.pdf") -> di
 # ============================================================================
 
 @app.function(image=image, gpu="T4", timeout=3600)
-@modal.web_endpoint(method="POST")
+@modal.fastapi_endpoint(method="POST")
 def extract(data: dict):
     """
     Main extraction endpoint.
@@ -758,7 +758,7 @@ def extract(data: dict):
 
 
 @app.function(image=image, gpu="T4", timeout=600)
-@modal.web_endpoint(method="GET")
+@modal.fastapi_endpoint(method="GET")
 def warmup():
     """
     Warmup endpoint - loads models and initializes container.
@@ -820,7 +820,7 @@ def warmup():
 
 
 @app.function(image=image)
-@modal.web_endpoint(method="GET")
+@modal.fastapi_endpoint(method="GET")
 def health():
     """
     Health check endpoint.
