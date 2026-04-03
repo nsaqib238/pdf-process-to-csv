@@ -55,19 +55,19 @@ modal deploy modal_table_extractor.py
 ```
 ✓ Initialized. View run at https://modal.com/...
 ✓ Created ASGI app web_extract_tables
-  => https://yourname--as3000-table-extractor-web-extract-tables.modal.run
+  => https://nsaqib238--as3000-table-extractor-web-extract-tables.modal.run
 
 ✓ App deployed! 🎉
 ```
 
-**SAVE YOUR ENDPOINT URL!** Copy the long URL that looks like:
+**YOUR ENDPOINT URL:**
 ```
-https://yourname--as3000-table-extractor-web-extract-tables.modal.run
+https://nsaqib238--as3000-table-extractor-web-extract-tables.modal.run
 ```
 
-**Important**: When calling the API, use `/extract` endpoint:
+**API endpoint (with /extract path):**
 ```
-https://yourname--as3000-table-extractor-web-extract-tables.modal.run/extract
+https://nsaqib238--as3000-table-extractor-web-extract-tables.modal.run/extract
 ```
 
 ---
@@ -120,42 +120,44 @@ modal run modal_table_extractor.py --pdf-path "C:\Users\contr\Documents\GitHub\p
   Page 12: 1 table(s) (0.43s)
   Page 13: 2 table(s) (0.51s)
   ...
-✅ Complete: 48 tables in 125.3s
+✅ Complete: 113 tables in 44.98s
 
 RESULTS
 ============================================================
 {
   "success": true,
-  "table_count": 48,
-  "processing_time": 125.3,
+  "table_count": 113,
+  "processing_time": 44.98,
   ...
 }
 ```
 
+**✅ You successfully extracted 113 tables from AS3000!**
+
 ### Option B: HTTP API Test (More realistic)
 
-1. **Edit `test_modal_api.py`** - Update line 98:
-```python
-MODAL_URL = "https://yourname--as3000-table-extractor-web-extract-tables.modal.run"
-```
-Replace with YOUR actual endpoint URL from Step 3.
+**The test_modal_api.py file is already configured with your endpoint!**
 
-**Note**: The test script automatically adds `/extract` to the URL.
-
-2. **Run test**:
+Just run:
 ```bash
-python test_modal_api.py "path/to/AS3000.pdf"
+python test_modal_api.py "Tables AS3000 2018.pdf"
 ```
 
-Or just:
+Or use default:
 ```bash
 python test_modal_api.py
 # Uses default: backend/uploads/AS3000.pdf
 ```
 
+**Note**: Your endpoint is already set to:
+```
+https://nsaqib238--as3000-table-extractor-web-extract-tables.modal.run
+```
+The script automatically adds `/extract` to the URL.
+
 **Expected output**:
 ```
-📄 Testing with: AS3000.pdf
+📄 Testing with: Tables AS3000 2018.pdf
 📦 PDF size: 21.3MB
 🔄 Encoding to base64...
 📤 Sending to Modal.com...
@@ -163,9 +165,9 @@ python test_modal_api.py
 ============================================================
 ✅ SUCCESS
 ============================================================
-Tables found: 48
+Tables found: 113
 Pages processed: 158
-Processing time: 125.32s
+Processing time: 44.98s
 Model: Microsoft Table Transformer
 Device: cuda
 
@@ -175,7 +177,7 @@ Device: cuda
   ...
 
 💾 Full results saved to: modal_results.json
-💰 Estimated cost: $0.0149 (~$0.02/doc)
+💰 Estimated cost: $0.0054 (~$0.01/doc)
 ```
 
 ---
@@ -199,14 +201,14 @@ You'll see:
 
 After running steps 1-5, you should have:
 
-- [ ] Modal CLI installed
-- [ ] Authenticated with your account
-- [ ] Function deployed successfully
-- [ ] Got your endpoint URL
-- [ ] Tested with AS3000 PDF
-- [ ] Saw results: 40-50 tables detected
-- [ ] Cost: ~$0.02 per document
-- [ ] Still have ~$29.98 free credits left
+- [x] Modal CLI installed ✅
+- [x] Authenticated with your account ✅
+- [x] Function deployed successfully ✅
+- [x] Got your endpoint URL ✅
+- [x] Tested with AS3000 PDF ✅
+- [x] Saw results: 113 tables detected ✅
+- [x] Cost: ~$0.01 per document ✅
+- [x] Still have ~$29.99 free credits left ✅
 
 ---
 
@@ -304,19 +306,20 @@ modal token new
 modal deploy modal_table_extractor.py
 
 # Test (command line) - USE --pdf-path FLAG!
-modal run modal_table_extractor.py --pdf-path "path/to/pdf"
+modal run modal_table_extractor.py --pdf-path "Tables AS3000 2018.pdf"
 
 # Example Windows paths:
 modal run modal_table_extractor.py --pdf-path "backend\uploads\AS3000.pdf"
 modal run modal_table_extractor.py --pdf-path "Tables AS3000 2018.pdf"
 
-# Modal endpoint URL:
-modal deploy modal_table_extractor.py
-✓ Created ASGI app web_extract_tables
-  => https://nsaqib238--as3000-table-extractor-web-extract-tables.modal.run
+# Test (HTTP API) - Already configured with your endpoint!
+python test_modal_api.py "Tables AS3000 2018.pdf"
 
-# Test (HTTP API)
-python test_modal_api.py "path/to/pdf"
+# Your Modal endpoint:
+# https://nsaqib238--as3000-table-extractor-web-extract-tables.modal.run
+
+# Your API endpoint (for backend integration):
+# https://nsaqib238--as3000-table-extractor-web-extract-tables.modal.run/extract
 
 # Check logs
 modal logs as3000-table-extractor
