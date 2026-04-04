@@ -725,7 +725,10 @@ def extract_pdf_complete(pdf_bytes: bytes, filename: str = "document.pdf") -> di
 @modal.fastapi_endpoint(method="POST")
 def extract(data: dict):
     """
-    Main extraction endpoint.
+    Main extraction endpoint - DEPRECATED: Use extract_tables + extract_clauses instead.
+    
+    This endpoint returns both tables and clauses but has issues with large responses
+    (292 tables = 100-200MB JSON, gets truncated).
     
     POST /extract
     Body: {
@@ -754,6 +757,102 @@ def extract(data: dict):
         return {
             "success": False,
             "error": f"Extraction failed: {str(e)}"
+        }
+
+
+@app.function(image=image, gpu="T4", timeout=10800)
+@modal.fastapi_endpoint(method="POST")
+def extract_tables(data: dict):
+    """
+    Extract TABLES ONLY (avoids response size issues).
+    
+    POST /extract-tables
+    Body: {
+        "pdf_base64": "base64_encoded_pdf",
+        "filename": "document.pdf"
+    }
+    
+    Returns: {
+        "success": True,
+        "tables": [...],  # 292 tables
+        "table_count": 292,
+        "processing_time": 3444.13,
+        "cost_estimate": 0.4114
+    }
+    """
+    import base64
+    
+    pdf_base64 = data.get("pdf_base64", "")
+    filename = data.get("filename", "document.pdf")
+    
+    if not pdf_base64:
+        return {
+            "success": False,
+            "error": "No pdf_base64 provided",
+            "tables": [],
+            "table_count": 0
+        }
+    
+    try:
+        pdf_bytes = base64.b64decode(pdf_base64)
+        result = extract_tables_from_pdf(pdf_bytes, filename)
+        return result
+    except Exception as e:
+        import traceback
+        return {
+            "success": False,
+            "error": f"Table extraction failed: {str(e)}",
+            "traceback": traceback.format_exc(),
+            "tables": [],
+            "table_count": 0
+        }
+
+
+@app.function(image=image, timeout=300)  # No GPU needed for clauses
+@modal.fastapi_endpoint(method="POST")
+def extract_clauses(data: dict):
+    """
+    Extract CLAUSES ONLY (rule-based, no GPU).
+    
+    POST /extract-clauses
+    Body: {
+        "pdf_base64": "base64_encoded_pdf",
+        "filename": "document.pdf"
+    }
+    
+    Returns: {
+        "success": True,
+        "clauses": [...],  # 4219 clauses
+        "clause_count": 4219,
+        "processing_time": 31.13,
+        "cost_estimate": 0.0
+    }
+    """
+    import base64
+    
+    pdf_base64 = data.get("pdf_base64", "")
+    filename = data.get("filename", "document.pdf")
+    
+    if not pdf_base64:
+        return {
+            "success": False,
+            "error": "No pdf_base64 provided",
+            "clauses": [],
+            "clause_count": 0
+        }
+    
+    try:
+        pdf_bytes = base64.b64decode(pdf_base64)
+        result = extract_clauses_from_pdf(pdf_bytes, filename)
+        return result
+    except Exception as e:
+        import traceback
+        return {
+            "success": False,
+            "error": f"Clause extraction failed: {str(e)}",
+            "traceback": traceback.format_exc(),
+            "clauses": [],
+            "clause_count": 0
         }
 
 

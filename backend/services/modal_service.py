@@ -86,6 +86,7 @@ class ModalService:
     def extract_complete(self, pdf_path: Path, filename: str = None) -> Dict[str, Any]:
         """
         Extract BOTH tables and clauses from PDF using Modal.com.
+        Uses separate endpoints to avoid HTTP response size limits.
 
         Args:
             pdf_path: Path to PDF file
@@ -112,6 +113,7 @@ class ModalService:
 
         try:
             logger.info(f"📡 Calling Modal.com for complete extraction: {filename}")
+            logger.info(f"   Using split endpoints to avoid response size limits")
 
             # Read and encode PDF
             with open(pdf_path, "rb") as f:
@@ -122,9 +124,11 @@ class ModalService:
 
             pdf_base64 = base64.b64encode(pdf_bytes).decode("utf-8")
 
-            # Call Modal API (single endpoint for both tables and clauses)
-            response = requests.post(
-                self.endpoint,
+            # STEP 1: Extract tables (separate endpoint)
+            logger.info("📊 Step 1: Extracting tables...")
+            tables_endpoint = self.endpoint.replace("/extract", "/extract-tables")
+            tables_response = requests.post(
+                tables_endpoint,
                 json={
                     "pdf_base64": pdf_base64,
                     "filename": filename
@@ -132,8 +136,8 @@ class ModalService:
                 timeout=self.timeout
             )
 
-            if response.status_code != 200:
-                error_msg = f"Modal API returned status {response.status_code}: {response.text}"
+            if tables_response.status_code != 200:
+                error_msg = f"Modal tables API returned status {tables_response.status_code}: {tables_response.text}"
                 logger.error(error_msg)
                 return {
                     "success": False,
@@ -142,22 +146,87 @@ class ModalService:
                     "clauses": [],
                 }
 
-            result = response.json()
+            tables_result = tables_response.json()
+            
+            if not tables_result.get("success"):
+                logger.error(f"Modal table extraction failed: {tables_result.get('error')}")
+                return {
+                    "success": False,
+                    "error": tables_result.get("error"),
+                    "tables": [],
+                    "clauses": [],
+                }
 
-            if not result.get("success"):
-                logger.error(f"Modal extraction failed: {result.get('error')}")
-                return result
+            tables = tables_result.get("tables", [])
+            table_count = tables_result.get("table_count", 0)
+            tables_time = tables_result.get("processing_time", 0)
+            tables_cost = tables_result.get("cost_estimate", 0)
 
-            # Log results
-            table_count = result.get("table_count", 0)
-            clause_count = result.get("clause_count", 0)
-            processing_time = result.get("processing_time", 0)
-            cost_estimate = result.get("cost_estimate", 0)
+            logger.info(f"✅ Tables extracted: {table_count} tables in {tables_time:.2f}s (${tables_cost:.4f})")
 
-            logger.info(f"✅ Modal.com extracted {table_count} tables, {clause_count} clauses")
-            logger.info(f"   Time: {processing_time:.2f}s | Cost: ${cost_estimate:.3f}")
+            # STEP 2: Extract clauses (separate endpoint)
+            logger.info("📝 Step 2: Extracting clauses...")
+            clauses_endpoint = self.endpoint.replace("/extract", "/extract-clauses")
+            clauses_response = requests.post(
+                clauses_endpoint,
+                json={
+                    "pdf_base64": pdf_base64,
+                    "filename": filename
+                },
+                timeout=self.timeout  # Clauses are fast (~30s), but use same timeout for consistency
+            )
 
-            return result
+            if clauses_response.status_code != 200:
+                error_msg = f"Modal clauses API returned status {clauses_response.status_code}: {clauses_response.text}"
+                logger.error(error_msg)
+                # Tables succeeded but clauses failed - still return tables
+                return {
+                    "success": True,  # Partial success
+                    "error": f"Clauses extraction failed: {error_msg}",
+                    "tables": tables,
+                    "clauses": [],
+                    "table_count": table_count,
+                    "clause_count": 0,
+                    "processing_time": tables_time,
+                    "cost_estimate": tables_cost,
+                }
+
+            clauses_result = clauses_response.json()
+
+            if not clauses_result.get("success"):
+                logger.error(f"Modal clause extraction failed: {clauses_result.get('error')}")
+                # Tables succeeded but clauses failed - still return tables
+                return {
+                    "success": True,  # Partial success
+                    "error": f"Clauses extraction failed: {clauses_result.get('error')}",
+                    "tables": tables,
+                    "clauses": [],
+                    "table_count": table_count,
+                    "clause_count": 0,
+                    "processing_time": tables_time,
+                    "cost_estimate": tables_cost,
+                }
+
+            clauses = clauses_result.get("clauses", [])
+            clause_count = clauses_result.get("clause_count", 0)
+            clauses_time = clauses_result.get("processing_time", 0)
+
+            total_time = tables_time + clauses_time
+            total_cost = tables_cost  # Clauses are rule-based, no cost
+
+            logger.info(f"✅ Clauses extracted: {clause_count} clauses in {clauses_time:.2f}s")
+            logger.info(f"✅ Modal.com complete: {table_count} tables, {clause_count} clauses")
+            logger.info(f"   Total time: {total_time:.2f}s | Total cost: ${total_cost:.4f}")
+
+            return {
+                "success": True,
+                "tables": tables,
+                "clauses": clauses,
+                "table_count": table_count,
+                "clause_count": clause_count,
+                "processing_time": total_time,
+                "cost_estimate": total_cost,
+            }
 
         except requests.exceptions.Timeout:
             error_msg = f"Modal.com request timed out after {self.timeout}s"
