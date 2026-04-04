@@ -65,6 +65,16 @@ class PDFProcessor:
                 filename=Path(input_path).name
             )
 
+            # DEBUG: Log what Modal actually returned
+            logger.info(f"Modal extraction result keys: {list(extraction_result.keys())}")
+            logger.info(f"Modal success: {extraction_result.get('success')}")
+            logger.info(f"Modal table_count: {extraction_result.get('table_count')}")
+            logger.info(f"Modal clause_count: {extraction_result.get('clause_count')}")
+            logger.info(f"Modal tables list length: {len(extraction_result.get('tables', []))}")
+            logger.info(f"Modal clauses list length: {len(extraction_result.get('clauses', []))}")
+            if extraction_result.get("error"):
+                logger.error(f"Modal returned error: {extraction_result.get('error')}")
+
             if not extraction_result.get("success"):
                 error_msg = extraction_result.get("error", "Unknown error")
                 raise Exception(f"Modal.com extraction failed: {error_msg}")

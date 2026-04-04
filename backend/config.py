@@ -110,7 +110,7 @@ class Settings(BaseSettings):
     # Modal.com Integration (Self-hosted AI)
     use_modal_extraction: bool = False
     modal_endpoint: Optional[str] = None
-    modal_timeout: int = 300  # seconds
+    modal_timeout: int = 10800  # seconds (3 hours for large PDFs)
     modal_fallback_mode: str = "openai"  # openai, fail, or skip
     modal_confidence_threshold: float = 0.70
 
