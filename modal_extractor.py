@@ -643,7 +643,7 @@ def extract_body_text(lines: List[str], start_idx: int, max_lines: int = 50) -> 
 @app.function(
     image=image,
     gpu="T4",              # $0.43/hour for table extraction
-    timeout=3600,          # 60 minutes for large PDFs (70MB+)
+    timeout=10800,         # 180 minutes (3 hours) for very large PDFs (500-700 pages)
     memory=16384,          # 16GB RAM
 )
 def extract_pdf_complete(pdf_bytes: bytes, filename: str = "document.pdf") -> dict:
@@ -721,7 +721,7 @@ def extract_pdf_complete(pdf_bytes: bytes, filename: str = "document.pdf") -> di
 # WEB ENDPOINTS
 # ============================================================================
 
-@app.function(image=image, gpu="T4", timeout=3600)
+@app.function(image=image, gpu="T4", timeout=10800)
 @modal.fastapi_endpoint(method="POST")
 def extract(data: dict):
     """
