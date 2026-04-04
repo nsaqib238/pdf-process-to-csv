@@ -126,7 +126,9 @@ class ModalService:
 
             # STEP 1: Extract tables (separate endpoint)
             logger.info("📊 Step 1: Extracting tables...")
-            tables_endpoint = self.endpoint.replace("/extract", "/extract-tables")
+            # Modal URL structure: https://user--app-extract.modal.run
+            # Replace: extract.modal.run -> extract-tables.modal.run
+            tables_endpoint = self.endpoint.replace("-extract.modal.run", "-extract-tables.modal.run")
             tables_response = requests.post(
                 tables_endpoint,
                 json={
@@ -166,7 +168,9 @@ class ModalService:
 
             # STEP 2: Extract clauses (separate endpoint)
             logger.info("📝 Step 2: Extracting clauses...")
-            clauses_endpoint = self.endpoint.replace("/extract", "/extract-clauses")
+            # Modal URL structure: https://user--app-extract.modal.run
+            # Replace: extract.modal.run -> extract-clauses.modal.run
+            clauses_endpoint = self.endpoint.replace("-extract.modal.run", "-extract-clauses.modal.run")
             clauses_response = requests.post(
                 clauses_endpoint,
                 json={
