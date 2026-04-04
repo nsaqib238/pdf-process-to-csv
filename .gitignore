@@ -39,6 +39,14 @@ outputs/
 *.pdf
 *.zip
 
+# Test scripts
+test_*.py
+
+# Root-level output files (should be in outputs/ directory)
+/normalized_document.txt
+/tables.json
+/clauses.json
+
 # Node
 node_modules/
 .next/
