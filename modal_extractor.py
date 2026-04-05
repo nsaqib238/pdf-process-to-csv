@@ -110,9 +110,10 @@ def extract_tables_from_pdf(pdf_bytes: bytes, filename: str) -> Dict[str, Any]:
         
         # Convert PDF to images
         print("  Converting PDF to images...")
-        # Use 300 DPI for better text recognition in small table cells
-        # No preprocessing applied - PaddleOCR handles raw images well
-        images = convert_from_bytes(pdf_bytes, dpi=300)
+        # Use 500 DPI for high-quality text recognition, especially for small caption text
+        # Higher DPI critical for: table numbers (3.1, 3.2), titles, small fonts
+        # Trade-off: Slower processing but better accuracy on captions and fine text
+        images = convert_from_bytes(pdf_bytes, dpi=500)
         
         # Initialize PaddleOCR (once for all tables)
         print("  Initializing PaddleOCR...")
