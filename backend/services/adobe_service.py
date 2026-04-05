@@ -95,7 +95,8 @@ class AdobeService:
     def extract_text_with_coordinates(
         self, 
         pdf_path: Path, 
-        filename: str = None
+        filename: str = None,
+        page_offset: int = 0
     ) -> Dict[str, Any]:
         """
         Extract text with bounding box coordinates from PDF.
@@ -103,6 +104,7 @@ class AdobeService:
         Args:
             pdf_path: Path to PDF file
             filename: Optional filename for logging
+            page_offset: Page offset for chunk merging (0 for first chunk, 93 for second, etc.)
             
         Returns:
             {
@@ -125,7 +127,8 @@ class AdobeService:
                     ...
                 ],
                 "processing_time": 12.5,
-                "page_count": 158
+                "page_count": 158,
+                "page_offset": 0
             }
             
         Raises:
@@ -177,7 +180,7 @@ class AdobeService:
                     adobe_data = json.loads(json_content.decode("utf-8"))
 
             # Parse Adobe JSON to our format
-            parsed_data = self._parse_adobe_json(adobe_data)
+            parsed_data = self._parse_adobe_json(adobe_data, page_offset=page_offset)
             
             processing_time = time.time() - start_time
             
@@ -188,6 +191,7 @@ class AdobeService:
                 "pages": parsed_data["pages"],
                 "page_count": parsed_data["page_count"],
                 "processing_time": round(processing_time, 2),
+                "page_offset": page_offset,
                 "raw_data": adobe_data  # Keep for debugging
             }
 
@@ -213,9 +217,13 @@ class AdobeService:
                 "fallback_reason": "adobe_api_limit" if "disqualified" in error_str else "adobe_error"
             }
 
-    def _parse_adobe_json(self, adobe_data: Dict) -> Dict[str, Any]:
+    def _parse_adobe_json(self, adobe_data: Dict, page_offset: int = 0) -> Dict[str, Any]:
         """
         Parse Adobe structuredData.json to our coordinate format.
+        
+        Args:
+            adobe_data: Adobe JSON response
+            page_offset: Offset to add to page numbers for chunk merging
         
         Adobe JSON structure:
         {
@@ -234,7 +242,7 @@ class AdobeService:
         pages_dict = {}
         
         for element in adobe_data.get("elements", []):
-            page_num = element.get("Page", 0) + 1  # Adobe uses 0-indexed pages
+            page_num = element.get("Page", 0) + 1 + page_offset  # Adobe uses 0-indexed pages + chunk offset
             
             if page_num not in pages_dict:
                 pages_dict[page_num] = {

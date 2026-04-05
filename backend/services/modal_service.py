@@ -25,6 +25,7 @@ from collections import Counter
 
 from config import settings
 from services.adobe_service import AdobeService
+from services.pdf_splitter import PDFSplitter, merge_extraction_results
 
 logger = logging.getLogger(__name__)
 
@@ -50,9 +51,19 @@ class ModalService:
         self.adobe_service = AdobeService()
         self.use_adobe_hybrid = self.adobe_service.is_available()
         
+        # Initialize PDF splitter for large documents
+        try:
+            self.pdf_splitter = PDFSplitter(chunk_size=93)  # 93 pages per chunk (safe under 100)
+        except ImportError:
+            logger.warning("⚠️ pypdf not installed. Large PDF splitting disabled.")
+            logger.info("   Install with: pip install pypdf")
+            self.pdf_splitter = None
+        
         if self.use_adobe_hybrid:
             logger.info("🔥 HYBRID MODE: Adobe OCR + Modal Structure")
             logger.info("   This will provide best-in-class text quality")
+            if self.pdf_splitter:
+                logger.info("✅ Large PDF splitting enabled (auto-chunk >100 pages)")
         else:
             logger.info("📊 STANDARD MODE: Modal with Tesseract OCR")
 
@@ -149,19 +160,43 @@ class ModalService:
             logger.info(f"📡 Calling Modal.com for complete extraction: {filename}")
             logger.info(f"   Using split endpoints to avoid response size limits")
             
-            # 🔥 HYBRID MODE: Adobe OCR first if available
+            # 🔥 HYBRID MODE: Adobe OCR with automatic chunking for large PDFs
             adobe_pages = None
             adobe_cost = 0.0
             if self.use_adobe_hybrid:
-                logger.info("🔥 Step 0: Adobe Extract API for high-quality OCR...")
-                adobe_result = self.adobe_service.extract_text_with_coordinates(pdf_path, filename)
-                if adobe_result.get("success"):
-                    adobe_pages = adobe_result.get("pages", [])
-                    adobe_cost = 0.05  # Approximate Adobe cost per document
-                    logger.info(f"   ✅ Adobe extracted {len(adobe_pages)} pages with high-quality text")
+                # Check if PDF needs splitting
+                needs_split = False
+                if self.pdf_splitter:
+                    split_info = self.pdf_splitter.get_split_info(pdf_path)
+                    needs_split = split_info.get("needs_splitting", False)
+                    
+                    if needs_split:
+                        logger.info(f"🔥 Large PDF detected: {split_info['total_pages']} pages")
+                        logger.info(f"   Will split into {split_info['num_chunks']} chunks of ~{split_info['chunk_size']} pages")
+                        logger.info(f"   Estimated cost: ${split_info['estimated_cost']} | Time: {split_info['estimated_time']:.0f}s")
+                
+                if needs_split:
+                    # Process with chunking
+                    logger.info("🔥 Step 0: Processing PDF in chunks for Adobe...")
+                    adobe_result = self._extract_with_chunking(pdf_path, filename)
+                    if adobe_result.get("success"):
+                        adobe_pages = adobe_result.get("pages", [])
+                        adobe_cost = adobe_result.get("total_cost", 0)
+                        logger.info(f"   ✅ Adobe extracted {len(adobe_pages)} pages across {adobe_result.get('num_chunks', 0)} chunks")
+                    else:
+                        logger.warning(f"   ⚠️ Adobe chunked extraction failed: {adobe_result.get('error')}")
+                        logger.info("   Falling back to Modal Tesseract OCR")
                 else:
-                    logger.warning(f"   ⚠️ Adobe extraction failed: {adobe_result.get('error')}")
-                    logger.info("   Falling back to Modal Tesseract OCR")
+                    # Single-chunk processing
+                    logger.info("🔥 Step 0: Adobe Extract API for high-quality OCR...")
+                    adobe_result = self.adobe_service.extract_text_with_coordinates(pdf_path, filename)
+                    if adobe_result.get("success"):
+                        adobe_pages = adobe_result.get("pages", [])
+                        adobe_cost = 0.05  # Approximate Adobe cost per document
+                        logger.info(f"   ✅ Adobe extracted {len(adobe_pages)} pages with high-quality text")
+                    else:
+                        logger.warning(f"   ⚠️ Adobe extraction failed: {adobe_result.get('error')}")
+                        logger.info("   Falling back to Modal Tesseract OCR")
 
             # Read and encode PDF
             with open(pdf_path, "rb") as f:
@@ -671,3 +706,101 @@ class ModalService:
 
         logger.info(f"✅ Converted {len(modal_clauses)} Modal clauses to pipeline format")
         return modal_clauses
+    
+    def _extract_with_chunking(self, pdf_path: Path, filename: str) -> Dict[str, Any]:
+        """
+        Extract text from large PDF by splitting into chunks and processing each.
+        Used for scanned PDFs > 100 pages to work within Adobe's limit.
+        
+        Args:
+            pdf_path: Path to PDF file
+            filename: Filename for logging
+            
+        Returns:
+            {
+                "success": True,
+                "pages": [...],  # All pages with adjusted page numbers
+                "num_chunks": 7,
+                "total_cost": 0.392,
+                "processing_time": 84.0
+            }
+        """
+        if not self.pdf_splitter:
+            return {
+                "success": False,
+                "error": "PDF splitter not available (pypdf not installed)",
+                "pages": []
+            }
+        
+        try:
+            # Split PDF into chunks
+            chunks = self.pdf_splitter.split_pdf(pdf_path)
+            
+            all_pages = []
+            total_cost = 0
+            total_time = 0
+            successful_chunks = 0
+            
+            # Process each chunk
+            for chunk in chunks:
+                chunk_idx = chunk["chunk_index"]
+                chunk_path = chunk["chunk_path"]
+                page_start = chunk["page_start"]
+                page_end = chunk["page_end"]
+                page_offset = page_start - 1  # Convert to 0-indexed offset
+                
+                logger.info(f"   Processing chunk {chunk_idx + 1}/{len(chunks)}: pages {page_start}-{page_end}")
+                
+                try:
+                    # Extract with Adobe
+                    result = self.adobe_service.extract_text_with_coordinates(
+                        chunk_path, 
+                        f"{filename}_chunk_{chunk_idx}",
+                        page_offset=page_offset
+                    )
+                    
+                    if result.get("success"):
+                        chunk_pages = result.get("pages", [])
+                        all_pages.extend(chunk_pages)
+                        total_cost += 0.056  # Cost per chunk
+                        total_time += result.get("processing_time", 0)
+                        successful_chunks += 1
+                        logger.info(f"      ✅ Chunk {chunk_idx + 1}: {len(chunk_pages)} pages extracted")
+                    else:
+                        logger.error(f"      ❌ Chunk {chunk_idx + 1} failed: {result.get('error')}")
+                        # Continue with other chunks even if one fails
+                        
+                except Exception as e:
+                    logger.error(f"      ❌ Chunk {chunk_idx + 1} error: {e}")
+                    # Continue with other chunks
+            
+            # Cleanup temporary chunk files
+            if not chunks[0].get("is_original", False):
+                self.pdf_splitter.cleanup_chunks(chunks)
+            
+            if successful_chunks == 0:
+                return {
+                    "success": False,
+                    "error": "All chunks failed to process",
+                    "pages": [],
+                    "num_chunks": len(chunks)
+                }
+            
+            logger.info(f"✅ Chunked extraction complete: {successful_chunks}/{len(chunks)} chunks successful")
+            
+            return {
+                "success": True,
+                "pages": all_pages,
+                "num_chunks": len(chunks),
+                "successful_chunks": successful_chunks,
+                "total_cost": round(total_cost, 3),
+                "processing_time": round(total_time, 2)
+            }
+            
+        except Exception as e:
+            logger.error(f"Chunked extraction error: {e}", exc_info=True)
+            return {
+                "success": False,
+                "error": str(e),
+                "pages": []
+            }

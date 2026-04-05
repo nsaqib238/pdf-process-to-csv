@@ -5,6 +5,7 @@ pydantic==2.5.3
 pydantic-settings==2.1.0
 # PyPDF2 is deprecated; pypdf is the maintained package (PdfReader / PdfWriter API)
 pypdf>=4.0,<6
+# pypdf also used for splitting large PDFs into chunks for Adobe API
 aiofiles==23.2.1
 
 # Adobe PDF Services SDK (for high-quality OCR with Modal hybrid pipeline)
