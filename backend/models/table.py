@@ -18,6 +18,8 @@ class Table(BaseModel):
     table_number: Optional[str] = None
     title: Optional[str] = None
     parent_clause_reference: Optional[str] = None
+    parent_clause_id: Optional[str] = None  # Link to parent clause
+    parent_clause_number: Optional[str] = None  # Parent clause number for reference
     page_start: int
     page_end: int
     header_rows: List[TableRow] = Field(default_factory=list)
