@@ -110,7 +110,8 @@ def extract_tables_from_pdf(pdf_bytes: bytes, filename: str) -> Dict[str, Any]:
         
         # Convert PDF to images
         print("  Converting PDF to images...")
-        images = convert_from_bytes(pdf_bytes, dpi=150)
+        # Increase DPI from 150 to 300 for sharper text recognition
+        images = convert_from_bytes(pdf_bytes, dpi=300)
         
         all_tables = []
         
@@ -196,8 +197,10 @@ def extract_table_caption(page_image, table_bbox, page_num):
     caption_region = page_image.crop((x0, caption_y0, x1, caption_y1))
     
     try:
+        # PSM 6: Assume uniform block of text (better for table captions)
+        # OEM 1: LSTM neural net mode (better accuracy than legacy)
         caption_text = pytesseract.image_to_string(
-            caption_region, config='--psm 6'
+            caption_region, config='--psm 6 --oem 1'
         ).strip()
         
         table_number = None
@@ -286,6 +289,7 @@ def extract_table_content(table_image, structure_data):
     import pytesseract
     import numpy as np
     import cv2
+    from PIL import ImageEnhance
     
     rows = structure_data.get("rows", [])
     columns = structure_data.get("columns", [])
@@ -295,7 +299,24 @@ def extract_table_content(table_image, structure_data):
         return extract_table_content_fallback(table_image)
     
     try:
+        # Preprocessing: enhance image quality before OCR
+        # 1. Sharpen image to improve text clarity
+        enhancer = ImageEnhance.Sharpness(table_image)
+        table_image = enhancer.enhance(2.0)
+        
+        # 2. Increase contrast to separate text from background
+        enhancer = ImageEnhance.Contrast(table_image)
+        table_image = enhancer.enhance(1.5)
+        
         img_cv = cv2.cvtColor(np.array(table_image), cv2.COLOR_RGB2BGR)
+        
+        # 3. Convert to grayscale and apply adaptive thresholding for binarization
+        gray = cv2.cvtColor(img_cv, cv2.COLOR_BGR2GRAY)
+        # Use adaptive threshold to handle varying lighting/contrast across table
+        binary = cv2.adaptiveThreshold(
+            gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+        )
+        img_cv = cv2.cvtColor(binary, cv2.COLOR_GRAY2BGR)
         
         header_rows = []
         data_rows = []
@@ -323,8 +344,13 @@ def extract_table_content(table_image, structure_data):
                     continue
                 
                 cell_img = img_cv[cell_y0:cell_y1, cell_x0:cell_x1]
+                
+                # PSM 6: Uniform block of text (good for table cells)
+                # OEM 1: LSTM neural net (best accuracy)
+                # -c preserve_interword_spaces=1: Keep spacing between words
                 cell_text = pytesseract.image_to_string(
-                    cell_img, config='--psm 6 --oem 3'
+                    cell_img, 
+                    config='--psm 6 --oem 1 -c preserve_interword_spaces=1'
                 ).strip()
                 cell_text = ' '.join(cell_text.split())
                 row_cells.append(cell_text)
@@ -347,9 +373,29 @@ def extract_table_content(table_image, structure_data):
 def extract_table_content_fallback(table_image):
     """Fallback: simple line-by-line OCR when structure recognition fails."""
     import pytesseract
+    import numpy as np
+    import cv2
+    from PIL import ImageEnhance
     
     try:
-        text = pytesseract.image_to_string(table_image, config='--psm 6').strip()
+        # Apply same preprocessing as main extraction
+        enhancer = ImageEnhance.Sharpness(table_image)
+        table_image = enhancer.enhance(2.0)
+        enhancer = ImageEnhance.Contrast(table_image)
+        table_image = enhancer.enhance(1.5)
+        
+        # Convert to grayscale and binarize
+        img_array = np.array(table_image)
+        if len(img_array.shape) == 3:
+            gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
+        else:
+            gray = img_array
+        binary = cv2.adaptiveThreshold(
+            gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+        )
+        
+        # PSM 6: Uniform block, OEM 1: LSTM mode
+        text = pytesseract.image_to_string(binary, config='--psm 6 --oem 1').strip()
         lines = [line.strip() for line in text.split('\n') if line.strip()]
         
         if len(lines) == 0:
