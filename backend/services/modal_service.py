@@ -305,13 +305,26 @@ class ModalService:
                     data_rows
                 )
 
+                # Convert confidence float to ConfidenceLevel enum
+                confidence_float = table.get("confidence", 0.0)
+                if confidence_float >= 0.9:
+                    confidence = "high"
+                elif confidence_float >= 0.7:
+                    confidence = "medium"
+                else:
+                    confidence = "low"
+
+                # Generate unique table_id
+                table_id = f"modal_{page}_{idx}_{table_number.replace('.', '_')}"
+
                 pipeline_table = {
+                    "table_id": table_id,
                     "table_number": table_number,
                     "title": table.get("title"),
                     "page_start": page,
                     "page_end": page,
                     "detection_method": "modal_complete",
-                    "confidence": table.get("confidence", 0.0),
+                    "confidence": confidence,
                     "bbox": table.get("bbox", {}),
                     "header_rows": header_rows,
                     "data_rows": data_rows,
