@@ -23,10 +23,9 @@ image = (
     modal.Image.debian_slim(python_version="3.11")
     .apt_install(
         "poppler-utils",      # PDF to image conversion
-        "tesseract-ocr",      # OCR for text extraction
-        "tesseract-ocr-eng",  # English language data
         "libgl1-mesa-glx",    # OpenCV dependencies
         "libglib2.0-0",
+        "libgomp1",           # Required for PaddlePaddle
     )
     .pip_install(
         # Table extraction (GPU models)
@@ -38,7 +37,9 @@ image = (
         "timm==0.9.12",
         "numpy==1.24.3",
         "opencv-python==4.8.1.78",
-        "pytesseract==0.3.10",
+        # PaddleOCR for high-quality text extraction (replaces Tesseract)
+        "paddleocr==2.7.3",
+        "paddlepaddle==2.6.0",
         # Clause extraction (rule-based parser)
         "pypdf==4.0.1",
         # Web framework
@@ -110,8 +111,18 @@ def extract_tables_from_pdf(pdf_bytes: bytes, filename: str) -> Dict[str, Any]:
         
         # Convert PDF to images
         print("  Converting PDF to images...")
-        # Increase DPI from 150 to 300 for sharper text recognition
-        images = convert_from_bytes(pdf_bytes, dpi=300)
+        # Use 200 DPI - good balance between quality and performance
+        images = convert_from_bytes(pdf_bytes, dpi=200)
+        
+        # Initialize PaddleOCR (once for all tables)
+        print("  Initializing PaddleOCR...")
+        from paddleocr import PaddleOCR
+        ocr_engine = PaddleOCR(
+            use_angle_cls=True,  # Enable text angle detection
+            lang='en',           # English language
+            use_gpu=torch.cuda.is_available(),  # Use GPU if available
+            show_log=False       # Suppress verbose logs
+        )
         
         all_tables = []
         
@@ -146,8 +157,8 @@ def extract_tables_from_pdf(pdf_bytes: bytes, filename: str) -> Dict[str, Any]:
                     table_image, structure_processor, structure_model, device
                 )
                 
-                # Extract content
-                table_content = extract_table_content(table_image, structure_data)
+                # Extract content with PaddleOCR
+                table_content = extract_table_content(table_image, structure_data, ocr_engine)
                 
                 # Build table result
                 table_result = {
@@ -161,7 +172,7 @@ def extract_tables_from_pdf(pdf_bytes: bytes, filename: str) -> Dict[str, Any]:
                     "row_count": table_content.get("row_count", 0),
                     "column_count": table_content.get("column_count", 0),
                     "has_merged_cells": structure_data.get("has_merged_cells", False),
-                    "extraction_method": "table_transformer_structure",
+                    "extraction_method": "table_transformer_paddleocr",
                 }
                 all_tables.append(table_result)
         
@@ -188,8 +199,8 @@ def extract_tables_from_pdf(pdf_bytes: bytes, filename: str) -> Dict[str, Any]:
 
 
 def extract_table_caption(page_image, table_bbox, page_num):
-    """Extract table number and title from caption region above table."""
-    import pytesseract
+    """Extract table number and title from caption region above table using PaddleOCR."""
+    from paddleocr import PaddleOCR
     
     x0, y0, x1, y1 = table_bbox
     caption_y0 = max(0, y0 - 100)
@@ -197,11 +208,22 @@ def extract_table_caption(page_image, table_bbox, page_num):
     caption_region = page_image.crop((x0, caption_y0, x1, caption_y1))
     
     try:
-        # PSM 6: Assume uniform block of text (better for table captions)
-        # OEM 1: LSTM neural net mode (better accuracy than legacy)
-        caption_text = pytesseract.image_to_string(
-            caption_region, config='--psm 6 --oem 1'
-        ).strip()
+        # Initialize PaddleOCR for caption
+        ocr = PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False, show_log=False)
+        
+        # Convert PIL to numpy array
+        import numpy as np
+        caption_array = np.array(caption_region)
+        
+        # Run OCR
+        result = ocr.ocr(caption_array, cls=True)
+        
+        # Extract text from result
+        caption_text = ""
+        if result and result[0]:
+            caption_text = ' '.join([line[1][0] for line in result[0]])
+        
+        caption_text = caption_text.strip()
         
         table_number = None
         title = None
@@ -284,39 +306,21 @@ def recognize_table_structure(table_image, processor, model, device):
         return {"rows": [], "columns": [], "column_headers": [], "has_merged_cells": False, "confidence": 0.0}
 
 
-def extract_table_content(table_image, structure_data):
-    """Extract text content from table cells using OCR."""
-    import pytesseract
+def extract_table_content(table_image, structure_data, ocr_engine):
+    """Extract text content from table cells using PaddleOCR."""
     import numpy as np
     import cv2
-    from PIL import ImageEnhance
     
     rows = structure_data.get("rows", [])
     columns = structure_data.get("columns", [])
     column_headers = structure_data.get("column_headers", [])
     
     if len(rows) == 0 or len(columns) == 0:
-        return extract_table_content_fallback(table_image)
+        return extract_table_content_fallback(table_image, ocr_engine)
     
     try:
-        # Preprocessing: enhance image quality before OCR
-        # 1. Sharpen image to improve text clarity
-        enhancer = ImageEnhance.Sharpness(table_image)
-        table_image = enhancer.enhance(2.0)
-        
-        # 2. Increase contrast to separate text from background
-        enhancer = ImageEnhance.Contrast(table_image)
-        table_image = enhancer.enhance(1.5)
-        
+        # Convert PIL to OpenCV format
         img_cv = cv2.cvtColor(np.array(table_image), cv2.COLOR_RGB2BGR)
-        
-        # 3. Convert to grayscale and apply adaptive thresholding for binarization
-        gray = cv2.cvtColor(img_cv, cv2.COLOR_BGR2GRAY)
-        # Use adaptive threshold to handle varying lighting/contrast across table
-        binary = cv2.adaptiveThreshold(
-            gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
-        )
-        img_cv = cv2.cvtColor(binary, cv2.COLOR_GRAY2BGR)
         
         header_rows = []
         data_rows = []
@@ -345,14 +349,18 @@ def extract_table_content(table_image, structure_data):
                 
                 cell_img = img_cv[cell_y0:cell_y1, cell_x0:cell_x1]
                 
-                # PSM 6: Uniform block of text (good for table cells)
-                # OEM 1: LSTM neural net (best accuracy)
-                # -c preserve_interword_spaces=1: Keep spacing between words
-                cell_text = pytesseract.image_to_string(
-                    cell_img, 
-                    config='--psm 6 --oem 1 -c preserve_interword_spaces=1'
-                ).strip()
-                cell_text = ' '.join(cell_text.split())
+                # Use PaddleOCR for text extraction
+                try:
+                    result = ocr_engine.ocr(cell_img, cls=True)
+                    if result and result[0]:
+                        # Extract text from all detected text boxes in cell
+                        cell_text = ' '.join([line[1][0] for line in result[0]])
+                    else:
+                        cell_text = ""
+                except:
+                    cell_text = ""
+                
+                cell_text = cell_text.strip()
                 row_cells.append(cell_text)
             
             if row_idx < header_row_count:
@@ -367,36 +375,26 @@ def extract_table_content(table_image, structure_data):
             "column_count": len(columns),
         }
     except Exception as e:
-        return extract_table_content_fallback(table_image)
+        return extract_table_content_fallback(table_image, ocr_engine)
 
 
-def extract_table_content_fallback(table_image):
-    """Fallback: simple line-by-line OCR when structure recognition fails."""
-    import pytesseract
+def extract_table_content_fallback(table_image, ocr_engine):
+    """Fallback: simple line-by-line OCR when structure recognition fails using PaddleOCR."""
     import numpy as np
-    import cv2
-    from PIL import ImageEnhance
     
     try:
-        # Apply same preprocessing as main extraction
-        enhancer = ImageEnhance.Sharpness(table_image)
-        table_image = enhancer.enhance(2.0)
-        enhancer = ImageEnhance.Contrast(table_image)
-        table_image = enhancer.enhance(1.5)
-        
-        # Convert to grayscale and binarize
+        # Convert PIL to numpy
         img_array = np.array(table_image)
-        if len(img_array.shape) == 3:
-            gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
-        else:
-            gray = img_array
-        binary = cv2.adaptiveThreshold(
-            gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
-        )
         
-        # PSM 6: Uniform block, OEM 1: LSTM mode
-        text = pytesseract.image_to_string(binary, config='--psm 6 --oem 1').strip()
-        lines = [line.strip() for line in text.split('\n') if line.strip()]
+        # Use PaddleOCR for full table extraction
+        result = ocr_engine.ocr(img_array, cls=True)
+        # Extract all text lines
+        lines = []
+        if result and result[0]:
+            for line in result[0]:
+                text = line[1][0].strip()
+                if text:
+                    lines.append(text)
         
         if len(lines) == 0:
             return {"header_rows": [], "data_rows": [], "row_count": 0, "column_count": 0}
