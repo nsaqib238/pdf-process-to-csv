@@ -7,9 +7,9 @@ pydantic-settings==2.1.0
 pypdf>=4.0,<6
 aiofiles==23.2.1
 
-# Adobe PDF Services SDK (optional — install separately if needed)
+# Adobe PDF Services SDK (for high-quality OCR with Modal hybrid pipeline)
 # See: https://github.com/adobe/pdfservices-python-sdk
-# pip install pdfservices-sdk
+pdfservices-sdk>=4.0.0
 pdfplumber>=0.11
 
 # Table pipeline: pdfplumber + Camelot + Tabula

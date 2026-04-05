@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     # Adobe PDF Services credentials
     adobe_client_id: Optional[str] = None
     adobe_client_secret: Optional[str] = None
+    adobe_org_id: Optional[str] = None
 
     # File paths
     upload_dir: str = "uploads"

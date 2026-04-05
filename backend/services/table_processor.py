@@ -75,42 +75,69 @@ class TableProcessor:
         return tables
 
     def _link_tables_to_clauses(self, clauses: List[Any]):
-        """Link tables to their parent clauses based on page location."""
+        """Link tables to their parent clauses based on page location and table numbers."""
         if not clauses:
             return
 
-        # Build clause lookup by page
+        # Build clause lookup by page AND by number prefix
         clause_by_page = {}
+        clause_by_number = {}
+        
         for clause in clauses:
+            # Index by page
             for page in range(clause.page_start, clause.page_end + 1):
                 if page not in clause_by_page:
                     clause_by_page[page] = []
                 clause_by_page[page].append(clause)
+            
+            # Index by number for quick lookup
+            if clause.clause_number:
+                clause_by_number[clause.clause_number] = clause
 
         # Link each table to nearest clause
+        linked_count = 0
         for table in self.tables:
             page = table.page_start
             
-            if page in clause_by_page:
+            best_clause = None
+            
+            # STRATEGY 1: Exact or prefix match by number
+            if table.table_number and not table.table_number.startswith("MODAL_P"):
+                # Try exact match first
+                if table.table_number in clause_by_number:
+                    best_clause = clause_by_number[table.table_number]
+                else:
+                    # Try prefix match (e.g., table 3.6.1 → clause 3.6)
+                    parts = table.table_number.split(".")
+                    for i in range(len(parts), 0, -1):
+                        prefix = ".".join(parts[:i])
+                        if prefix in clause_by_number:
+                            best_clause = clause_by_number[prefix]
+                            break
+            
+            # STRATEGY 2: Search on same page
+            if not best_clause and page in clause_by_page:
                 page_clauses = clause_by_page[page]
                 
-                # Find the deepest (most specific) clause on this page
-                # Prefer clauses with matching numbers (e.g., table 3.6.1 → clause 3.6.1)
-                best_clause = None
-                
-                if table.table_number:
-                    # Try exact or prefix match
-                    for clause in page_clauses:
-                        if clause.clause_number == table.table_number:
-                            best_clause = clause
-                            break
-                        if table.table_number.startswith(clause.clause_number + "."):
-                            best_clause = clause
-                
-                # If no match, use deepest clause on page
-                if not best_clause and page_clauses:
+                # Prefer deeper (more specific) clauses
+                if page_clauses:
                     best_clause = max(page_clauses, key=lambda c: c.level)
-                
-                if best_clause:
-                    table.parent_clause_id = best_clause.clause_id
-                    table.parent_clause_number = best_clause.clause_number
+            
+            # STRATEGY 3: Search nearby pages (±1 page)
+            if not best_clause:
+                for nearby_page in [page - 1, page + 1]:
+                    if nearby_page in clause_by_page:
+                        nearby_clauses = clause_by_page[nearby_page]
+                        if nearby_clauses:
+                            best_clause = max(nearby_clauses, key=lambda c: c.level)
+                            break
+            
+            if best_clause:
+                table.parent_clause_id = best_clause.clause_id
+                table.parent_clause_number = best_clause.clause_number
+                linked_count += 1
+        
+        orphan_count = len(self.tables) - linked_count
+        if orphan_count > 0:
+            logger.warning(f"⚠️ {orphan_count} tables without clause links ({orphan_count/len(self.tables)*100:.1f}%)")
+        logger.info(f"✅ Linked {linked_count}/{len(self.tables)} tables to clauses ({linked_count/len(self.tables)*100:.1f}%)")
