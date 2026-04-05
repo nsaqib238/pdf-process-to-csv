@@ -10,6 +10,9 @@ aiofiles==23.2.1
 # Adobe PDF Services SDK (for high-quality OCR with Modal hybrid pipeline)
 # See: https://github.com/adobe/pdfservices-python-sdk
 pdfservices-sdk>=4.0.0
+# Adobe SDK dependencies
+requests>=2.31.0
+defusedxml>=0.7.1
 pdfplumber>=0.11
 
 # Table pipeline: pdfplumber + Camelot + Tabula
@@ -35,5 +38,6 @@ openai>=1.12.0
 # Modal.com integration for self-hosted AI table extraction
 # Alternative to OpenAI with 99.8% cost savings
 modal>=0.63.0
-requests>=2.31.0
+# Already included above for Adobe SDK, but listing here for clarity
+# requests>=2.31.0
 urllib3>=2.0.7
