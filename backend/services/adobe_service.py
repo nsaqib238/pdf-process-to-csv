@@ -19,13 +19,15 @@ from typing import Dict, Any, List, Optional
 from pathlib import Path
 
 try:
-    from adobe.pdfservices.operation.auth.credentials import Credentials
-    from adobe.pdfservices.operation.execution_context import ExecutionContext
-    from adobe.pdfservices.operation.pdfops.extract_pdf_operation import ExtractPDFOperation
-    from adobe.pdfservices.operation.pdfops.options.extractpdf.extract_pdf_options import ExtractPDFOptions
-    from adobe.pdfservices.operation.pdfops.options.extractpdf.extract_element_type import ExtractElementType
-    from adobe.pdfservices.operation.pdfops.options.extractpdf.extract_renditions_element_type import ExtractRenditionsElementType
-    from adobe.pdfservices.operation.io.file_ref import FileRef
+    # pdfservices-sdk 4.x (job-based API; legacy ExecutionContext / ExtractPDFOperation removed)
+    from adobe.pdfservices.operation.auth.service_principal_credentials import ServicePrincipalCredentials
+    from adobe.pdfservices.operation.config.client_config import ClientConfig
+    from adobe.pdfservices.operation.pdf_services import PDFServices
+    from adobe.pdfservices.operation.pdf_services_media_type import PDFServicesMediaType
+    from adobe.pdfservices.operation.pdfjobs.jobs.extract_pdf_job import ExtractPDFJob
+    from adobe.pdfservices.operation.pdfjobs.params.extract_pdf.extract_pdf_params import ExtractPDFParams
+    from adobe.pdfservices.operation.pdfjobs.params.extract_pdf.extract_element_type import ExtractElementType
+    from adobe.pdfservices.operation.pdfjobs.result.extract_pdf_result import ExtractPDFResult
     ADOBE_SDK_AVAILABLE = True
 except ImportError:
     ADOBE_SDK_AVAILABLE = False
@@ -45,7 +47,7 @@ class AdobeService:
         
         self.available = False
         self.credentials = None
-        self.execution_context = None
+        self.pdf_services = None
 
         if not ADOBE_SDK_AVAILABLE:
             logger.warning("❌ Adobe PDF Services SDK not installed. Install with: pip install pdfservices-sdk")
@@ -57,15 +59,18 @@ class AdobeService:
             return
 
         try:
-            # Initialize credentials
-            self.credentials = Credentials.service_principal_credentials_builder().\
-                with_client_id(self.client_id).\
-                with_client_secret(self.client_secret).\
-                build()
-
-            # Create execution context
-            self.execution_context = ExecutionContext.create(self.credentials)
-            
+            self.credentials = ServicePrincipalCredentials(
+                client_id=self.client_id,
+                client_secret=self.client_secret,
+            )
+            client_config = ClientConfig(
+                connect_timeout=settings.adobe_connect_timeout_ms,
+                read_timeout=settings.adobe_read_timeout_ms,
+            )
+            self.pdf_services = PDFServices(
+                credentials=self.credentials,
+                client_config=client_config,
+            )
             self.available = True
             logger.info("✅ Adobe PDF Services initialized successfully")
             
@@ -124,40 +129,42 @@ class AdobeService:
 
         try:
             logger.info(f"📄 Adobe Extract API: {filename}")
-            
-            # Create ExtractPDF operation
-            extract_pdf_operation = ExtractPDFOperation.create_new()
 
-            # Set operation input from source file
-            source = FileRef.create_from_local_file(str(pdf_path))
-            extract_pdf_operation.set_input(source)
+            with open(pdf_path, "rb") as f:
+                pdf_bytes = f.read()
 
-            # Set options: extract text with coordinates
-            extract_pdf_options = ExtractPDFOptions.builder().\
-                with_element_to_extract(ExtractElementType.TEXT).\
-                build()
-            
-            extract_pdf_operation.set_options(extract_pdf_options)
+            logger.info("   Uploading PDF to Adobe...")
+            input_asset = self.pdf_services.upload(
+                input_stream=pdf_bytes,
+                mime_type=PDFServicesMediaType.PDF,
+            )
 
-            # Execute operation
+            extract_pdf_params = ExtractPDFParams(
+                elements_to_extract=[ExtractElementType.TEXT],
+            )
+            extract_pdf_job = ExtractPDFJob(
+                input_asset=input_asset,
+                extract_pdf_params=extract_pdf_params,
+            )
+
             logger.info("   Executing Adobe Extract API...")
-            result: FileRef = extract_pdf_operation.execute(self.execution_context)
+            location = self.pdf_services.submit(extract_pdf_job)
+            pdf_services_response = self.pdf_services.get_job_result(
+                location, ExtractPDFResult
+            )
+            extract_result = pdf_services_response.get_result()
 
-            # Save result to temporary location
-            import tempfile
-            with tempfile.NamedTemporaryFile(suffix='.zip', delete=False) as temp_file:
-                result.save_as(temp_file.name)
-                temp_path = Path(temp_file.name)
-
-            # Extract JSON from ZIP
             logger.info("   Parsing extraction results...")
-            with zipfile.ZipFile(temp_path, 'r') as zip_ref:
-                # Adobe returns structuredData.json
-                json_content = zip_ref.read('structuredData.json')
-                adobe_data = json.loads(json_content)
-
-            # Clean up temp file
-            temp_path.unlink()
+            adobe_data = extract_result.get_content_json()
+            if adobe_data is None:
+                resource = extract_result.get_resource()
+                if resource is None:
+                    raise ValueError("Adobe Extract returned no content or resource")
+                stream_asset = self.pdf_services.get_content(resource)
+                zip_bytes = stream_asset.get_input_stream().read()
+                with zipfile.ZipFile(io.BytesIO(zip_bytes), "r") as zip_ref:
+                    json_content = zip_ref.read("structuredData.json")
+                    adobe_data = json.loads(json_content.decode("utf-8"))
 
             # Parse Adobe JSON to our format
             parsed_data = self._parse_adobe_json(adobe_data)

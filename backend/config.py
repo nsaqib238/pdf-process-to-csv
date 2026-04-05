@@ -38,9 +38,11 @@ class Settings(BaseSettings):
     adobe_extract_chunk_pages: int = 100
     # If Adobe times out server-side, auto-split a chunk until this floor.
     adobe_extract_min_chunk_pages: int = 10
-    # Adobe SDK defaults are too low for long-running extract polling on large files.
-    adobe_connect_timeout_ms: int = 15000
-    adobe_read_timeout_ms: int = 120000
+    # Adobe SDK: timeouts in ms (passed to requests as seconds). Defaults must allow
+    # large PDF upload (PUT body) and long extract job polling; 15s connect caused
+    # TimeoutError on ~80MB uploads for slow uplinks.
+    adobe_connect_timeout_ms: int = 120000
+    adobe_read_timeout_ms: int = 900000
 
     # Table pipeline: Camelot/Tabula fusion (needs Java; improves many standards-style grids)
     enable_table_camelot_tabula: bool = True
