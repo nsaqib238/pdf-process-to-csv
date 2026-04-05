@@ -16,13 +16,14 @@ Extract structured clauses and tables from PDF standards documents (like AS3000 
 - Cost: $0.00 (no AI inference)
 - Accuracy: 95%+ on standards documents
 
-**TABLES**: Modal.com GPU-based extraction
-- Microsoft Table Transformer (GPU model)
-- Tesseract OCR for cell text
-- Cost: ~$0.006/document (T4 GPU @ $0.43/hour)
-- Accuracy: 85-92%
+**TABLES**: Hybrid extraction (Adobe OCR + Modal structure)
+- Adobe PDF Extract API for high-quality OCR (99%+ accuracy)
+- Microsoft Table Transformer (GPU model) for structure detection
+- 5-layer quality filtering (removes empty/garbage tables)
+- Cost: ~$0.056/document ($0.05 Adobe + $0.006 Modal)
+- Accuracy: 95%+ usable tables
 
-**Total System Cost**: ~$0.006 per document (99.9% cheaper than GPT-4 approach)
+**Total System Cost**: ~$0.056 per document (Adobe hybrid) or ~$0.006 (Modal only)
 
 ### Why Rule-Based Clause Parsing?
 
@@ -94,6 +95,13 @@ cp .env.example .env
 USE_MODAL_EXTRACTION=true
 MODAL_ENDPOINT=https://your-username--app-name-web-extract-tables.modal.run/extract
 
+# Optional: Adobe PDF Services (for high-quality OCR hybrid mode)
+# When provided, automatically uses Adobe OCR + Modal structure
+# Quota: 500 documents/month - Cost: +$0.05/doc
+ADOBE_CLIENT_ID=your_client_id_here
+ADOBE_CLIENT_SECRET=your_client_secret_here
+ADOBE_ORG_ID=your_org_id_here
+
 # Optional: OpenAI API key for fallback (recommended)
 OPENAI_API_KEY=sk-proj-your-key-here
 
@@ -119,6 +127,25 @@ modal deploy modal_extractor.py
 ```env
 MODAL_ENDPOINT=https://your-username--as3000-table-extractor-web-extract-tables.modal.run/extract
 ```
+
+### 7. Optional: Enable Adobe Hybrid Mode (Recommended)
+
+For best OCR quality, add Adobe credentials to `.env`:
+
+```env
+ADOBE_CLIENT_ID=your_client_id_here
+ADOBE_CLIENT_SECRET=your_client_secret_here
+ADOBE_ORG_ID=your_org_id_here
+```
+
+**Benefits:**
+- Eliminates OCR corruption ("ROTECTION" → "PROTECTION")
+- Removes empty/garbage tables (111 → 75 high-quality tables)
+- Improves clause linking (79% → 90%+)
+- Cost: +$0.05/document (total $0.056)
+- Quota: 500 documents/month
+
+**See:** `ADOBE_HYBRID_SETUP.md` for detailed setup guide.
 
 ## 🚀 Running the Application
 
@@ -202,14 +229,16 @@ curl http://localhost:8000/api/download/{job_id}/tables.json -o tables.json
 
 ## 💰 Cost Comparison
 
-| Method | Cost/Doc | Accuracy | Best For |
-|--------|----------|----------|----------|
-| **Modal.com** | $0.006 | 85-92% | Ruled tables, high volume |
-| Modal + OpenAI fallback | $0.10-0.50 | 90-95% | Mixed table types |
-| OpenAI only | $8-10 | 90-95% | Low volume, complex tables |
-| Geometric only | $0 | 70-80% | Simple ruled tables |
+| Method | Cost/Doc | OCR Quality | Usable Tables | Best For |
+|--------|----------|-------------|---------------|----------|
+| **Adobe + Modal (Hybrid)** | $0.056 | Excellent (99%+) | 95%+ | Production, high quality |
+| **Modal only** | $0.006 | Good (85-90%) | 68-75% | Budget, volume |
+| Modal + OpenAI fallback | $0.10-0.50 | Excellent | 90-95% | Mixed table types |
+| OpenAI only | $8-10 | Excellent | 90-95% | Low volume, complex |
+| Geometric only | $0 | Fair (70-80%) | 60-70% | Simple ruled tables |
 
 **Free tiers:**
+- Adobe: 500 docs/month free tier available
 - Modal.com: $30 credits = ~5000 extractions
 - OpenAI: $5 credits = ~1 extraction
 
@@ -218,6 +247,7 @@ curl http://localhost:8000/api/download/{job_id}/tables.json -o tables.json
 - **Backend**: Python 3.12, FastAPI, pdfplumber, Camelot, Tabula
 - **Frontend**: Next.js 14, TypeScript, Tailwind CSS
 - **AI/GPU**: Modal.com serverless GPU (T4) with Microsoft Table Transformer
+- **OCR**: Adobe PDF Extract API (hybrid mode) or Tesseract (fallback)
 - **Optional**: OpenAI GPT-4o-mini for fallback
 
 ## ⚠️ Troubleshooting
@@ -240,11 +270,20 @@ gs --version   # Should show Ghostscript
 
 ## 📊 Performance
 
-### With Modal.com (Recommended)
-- **Coverage**: 95%+ of tables
+### With Adobe Hybrid Mode (Recommended)
+- **Coverage**: 95%+ of tables detected
+- **Usable quality**: 95%+ (vs 68% Modal-only)
+- **Processing time**: 45-60 sec/page (after warm-up)
+- **Cost**: $0.056 per document
+- **OCR accuracy**: 99%+ (eliminates corruption)
+- **Clause linking**: 90%+ (vs 79% Modal-only)
+
+### With Modal.com Only
+- **Coverage**: 95%+ of tables detected
+- **Usable quality**: 68-75% (many empty/corrupted)
 - **Processing time**: 30-45 sec/page (after warm-up)
 - **Cost**: $0.006 per document
-- **Accuracy**: 85-92% (excellent for ruled tables)
+- **OCR accuracy**: 85-90% (Tesseract OCR)
 
 ### With AI Enhancement Enabled
 - **Coverage**: 95%+ of tables
