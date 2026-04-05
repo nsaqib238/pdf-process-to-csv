@@ -38,8 +38,8 @@ image = (
         "numpy==1.24.3",
         "opencv-python==4.8.1.78",
         # PaddleOCR for high-quality text extraction (replaces Tesseract)
-        "paddleocr==2.7.3",
-        "paddlepaddle==2.6.0",
+        "paddleocr==2.8.1",
+        "paddlepaddle==3.0.0",
         # Clause extraction (rule-based parser)
         "pypdf==4.0.1",
         # Web framework
