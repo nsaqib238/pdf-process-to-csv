@@ -169,7 +169,10 @@ class AdobeService:
 
             logger.info("   Parsing extraction results...")
             adobe_data = extract_result.get_content_json()
-            if adobe_data is None:
+            
+            # Handle different return types from Adobe SDK
+            if adobe_data is None or isinstance(adobe_data, bytes):
+                # Extract from ZIP file (newer SDK versions or certain response types)
                 resource = extract_result.get_resource()
                 if resource is None:
                     raise ValueError("Adobe Extract returned no content or resource")
@@ -178,6 +181,12 @@ class AdobeService:
                 with zipfile.ZipFile(io.BytesIO(zip_bytes), "r") as zip_ref:
                     json_content = zip_ref.read("structuredData.json")
                     adobe_data = json.loads(json_content.decode("utf-8"))
+            elif not isinstance(adobe_data, dict):
+                # Unexpected type - try to parse as JSON string
+                try:
+                    adobe_data = json.loads(str(adobe_data))
+                except (json.JSONDecodeError, TypeError):
+                    raise ValueError(f"Adobe Extract returned unexpected data type: {type(adobe_data)}")
 
             # Parse Adobe JSON to our format
             parsed_data = self._parse_adobe_json(adobe_data, page_offset=page_offset)
