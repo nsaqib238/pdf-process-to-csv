@@ -36,6 +36,16 @@ from config import settings
 
 logger = logging.getLogger(__name__)
 
+# Fix Windows console emoji encoding issues
+import sys
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except AttributeError:
+        # Python < 3.7
+        pass
+
 
 class AdobeService:
     """Adobe PDF Extract API client for high-quality text extraction"""
@@ -183,12 +193,24 @@ class AdobeService:
 
         except Exception as e:
             error_msg = f"Adobe Extract API error: {str(e)}"
-            logger.error(error_msg, exc_info=True)
+            error_str = str(e).lower()
+            
+            # Check for common Adobe API errors
+            if "disqualified_scan_page_limit" in error_str or "scanned file exceeds page limit" in error_str:
+                logger.warning(f"   Adobe API limit: PDF has too many scanned pages")
+                logger.warning(f"   Adobe free tier limit: 100 scanned pages per document")
+                logger.info(f"   Falling back to Modal Tesseract OCR...")
+            elif "page limit" in error_str or "disqualified" in error_str:
+                logger.warning(f"   Adobe API rejected PDF: {error_str}")
+            else:
+                logger.error(error_msg, exc_info=True)
+            
             return {
                 "success": False,
                 "error": error_msg,
                 "pages": [],
-                "page_count": 0
+                "page_count": 0,
+                "fallback_reason": "adobe_api_limit" if "disqualified" in error_str else "adobe_error"
             }
 
     def _parse_adobe_json(self, adobe_data: Dict) -> Dict[str, Any]:

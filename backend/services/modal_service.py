@@ -28,6 +28,16 @@ from services.adobe_service import AdobeService
 
 logger = logging.getLogger(__name__)
 
+# Fix Windows console emoji encoding issues
+import sys
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except AttributeError:
+        # Python < 3.7
+        pass
+
 
 class ModalService:
     """Service for complete PDF extraction using Modal.com (tables + clauses)"""
