@@ -49,7 +49,11 @@ class ModalService:
         
         # Initialize Adobe service for hybrid mode
         self.adobe_service = AdobeService()
-        self.use_adobe_hybrid = self.adobe_service.is_available()
+        # Check both: Adobe available AND enabled in config
+        self.use_adobe_hybrid = (
+            settings.enable_adobe_hybrid and 
+            self.adobe_service.is_available()
+        )
         
         # Initialize PDF splitter for large documents
         try:
@@ -65,7 +69,10 @@ class ModalService:
             if self.pdf_splitter:
                 logger.info("✅ Large PDF splitting enabled (auto-chunk >100 pages)")
         else:
-            logger.info("📊 STANDARD MODE: Modal with Tesseract OCR")
+            if not settings.enable_adobe_hybrid:
+                logger.info("📊 STANDARD MODE: Modal with Tesseract OCR (Adobe disabled in config)")
+            else:
+                logger.info("📊 STANDARD MODE: Modal with Tesseract OCR")
 
         if not self.endpoint:
             logger.warning(

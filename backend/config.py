@@ -25,6 +25,12 @@ class Settings(BaseSettings):
     adobe_client_id: Optional[str] = None
     adobe_client_secret: Optional[str] = None
     adobe_org_id: Optional[str] = None
+    
+    # Adobe Hybrid Mode Control
+    # Set to False to disable Adobe OCR and use only Modal Tesseract OCR
+    # Useful for conserving Adobe API quota (500 requests/month free tier)
+    # When disabled, processing uses Modal's Tesseract OCR for all text extraction
+    enable_adobe_hybrid: bool = True
 
     # File paths
     upload_dir: str = "uploads"

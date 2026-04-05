@@ -4508,3 +4508,13 @@ WARNING: No glyph for 32 (CID 0020) in font HiddenHorzOCR
 2026-04-04 09:15:35,761 - __main__ - INFO - ================================================================================
 2026-04-04 09:15:35,761 - __main__ - INFO - Server ready. Logs are being written to: backend_logs.txt
 2026-04-04 09:15:35,761 - __main__ - INFO - ================================================================================
+2026-04-05 03:08:23,378 - __main__ - INFO - ================================================================================
+2026-04-05 03:08:23,378 - __main__ - INFO - PDF Processing Pipeline Starting...
+2026-04-05 03:08:23,379 - __main__ - INFO - ================================================================================
+2026-04-05 03:08:23,380 - services.adobe_service - WARNING - ❌ Adobe PDF Services SDK not installed. Install with: pip install pdfservices-sdk
+2026-04-05 03:08:23,380 - services.modal_service - INFO - 📊 STANDARD MODE: Modal with Tesseract OCR
+2026-04-05 03:08:23,380 - services.adobe_service - WARNING - ❌ Adobe PDF Services SDK not installed. Install with: pip install pdfservices-sdk
+2026-04-05 03:08:23,380 - services.modal_service - INFO - 📊 STANDARD MODE: Modal with Tesseract OCR
+2026-04-05 03:08:23,380 - __main__ - INFO - ================================================================================
+2026-04-05 03:08:23,381 - __main__ - INFO - Server ready. Logs are being written to: backend_logs.txt
+2026-04-05 03:08:23,381 - __main__ - INFO - ================================================================================
