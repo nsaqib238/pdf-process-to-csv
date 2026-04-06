@@ -176,58 +176,111 @@ def extract_native_text_with_coordinates(pdf_bytes: bytes) -> Dict[int, List[Dic
         return {}
 
 
-def find_caption_in_native_text(native_texts: List[Dict], table_bbox: tuple, page_height: int) -> Optional[Dict]:
+def find_caption_in_native_text(native_texts: List[Dict], table_bbox: tuple, page_height: int, pdf_page_height: float = None) -> Optional[Dict]:
     """
     Find table caption in native text above table region.
     
     Args:
-        native_texts: List of text blocks with coordinates from PyMuPDF
-        table_bbox: (x0, y0, x1, y1) in image coordinates
-        page_height: Height of page in image coordinates
+        native_texts: List of text blocks with coordinates from PyMuPDF (PDF coordinates)
+        table_bbox: (x0, y0, x1, y1) in IMAGE PIXEL coordinates
+        page_height: Height of page in IMAGE PIXEL coordinates
+        pdf_page_height: Height of PDF page in PDF coordinates (optional)
         
     Returns:
         {"table_number": "3.1", "title": "Installation methods"}
     """
+    import re
+    
     x0, y0, x1, y1 = table_bbox
-    caption_y0 = max(0, y0 - 100)
-    caption_y1 = y0
+    
+    # CRITICAL FIX: PyMuPDF coordinates are in PDF space (typically 72 DPI)
+    # Image coordinates are in pixel space (300 DPI in our case)
+    # We need to scale or search more liberally
+    
+    # Expanded caption search region (200px above table, wider horizontal margin)
+    caption_y0 = max(0, y0 - 200)  # Increased from 100 to 200
+    caption_y1 = y0 + 50  # Allow some overlap
+    caption_x0 = x0 - 100  # Wider left margin
+    caption_x1 = x1 + 100  # Wider right margin
     
     # Find text blocks in caption region
-    caption_texts = []
+    caption_candidates = []
     for text_block in native_texts:
-        if text_block["bbox"]:
-            tx0, ty0, tx1, ty1 = text_block["bbox"]
-            # Check if text overlaps with caption region
-            if ty0 >= caption_y0 and ty1 <= caption_y1:
-                if tx0 >= x0 - 50 and tx1 <= x1 + 50:  # Allow some horizontal margin
-                    caption_texts.append(text_block["text"])
+        if not text_block.get("bbox"):
+            continue
+            
+        tx0, ty0, tx1, ty1 = text_block["bbox"]
+        text_content = text_block["text"]
+        
+        # Skip empty text
+        if not text_content or not text_content.strip():
+            continue
+        
+        # LIBERAL MATCHING: Check if text is anywhere near the caption region
+        # We'll check vertical position primarily and be generous with horizontal
+        vertical_overlap = (ty0 >= caption_y0 and ty0 <= caption_y1) or \
+                          (ty1 >= caption_y0 and ty1 <= caption_y1) or \
+                          (ty0 <= caption_y0 and ty1 >= caption_y1)
+        
+        horizontal_overlap = (tx1 >= caption_x0 and tx0 <= caption_x1)
+        
+        if vertical_overlap and horizontal_overlap:
+            # Calculate distance from table top
+            distance_from_table = y0 - ty1
+            caption_candidates.append({
+                "text": text_content,
+                "distance": distance_from_table,
+                "bbox": (tx0, ty0, tx1, ty1),
+                "font_size": text_block.get("font_size", 0)
+            })
     
-    if not caption_texts:
+    if not caption_candidates:
         return None
     
-    caption_text = " ".join(caption_texts)
+    # Sort by distance from table (closest first) and combine
+    caption_candidates.sort(key=lambda c: c["distance"], reverse=True)
+    
+    # Try each candidate or combination
+    caption_text = " ".join(c["text"] for c in caption_candidates[:3])  # Top 3 closest
     
     # Parse table number and title
     table_number = None
     title = None
     
-    # Try to find table number
+    # Enhanced regex patterns for table number detection
     number_patterns = [
-        r'TABLE\s+([A-Z]?\d+\.?\d*)',
-        r'Table\s+([A-Z]?\d+\.?\d*)',
-        r'^([A-Z]?\d+\.?\d*)\s*[-–—]',
-        r'^([A-Z]?\d+\.?\d*)\s+\w',
+        r'(?i)TABLE\s+([A-Z]?\d+\.\d+)',  # Table 3.1, Table A.1
+        r'(?i)TABLE\s+([A-Z]?\d+)',        # Table 3, Table A
+        r'(?i)Table\s+([A-Z]?\d+\.\d+)',  # table 3.1
+        r'(?i)Table\s+([A-Z]?\d+)',        # table 3
+        r'^([A-Z]?\d+\.\d+)\s*[-–—:]',   # 3.1 - Title or 3.1: Title
+        r'^([A-Z]?\d+\.\d+)\s+[A-Z]',     # 3.1 Title (capital letter after)
+        r'^([A-Z]?\d+)\s*[-–—:]',         # 3 - Title
     ]
     
     for pattern in number_patterns:
-        match = re.search(pattern, caption_text, re.IGNORECASE)
+        match = re.search(pattern, caption_text)
         if match:
             table_number = match.group(1).strip()
+            # Extract title after the match
             title = caption_text[match.end():].strip()
+            # Clean up title
             title = re.sub(r'^[-–—:\s]+', '', title)
+            # Remove common noise
+            title = re.sub(r'\(continued\)\s*$', '', title, flags=re.IGNORECASE)
+            title = re.sub(r'\(CONTINUED\)\s*$', '', title)
+            
             if len(title) < 3:
                 title = None
             break
+    
+    # Additional check: If we found a table number, validate it
+    if table_number:
+        # Filter out garbage numbers like "53.21", "89.29"
+        if re.match(r'^\d{2,}\.\d{2,}$', table_number):  # Multi-digit.multi-digit
+            # This is likely garbage unless it's a valid range
+            if int(table_number.split('.')[0]) > 50:
+                return None
     
     return {
         "table_number": table_number,
@@ -548,7 +601,7 @@ def extract_tables_from_pdf(pdf_bytes: bytes, filename: str) -> Dict[str, Any]:
             
             target_sizes = torch.tensor([image.size[::-1]])
             detection_results = detection_processor.post_process_object_detection(
-                outputs, threshold=0.7, target_sizes=target_sizes
+                outputs, threshold=0.8, target_sizes=target_sizes
             )[0]
             
             # Process each detected table
